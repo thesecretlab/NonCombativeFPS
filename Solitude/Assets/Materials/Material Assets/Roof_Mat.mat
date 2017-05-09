@@ -6,9 +6,9 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Floor_Test
-  m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULARHIGHLIGHTS_OFF
+  m_Name: Roof_Mat
+  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -18,13 +18,13 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: ea7f096ff4dc19c45b3bf8f055722592, type: 3}
+        m_Scale: {x: 40, y: 40}
         m_Offset: {x: 0, y: 0}
     - first:
-        name: _Detail
+        name: _Cube
       second:
-        m_Texture: {fileID: 2800000, guid: dca1cf230922afa49bc1a395192090c1, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -52,10 +52,22 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _Illum
+      second:
+        m_Texture: {fileID: 2800000, guid: c4132ef6bc8c53843bcd15c5a7a0f052, type: 3}
+        m_Scale: {x: 10, y: 10}
+        m_Offset: {x: 0, y: 0}
+    - first:
+        name: _LightMap
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: dca1cf230922afa49bc1a395192090c1, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: ea4d914751dcf5640b99aafc6c9c2f8e, type: 3}
+        m_Scale: {x: 40, y: 40}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -89,17 +101,20 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _Emission
+      second: 1
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
         name: _Glossiness
-      second: 0
+      second: 0.5
     - first:
         name: _GlossyReflections
-      second: 0
+      second: 1
     - first:
         name: _Metallic
-      second: 1
+      second: 0
     - first:
         name: _Mode
       second: 0
@@ -110,11 +125,14 @@ Material:
         name: _Parallax
       second: 0.02
     - first:
+        name: _Shininess
+      second: 0.042
+    - first:
         name: _SmoothnessTextureChannel
       second: 0
     - first:
         name: _SpecularHighlights
-      second: 0
+      second: 1
     - first:
         name: _SrcBlend
       second: 1
@@ -127,7 +145,13 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0, g: 0, b: 0, a: 1}
+      second: {r: 1, g: 0.89100003, b: 0.89100003, a: 1}
     - first:
         name: _EmissionColor
+      second: {r: 0, g: 0, b: 0, a: 1}
+    - first:
+        name: _ReflectColor
+      second: {r: 1, g: 1, b: 1, a: 0.5}
+    - first:
+        name: _SpecColor
       second: {r: 0, g: 0, b: 0, a: 1}
