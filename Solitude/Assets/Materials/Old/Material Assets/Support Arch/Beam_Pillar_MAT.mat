@@ -48,7 +48,7 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 9d3c21a8637769e4fa947e47a4c24c78, type: 3}
+        m_Texture: {fileID: 2800000, guid: dca1cf230922afa49bc1a395192090c1, type: 3}
         m_Scale: {x: 1, y: 3}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -105,7 +105,7 @@ Material:
       second: 0.02
     - first:
         name: _Shininess
-      second: 0.078
+      second: 0.061
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -124,10 +124,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.216, g: 0.16941176, b: 0.16941176, a: 1}
+      second: {r: 0.32941177, g: 0.25490198, b: 0.22745098, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _SpecColor
-      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+      second: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
