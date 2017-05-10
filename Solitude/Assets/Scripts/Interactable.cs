@@ -4,8 +4,6 @@ using UnityEngine;
 
 public abstract class Interactable : MonoBehaviour {
 
-    private bool active = true;
-
     public Vector3 getPos() {
         return transform.position;
     }
@@ -15,10 +13,6 @@ public abstract class Interactable : MonoBehaviour {
         this.setup();
         GameObject.FindGameObjectWithTag("Player").SendMessage("addInteractable", this);
 	}
-
-    public bool isActive() {
-        return active;  
-    }
 
     protected abstract void setup();
 
