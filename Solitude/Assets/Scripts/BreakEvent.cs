@@ -12,7 +12,11 @@ public class BreakEvent{
     public BreakEvent(Breakable parent,int breakPercent) {
         this.parent = parent;
         this.breakPercent = breakPercent;
-        ((Ship)Object.FindObjectOfType<Ship>()).addBreakEvent(this);
+        try {
+            ((Ship)Object.FindObjectOfType<Ship>()).addBreakEvent(this);
+        } catch (System.NullReferenceException e) {
+            Debug.Log("Ship not found");
+        }
     }
 
     public void dobreak() {

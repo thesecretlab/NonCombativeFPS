@@ -20,6 +20,10 @@ public abstract class Interactable : MonoBehaviour {
         return active;  
     }
 
+    public void setActive(bool active) {
+        this.active = active;
+    }
+
     protected abstract void setup();
 
     public abstract void interact();
