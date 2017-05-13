@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class PauseScript : MonoBehaviour {
 
-    public bool paused = false;
+    //track if game is paused
+    public bool paused;
+
+    //used to point to the pause ui
+    public GameObject pauseUI;
+
+    //unpauses game, can be called by button in pause menu itself
+    public void Unpause()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Time.timeScale = 1;
+        paused = false;
+        pauseUI.gameObject.SetActive(false);
+    }
 
     // Use this for initialization
     void Start() {
-
+        Unpause();
     }
 
     // Update is called once per frame
     void Update() {
         if (Input.GetKey(KeyCode.Escape))
         {
-            paused = !paused;
+            paused = true;
         }
 
         if (paused)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
             Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
+            pauseUI.gameObject.SetActive(true);
+        }
     }
 
 }

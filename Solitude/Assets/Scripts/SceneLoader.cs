@@ -9,9 +9,14 @@ public class SceneLoader : MonoBehaviour {
 	void Start () {
 		
 	}
-    public void LoadLevel()
+    public void LoadMainScene()
     {
         SceneManager.LoadScene("MainScene");
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 
     public void ExitGame()
