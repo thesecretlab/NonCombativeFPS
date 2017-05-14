@@ -22,8 +22,11 @@ public class BatteryManager : MonoBehaviour {
     {
         while (true)
         {
-
-            if (torchLight.active == true)
+            if (Time.timeScale == 0) //game is currently paused
+            {
+                CurrentDrain = 0;
+            }
+            else if (torchLight.active == true)
             {
                 CurrentDrain = 2;
             }
@@ -32,9 +35,16 @@ public class BatteryManager : MonoBehaviour {
                 CurrentDrain = 1;
             }
 
+            if (BatteryRemaining <= 0)
+            {
+                Debug.Log("Player battery is flat, rip");
+                torchLight.SetActive(false);
+            }
+
             BatteryRemaining = BatteryRemaining - CurrentDrain;
             batterySlider.value = BatteryRemaining;
             yield return new WaitForSecondsRealtime(DrainRate);
+            
         }
     }
 

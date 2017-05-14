@@ -14,9 +14,24 @@ public class SceneLoader : MonoBehaviour {
         SceneManager.LoadScene("MainScene");
     }
 
+    public void LoadHighScores()
+    {
+        SceneManager.LoadScene("HighScoreScene");
+    }
+
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MenuScene");
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene("CreditScene");
+    }
+
+    public void LoadSettingsPage()
+    {
+        SceneManager.LoadScene("SettingScene");
     }
 
     public void ExitGame()
