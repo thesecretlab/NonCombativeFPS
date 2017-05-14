@@ -14,7 +14,7 @@ public class CommandTerminal : Terminal, Breakable {
 
 
     public override void interact() {
-        throw new NotImplementedException();
+        showUI(true);
     }
 
     public void onBreak() {
@@ -42,21 +42,27 @@ public class CommandTerminal : Terminal, Breakable {
 
     }
 
-    void doUpdate() {
-        if (Input.GetKeyDown(KeyCode.Return)) {
-            onSubmit(line);
-            line = "";
-        }
-        if (Input.GetKey(KeyCode.Backspace)) {
-            if (line.Length > 0) {
-                line = line.Substring(0, line.Length - 1);
+    protected override void doUpdate() {
+        if (isVis) {
+            if (Input.GetKeyDown(KeyCode.Return)) {
+                onSubmit(line);
+                line = "";
             }
+            if (Input.GetKey(KeyCode.Backspace)) {
+                if (line.Length > 0) {
+                    line = line.Substring(0, line.Length - 1);
+                }
+            }
+            line += Input.inputString;
+            t.text = "";
+            foreach (string l in console) {
+                t.text += "   " + l + "\n";
+            }
+            t.text += "> " + line;
         }
-        line += Input.inputString;
-        t.text = "";
-        foreach (string l in console) {
-            t.text += "   " + l + "\n";
-        }
-        t.text += "> " + line;
+    }
+
+    public void onFix() {
+        throw new NotImplementedException();
     }
 }
