@@ -13,7 +13,7 @@ public abstract class Interactable : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         this.setup();
-        GameObject.FindGameObjectWithTag("Player").SendMessage("addInteractable", this);
+        //GameObject.FindGameObjectWithTag("Player").SendMessage("addInteractable", this);
 	}
 
     public bool isActive() {
