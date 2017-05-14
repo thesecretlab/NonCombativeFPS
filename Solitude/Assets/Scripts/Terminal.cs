@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public abstract class Terminal : Interactable {
     public GameObject uiPrefab;
-    protected GameObject ui;
+    public GameObject ui;
     protected abstract void initialise();
+
+    private bool isVis;
 
     public override abstract void interact();
 
@@ -15,12 +15,19 @@ public abstract class Terminal : Interactable {
         ui = Instantiate(uiPrefab);
         ui.transform.SetParent(canvas.transform, false);
         ui.SetActive(false);
+        isVis = false;
         this.initialise();
     }
 
-    protected void showUi() {
-        ui.SetActive(true);
+    void Update() {
+        if (isVis & CrossPlatformInputManager.GetButtonDown("Esc")) {
+            showUI(false);
+        }
     }
 
-    
+    protected void showUI(bool show) {
+        ui.SetActive(show);
+        isVis = show;
+        Player.playerObj.FPSEnable(!show);
+    }
 }

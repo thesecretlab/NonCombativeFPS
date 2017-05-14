@@ -4,6 +4,7 @@ using UnityEngine;
 
 public interface Breakable {
     void onBreak();
+    void onFix();
 }
 
 public class BreakEvent{
@@ -16,6 +17,7 @@ public class BreakEvent{
             ((Ship)Object.FindObjectOfType<Ship>()).addBreakEvent(this);
         } catch (System.NullReferenceException e) {
             Debug.Log("Ship not found");
+            Debug.Log(e.ToString());
         }
     }
 
