@@ -11,7 +11,7 @@ public abstract class Terminal : Interactable {
     public override abstract void interact();
 
     protected override void setup() {
-        GameObject canvas = GameObject.FindGameObjectWithTag("Canvas");
+        UICanvas canvas = UICanvas.Canvas;
         ui = Instantiate(uiPrefab);
         ui.transform.SetParent(canvas.transform, false);
         ui.SetActive(false);
