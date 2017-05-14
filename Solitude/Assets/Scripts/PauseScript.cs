@@ -37,6 +37,10 @@ public class PauseScript : MonoBehaviour {
             Time.timeScale = 0;
             pauseUI.gameObject.SetActive(true);
         }
+         else //I have no idea why this needs to be here but it makes it work the way it should
+        {
+            Unpause();
+        }
     }
 
 }
