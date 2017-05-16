@@ -22,6 +22,18 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     protected override void initialise() {
+
+        commands.Add("cd /navigation");
+        commands.Add("service stop navigation");
+        commands.Add("mv navigation.back navigation");
+        commands.Add("service start navigation");
+
+        addline("Available Commands");
+        foreach(string command in commands)
+        {
+            addline(command);
+        }
+
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
         //used to define a set of empty lines;
@@ -38,9 +50,34 @@ public class CommandTerminal : Terminal, Breakable {
 
     //called when the Return key is pressed
     private void onSubmit(string line) {
+
         addline(line);
 
-    }
+        switch (line.ToLower())
+        {
+
+            case "cd /navigation":
+                addline("cd /navigation");
+                break;
+            case "service stop navigation":
+                addline("service stop navigation");
+                break;
+            case "mv navigation.back navigation":
+                addline("mv navigation.back navigation");
+                break;
+            case "service start navigation":
+                addline("service start navigation");
+                break;
+            default:
+                addline("Invalid Command, Please try again.");
+                break;
+        }
+
+        
+
+
+
+       }
 
     protected override void doUpdate() {
         if (isVis) {
