@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.027450982, g: 0.16078432, b: 0.9058824, a: 1}
+  m_Color: {r: 0.46901616, g: 1, b: 0.024137914, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -648,7 +648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.027248265, g: 0.1939957, b: 0.878, a: 1}
+  m_Color: {r: 0.46901616, g: 1, b: 0.024137914, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.027450982, g: 0.16078432, b: 0.9058824, a: 1}
+  m_Color: {r: 0.46901616, g: 1, b: 0.024137914, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
