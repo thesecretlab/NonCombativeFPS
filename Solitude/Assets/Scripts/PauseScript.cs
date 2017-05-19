@@ -9,6 +9,8 @@ public class PauseScript : MonoBehaviour {
 
     //used to point to the pause ui
     public GameObject pauseUI;
+    //used to point to the settings ui
+    public GameObject pauseSettingsUI;
 
     //unpauses game, can be called by button in pause menu itself
     public void Unpause()
@@ -17,6 +19,7 @@ public class PauseScript : MonoBehaviour {
         Time.timeScale = 1;
         paused = false;
         pauseUI.gameObject.SetActive(false);
+        pauseSettingsUI.SetActive(false);
     }
 
     // Use this for initialization
@@ -41,6 +44,16 @@ public class PauseScript : MonoBehaviour {
         {
             Unpause();
         }
+    }
+
+    public void showSettingsUI()
+    {
+        pauseSettingsUI.SetActive(true);
+    }
+
+    public void hideSettingsUI()
+    {
+        pauseSettingsUI.SetActive(false);
     }
 
 }
