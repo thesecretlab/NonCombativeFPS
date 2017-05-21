@@ -8,8 +8,8 @@ public class CommandTerminal : Terminal, Breakable {
 
     public Text t;
     string line = "";
-    List<string> console = new List<string>();
 
+    List<string> console = new List<string>();
     public List<string> commands = new List<string>();
 
 
@@ -23,21 +23,23 @@ public class CommandTerminal : Terminal, Breakable {
 
     protected override void initialise() {
 
+        t = ui.GetComponentInChildren<Text>();
+        t.text = "";
+
+        //used to define a set of empty lines;
+        console = new List<string>(new string[20]);
+
         commands.Add("cd /navigation");
         commands.Add("service stop navigation");
         commands.Add("mv navigation.back navigation");
         commands.Add("service start navigation");
 
         addline("Available Commands");
-        foreach(string command in commands)
+        foreach (string command in commands)
         {
             addline(command);
         }
 
-        t = ui.GetComponentInChildren<Text>();
-        t.text = "";
-        //used to define a set of empty lines;
-        console = new List<string>(new string[20]);
     }
 
     //used to add a line to the console;
