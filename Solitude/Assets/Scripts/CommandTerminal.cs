@@ -34,6 +34,7 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("service stop navigation");
         commands.Add("mv navigation.back navigation");
         commands.Add("service start navigation");
+        commands.Add("help");
 
         addline("Available Commands");
         foreach (string command in commands)
@@ -57,8 +58,10 @@ public class CommandTerminal : Terminal, Breakable {
     private void onSubmit(string line) {
 
         addline(line);
+        String entry = line.ToLower();
+        entry = entry.Trim();
 
-        switch (line.ToLower())
+        switch (entry)
         {
 
             case "cd /navigation":
@@ -72,6 +75,13 @@ public class CommandTerminal : Terminal, Breakable {
                 break;
             case "service start navigation":
                 addline("service start navigation");
+                break;
+            case "help":
+                addline("Available Commands");
+                foreach (string command in commands)
+                {
+                    addline(command);
+                }
                 break;
             default:
                 addline("Invalid Command, Please try again.");
@@ -87,7 +97,7 @@ public class CommandTerminal : Terminal, Breakable {
     protected override void doUpdate() {
         if (isVis) {
             if (Input.GetKeyDown(KeyCode.Return)) {
-                onSubmit(line);
+                onSubmit(line.Trim());
                 line = "";
             }
             if (Input.GetKey(KeyCode.Backspace)) {
@@ -100,7 +110,7 @@ public class CommandTerminal : Terminal, Breakable {
             foreach (string l in console) {
                 t.text += "   " + l + "\n";
             }
-            t.text += "> " + line;
+            t.text += ">" + line;
         }
     }
 
