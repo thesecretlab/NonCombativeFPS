@@ -1,20 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.Characters.FirstPerson;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class Player : MonoBehaviour {
 
-    List<Interactable> interactables = new List<Interactable>();
-    Interactable active;
+    public static Player playerObj;
+
+    private List<Interactable> interactables = new List<Interactable>();
+    private Interactable active;
+
+    private bool canInteract = false;
+
+    public RigidbodyFirstPersonController FPSController;
+
+    void Awake() {
+        if (playerObj == null) {
+            playerObj = this;
+        } else {
+            Destroy(transform.gameObject);
+        }
+    }
 
     // Use this for initialization
     void Start() {
+        
+        FPSController = GetComponent<RigidbodyFirstPersonController>();
 
+    }
+
+    public void FPSEnable(bool enable) {
+        if (enable) {
+            FPSController.enabled = true;
+            FPSController.mouseLook.lockCursor = true;
+        } else {
+            FPSController.enabled = false;
+            FPSController.mouseLook.lockCursor = false;
+        }
+    }
+
+    private void doInteract() {
+        if (canInteract) {
+            active.interact();
+        }
     }
 
     // Update is called once per frame
     void Update() {
-
+        checkInteractables();
+        if (CrossPlatformInputManager.GetButtonDown("Interact")) {
+            doInteract();
+        }
     }
 
     void checkInteractables() {
@@ -22,13 +59,18 @@ public class Player : MonoBehaviour {
         bool interact = false;
         foreach (Interactable inter in interactables) {
             //Only continuees checking if no interactable has been found;
+            Debug.Log("1");
             if (!interact) {
                 //checks if the interactable is active
+                Debug.Log("2");
                 if (inter.isActive()) {
                     //checks if the interactable is within the players reach
+                    Debug.Log("3");
                     if (Vector3.Distance(inter.getPos(), transform.position) < reach) {
                         //checks if the player is looking at the interactable
+                        Debug.Log("4");
                         if (lookingAt(inter)) {
+                            Debug.Log("5");
                             active = inter;
                             interact = true;
                         }
@@ -37,7 +79,9 @@ public class Player : MonoBehaviour {
             }
         }
         if (interact) {
-            //TODO code for showing "E to interact"
+            canInteract = true;
+        } else {
+            canInteract = false;
         }
     }
 
@@ -53,8 +97,8 @@ public class Player : MonoBehaviour {
         return Vector2.Angle(targetDirRed, playerDirRed) < look;
     }
 
-    void addInteractable(Interactable inter) {
+    public void addInteractable(Interactable inter) {
         interactables.Add(inter);
-        inter.interact();
+        //inter.interact();
     }
 }
