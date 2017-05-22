@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
     private bool canInteract = false;
 
     public RigidbodyFirstPersonController FPSController;
+    public GameObject interactableText; //
 
     void Awake() {
         if (playerObj == null) {
@@ -25,7 +26,8 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        
+
+        interactableText.SetActive(false); //hides the ui text on starting the game
         FPSController = GetComponent<RigidbodyFirstPersonController>();
 
     }
@@ -80,8 +82,10 @@ public class Player : MonoBehaviour {
         }
         if (interact) {
             canInteract = true;
+            interactableText.SetActive(true);//
         } else {
             canInteract = false;
+            interactableText.SetActive(false);//
         }
     }
 
