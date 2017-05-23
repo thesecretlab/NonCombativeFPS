@@ -12,6 +12,7 @@ public class Player : MonoBehaviour {
     private Interactable active;
 
     private bool canInteract = false;
+    private bool FPSActive = true;
 
     public RigidbodyFirstPersonController FPSController;
 
@@ -25,23 +26,17 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        
         FPSController = GetComponent<RigidbodyFirstPersonController>();
-
     }
 
     public void FPSEnable(bool enable) {
-        if (enable) {
-            FPSController.enabled = true;
-            FPSController.mouseLook.lockCursor = true;
-        } else {
-            FPSController.enabled = false;
-            FPSController.mouseLook.lockCursor = false;
-        }
+        FPSActive = enable;
+        FPSController.enabled = enable;
+        FPSController.mouseLook.lockCursor = enable;
     }
 
     private void doInteract() {
-        if (canInteract) {
+        if (FPSActive && canInteract) {
             active.interact();
         }
     }
