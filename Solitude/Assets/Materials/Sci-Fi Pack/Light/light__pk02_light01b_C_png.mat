@@ -6,8 +6,8 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Main_paneltexture
-  m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
+  m_Name: light__pk02_light01b_C_png
+  m_Shader: {fileID: 13, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: _EMISSION
   m_LightmapFlags: 1
   m_CustomRenderQueue: -1
@@ -18,7 +18,7 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: 1c85e64b0b2ddb340b4e293a9dec14f8, type: 3}
+        m_Texture: {fileID: 2800000, guid: b2a6b6a2fdaf7bc489a75fe29e80a2b8, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -46,9 +46,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
+        name: _Illum
+      second:
+        m_Texture: {fileID: 2800000, guid: 80f6b52beff78964091719e34d46524b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 2e07ecb4a7dfed24caf873ab49238468, type: 3}
+        m_Texture: {fileID: 2800000, guid: c5bb8d5880c4873469330710ac8d0083, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - first:
@@ -83,6 +89,9 @@ Material:
         name: _DstBlend
       second: 0
     - first:
+        name: _Emission
+      second: 1
+    - first:
         name: _GlossMapScale
       second: 1
     - first:
@@ -105,7 +114,7 @@ Material:
       second: 0.02
     - first:
         name: _Shininess
-      second: 0.106
+      second: 0.078125
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -124,7 +133,7 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.40392157, g: 0.36078432, b: 0.36078432, a: 1}
+      second: {r: 0.8, g: 0.8, b: 0.8, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
