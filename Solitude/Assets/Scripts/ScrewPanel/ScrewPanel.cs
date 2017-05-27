@@ -47,4 +47,8 @@ public class ScrewPanel : Terminal, Breakable {
         isFixing = false;
         Debug.Log("YAY");
     }
+
+    protected override void doUpdate() {
+        
+    }
 }
