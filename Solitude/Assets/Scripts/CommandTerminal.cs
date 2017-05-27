@@ -12,6 +12,10 @@ public class CommandTerminal : Terminal, Breakable {
     public Boolean navDir = true;
     public Boolean isBroken = true;
 
+    int dashCount = 0;
+    //the number of frames the dash is shown and not shown on
+    int dashFrames = 20;
+
     List<string> console = new List<string>();
     public List<string> commands = new List<string>();
     int LINES = 6;
@@ -137,6 +141,10 @@ public class CommandTerminal : Terminal, Breakable {
        }
 
     protected override void doUpdate() {
+        dashCount++;
+        if (dashCount > 2*dashFrames) {
+            dashCount -= 2*dashFrames;
+        }
         if (isVis) {
             if (Input.GetKeyDown(KeyCode.Return)) {
                 onSubmit(line.Trim());
@@ -152,7 +160,9 @@ public class CommandTerminal : Terminal, Breakable {
             foreach (string l in console) {
                 t.text += "   " + l + "\n";
             }
-            t.text += ">" + line;
+            t.text += ">";
+            t.text += line;
+            if (dashCount < dashFrames) { t.text += "_"; };
         }
     }
 

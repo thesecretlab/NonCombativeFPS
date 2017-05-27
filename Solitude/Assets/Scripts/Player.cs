@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
     public void FPSEnable(bool enable) {
         FPSActive = enable;
         FPSController.enabled = enable;
-        FPSController.mouseLook.lockCursor = enable;
+        FPSController.mouseLook.SetCursorLock(enable);
     }
 
     private void doInteract() {
