@@ -38,7 +38,6 @@ GameObject:
   - component: {fileID: 224645774186632740}
   - component: {fileID: 222392640203776846}
   - component: {fileID: 114559524741501038}
-  - component: {fileID: 114578269818212430}
   m_Layer: 5
   m_Name: Text
   m_TagString: Untagged
@@ -106,17 +105,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\tTest\n>\tCommand Here"
---- !u!114 &114578269818212430
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1487817545877682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08d217d68b737f14da5e0d405d5ba5a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &222392640203776846
 CanvasRenderer:
   m_ObjectHideFlags: 1
