@@ -2,7 +2,7 @@
 using UnityStandardAssets.CrossPlatformInput;
 public abstract class Terminal : Interactable {
     public GameObject uiPrefab;
-    public GameObject ui;
+    protected GameObject ui;
     protected abstract void initialise();
     protected abstract void doUpdate();
     protected bool isVis;

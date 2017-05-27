@@ -6,11 +6,19 @@ using UnityEngine.UI;
 
 public class CommandTerminal : Terminal, Breakable {
 
-    public Text t;
+    Text t;
     string line = "";
-    public Boolean service = true;
-    public Boolean navDir = true;
-    public Boolean isBroken = true;
+    Boolean service = true;
+    Boolean navDir = true;
+    Boolean isBroken = true;
+
+    public int ScreenElement;
+
+    public Material matRedReff;
+    Material matBlackReff;
+
+    Renderer rend;
+    Material[] mat;
 
     int dashCount = 0;
     //the number of frames the dash is shown and not shown on
@@ -22,15 +30,27 @@ public class CommandTerminal : Terminal, Breakable {
 
 
     public override void interact() {
+        if (rend != null) {
+            mat[ScreenElement] = matRedReff;
+            rend.materials = mat;
+        }
+
         showUI(true);
         navDir = false;
     }
 
     public void onBreak() {
-        throw new NotImplementedException();
+        if (rend != null) {
+            mat[ScreenElement] = matRedReff;
+            rend.materials = mat;
+        }
     }
 
     protected override void initialise() {
+
+        rend = GetComponent<Renderer>();
+        mat = rend.materials;
+        matBlackReff = mat[ScreenElement];
 
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
@@ -167,6 +187,9 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     public void onFix() {
-        throw new NotImplementedException();
+        if (rend != null) {
+            mat[ScreenElement] = matBlackReff;
+            rend.materials = mat;
+        }
     }
 }
