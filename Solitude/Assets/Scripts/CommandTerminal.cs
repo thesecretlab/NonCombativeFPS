@@ -10,7 +10,7 @@ public class CommandTerminal : Terminal, Breakable {
     string line = "";
     public Boolean service = true;
     public Boolean navDir = true;
-    public Boolean isBroken = true;
+    public Boolean isBroken = false;
     BreakEvent broken;
 
     List<string> console = new List<string>();
@@ -24,8 +24,10 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     public void onBreak() {
-        throw new NotImplementedException();
-    }
+        
+
+      isBroken = true;
+}
 
     protected override void initialise() {
 
@@ -44,6 +46,12 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("mv navigation.back navigation");
         commands.Add("service start navigation");
         commands.Add("help");
+
+        if(isBroken)
+        {
+            addline("Data Corrupted, please restore from back ups");
+        }
+
 
         addline("Available Commands");
         foreach (string command in commands)
