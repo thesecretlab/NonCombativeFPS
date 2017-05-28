@@ -6,10 +6,10 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: FloorTrim
+  m_Name: Term2_Trim1
   m_Shader: {fileID: 4, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: 
-  m_LightmapFlags: 5
+  m_ShaderKeywords: _EMISSION
+  m_LightmapFlags: 1
   m_CustomRenderQueue: -1
   stringTagMap: {}
   m_SavedProperties:
@@ -18,8 +18,8 @@ Material:
     - first:
         name: _BumpMap
       second:
-        m_Texture: {fileID: 2800000, guid: c2f39f617a2001f4e823c71e678c7408, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: 7598092e66e2cb748a45540ac85095ad, type: 3}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _DetailAlbedoMap
@@ -48,8 +48,8 @@ Material:
     - first:
         name: _MainTex
       second:
-        m_Texture: {fileID: 2800000, guid: 422c4c63e1e860f4281abf297addd617, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Texture: {fileID: 2800000, guid: a4c34180be191b7479868344ec7e3b6a, type: 3}
+        m_Scale: {x: 4, y: 4}
         m_Offset: {x: 0, y: 0}
     - first:
         name: _MetallicGlossMap
@@ -105,7 +105,7 @@ Material:
       second: 0.02
     - first:
         name: _Shininess
-      second: 0.424
+      second: 0.078125
     - first:
         name: _SmoothnessTextureChannel
       second: 0
@@ -124,10 +124,10 @@ Material:
     m_Colors:
     - first:
         name: _Color
-      second: {r: 0.6117647, g: 0.59096473, b: 0.59096473, a: 1}
+      second: {r: 0.40392157, g: 0.36078432, b: 0.36078432, a: 1}
     - first:
         name: _EmissionColor
       second: {r: 0, g: 0, b: 0, a: 1}
     - first:
         name: _SpecColor
-      second: {r: 0.7490196, g: 0.6943412, b: 0.6943412, a: 1}
+      second: {r: 0.5, g: 0.5, b: 0.5, a: 1}
