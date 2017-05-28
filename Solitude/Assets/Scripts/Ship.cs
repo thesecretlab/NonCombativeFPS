@@ -22,5 +22,6 @@ public class Ship : MonoBehaviour {
 
     public void addBreakEvent(BreakEvent e) {
         breakables.Add(e);
+        e.dobreak();
     }
 }
