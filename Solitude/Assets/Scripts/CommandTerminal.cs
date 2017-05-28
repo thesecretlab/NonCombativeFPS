@@ -11,6 +11,7 @@ public class CommandTerminal : Terminal, Breakable {
     public Boolean service = true;
     public Boolean navDir = true;
     public Boolean isBroken = true;
+    BreakEvent broken;
 
     List<string> console = new List<string>();
     public List<string> commands = new List<string>();
@@ -27,6 +28,10 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     protected override void initialise() {
+
+
+        broken = new BreakEvent(this, 10);
+
 
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
