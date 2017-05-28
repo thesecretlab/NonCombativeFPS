@@ -9,9 +9,27 @@ public class Lever : Interactable {
     Reactor rec;
     public int num;
 
+    bool blown;
+
+    public void blow() {
+        if (!blown) {
+            anim.SetTrigger("blow");
+            blown = true;
+            active = true;
+        }
+    }
+
+    public bool isBlown() {
+        return blown;
+    }
+
     public override void interact() {
-        anim.SetTrigger("pull");
-        rec.throwLever(num);
+        if (blown) {
+            active = false;
+            anim.SetTrigger("pull");
+            blown = false;
+            rec.throwLever(num);
+        }
     }
 
     public void setReactor(Reactor rec,int num) {
@@ -20,6 +38,8 @@ public class Lever : Interactable {
     }
 
     protected override void setup() {
+        active = false;
         anim = GetComponent<Animator>();
+        blown = false;
     }
 }

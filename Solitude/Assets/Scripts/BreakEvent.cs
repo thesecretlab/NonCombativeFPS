@@ -10,11 +10,12 @@ public interface Breakable {
 public class BreakEvent{
     Breakable parent;
     public int breakPercent;
+
     public BreakEvent(Breakable parent,int breakPercent) {
         this.parent = parent;
         this.breakPercent = breakPercent;
         try {
-            ((Ship)Object.FindObjectOfType<Ship>()).addBreakEvent(this);
+            Ship.ship.addBreakEvent(this);
         } catch (System.NullReferenceException e) {
             Debug.Log("Ship not found");
             Debug.Log(e.ToString());

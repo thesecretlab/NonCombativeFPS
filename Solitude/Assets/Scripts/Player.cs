@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     private Interactable active;
     private bool canInteract = false;
     private bool FPSActive = true;
-    public RigidbodyFirstPersonController FPSController;
+    private RigidbodyFirstPersonController FPSController;
     public GameObject interactableText; //
 
     void Awake() {

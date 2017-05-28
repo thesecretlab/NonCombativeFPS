@@ -7,24 +7,40 @@ public class Reactor : MonoBehaviour, Breakable {
     public Lever[] levers;
 
     public void onBreak() {
-        throw new NotImplementedException();
+        Ship.ship.setPower(false);
+        Debug.Log("boom");
+        foreach(Lever lev in levers) {
+            Debug.Log("Lev");
+            lev.blow();
+        }
     }
 
     public void onFix() {
-        throw new NotImplementedException();
+        Debug.Log("Breakers Fixed");
+        Ship.ship.setPower(true);
     }
 
     public void throwLever(int lever) {
-        levers[lever].gameObject.SetActive(false);
+        bool isblown = false;
+        foreach (Lever lev in levers) {
+            if (!isblown) {
+                if (lev.isBlown()) {
+                    isblown = true;
+                }
+            }
+        }
+        if (!isblown) {
+            onFix();
+        }
     }
 
     void Start () {
+        new BreakEvent(this, 100);
 		levers = GetComponentsInChildren<Lever>();
         int i = 0;
         foreach (Lever lev in levers) {
             lev.setReactor(this,i);
             i++;
-            Debug.Log(i);
         }
 	}
 }
