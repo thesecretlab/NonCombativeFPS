@@ -7166,6 +7166,7 @@ GameObject:
   - component: {fileID: 23774304345325966}
   - component: {fileID: 95655796190112146}
   - component: {fileID: 64091483550100812}
+  - component: {fileID: 114784562755939650}
   m_Layer: 0
   m_Name: Terminalconsole4 (8)
   m_TagString: Untagged
@@ -24995,7 +24996,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1906715748094218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 75.23, y: 19.55, z: -74.46}
+  m_LocalPosition: {x: -3.9377775, y: 5.4049807, z: 32.01616}
   m_LocalScale: {x: 1.2175376, y: 1.2175351, z: 1.2175351}
   m_Children:
   - {fileID: 4833818417754040}
@@ -26289,7 +26290,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1817017423723340}
-  m_LocalRotation: {x: 0.6123726, y: -0.35355327, z: -0.3535535, w: 0.61237246}
+  m_LocalRotation: {x: 0.6123725, y: -0.35355324, z: -0.35355347, w: 0.6123724}
   m_LocalPosition: {x: 6.9474416, y: 3.1961432, z: 6.4488215}
   m_LocalScale: {x: 3.0798979, y: 0.75651383, z: 0.44877225}
   m_Children: []
@@ -30204,7 +30205,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1033709922823922}
-  m_LocalRotation: {x: 0.6123726, y: -0.35355327, z: -0.3535535, w: 0.61237246}
+  m_LocalRotation: {x: 0.6123725, y: -0.35355324, z: -0.35355347, w: 0.6123724}
   m_LocalPosition: {x: 6.9474416, y: 3.1961432, z: 20.828348}
   m_LocalScale: {x: 3.0798979, y: 0.75651383, z: 0.44877225}
   m_Children: []
@@ -37970,7 +37971,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1096626973263216}
-  m_LocalRotation: {x: 0.6123726, y: -0.35355327, z: -0.3535535, w: 0.61237246}
+  m_LocalRotation: {x: 0.6123725, y: -0.35355324, z: -0.35355347, w: 0.6123724}
   m_LocalPosition: {x: 6.9474416, y: 3.1961432, z: -1.0919805}
   m_LocalScale: {x: 3.0798979, y: 0.75651383, z: 0.44877225}
   m_Children: []
@@ -38521,7 +38522,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1861652855323698}
-  m_LocalRotation: {x: 0.6123726, y: -0.35355327, z: -0.3535535, w: 0.61237246}
+  m_LocalRotation: {x: 0.6123725, y: -0.35355324, z: -0.35355347, w: 0.6123724}
   m_LocalPosition: {x: 6.9474416, y: 3.1961432, z: 13.792002}
   m_LocalScale: {x: 3.0798979, y: 0.75651383, z: 0.44877225}
   m_Children: []
@@ -91758,3 +91759,19 @@ Light:
   m_BounceIntensity: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!114 &114784562755939650
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1322030349106460}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f1b46f815dd7cf4aa6e4457082b01e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  uiPrefab: {fileID: 1478820287496784, guid: 89b6a46c6c3e7474090254b2d2ec55e9, type: 2}
+  ScreenElement: 0
+  matRedReff: {fileID: 2100000, guid: e9bc89c0879a2ce438ff2b8233aae147, type: 2}
+  commands: []
