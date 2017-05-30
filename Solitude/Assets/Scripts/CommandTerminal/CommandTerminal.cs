@@ -48,7 +48,7 @@ public class CommandTerminal : Terminal, Breakable {
         rend = GetComponent<Renderer>();
         mat = rend.materials;
         matBlackReff = mat[ScreenElement];
-        broken = new BreakEvent(this, 10);
+        broken = new BreakEvent(this, 50);
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
         commands.Add("cd /navigation");

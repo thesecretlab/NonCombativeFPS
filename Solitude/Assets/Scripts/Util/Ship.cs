@@ -7,6 +7,8 @@ public class Ship : MonoBehaviour {
     public static Ship ship;
     Light[] lights;
 
+    int breakmod = 0;
+
     List<BreakEvent> breakables = new List<BreakEvent>();
     int waitSec = 1;
     int repeatSec = 1000;
@@ -34,15 +36,15 @@ public class Ship : MonoBehaviour {
     void tryBreak() {
         Debug.Log("tryBreak");
         foreach(BreakEvent e in breakables) {
-            if (Random.Range(1, 100) < e.breakPercent) {
+            if (Random.Range(1, breakmod) < e.breakPercent) {
                 e.dobreak();
             }
         }
+        breakmod = 100;
     }
 
     public void addBreakEvent(BreakEvent e) {
         Debug.Log(e.breakPercent);
         breakables.Add(e);
-        e.dobreak();
     }
 }
