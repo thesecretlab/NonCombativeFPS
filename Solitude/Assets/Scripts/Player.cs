@@ -10,7 +10,7 @@ public class Player : MonoBehaviour {
     private Interactable active;
     private bool canInteract = false;
     private bool FPSActive = true;
-    public RigidbodyFirstPersonController FPSController;
+    private RigidbodyFirstPersonController FPSController;
     public GameObject interactableText; //
 
     void Awake() {
@@ -52,18 +52,18 @@ public class Player : MonoBehaviour {
         bool interact = false;
         foreach (Interactable inter in interactables) {
             //Only continuees checking if no interactable has been found;
-            Debug.Log("1");
+            //Debug.Log("1");
             if (!interact) {
                 //checks if the interactable is active
-                Debug.Log("2");
+                //Debug.Log("2");
                 if (inter.isActive()) {
                     //checks if the interactable is within the players reach
-                    Debug.Log("3");
+                    //Debug.Log("3");
                     if (Vector3.Distance(inter.getPos(), transform.position) < reach) {
                         //checks if the player is looking at the interactable
-                        Debug.Log("4");
+                        //Debug.Log("4");
                         if (lookingAt(inter)) {
-                            Debug.Log("5");
+                            //Debug.Log("5");
                             active = inter;
                             interact = true;
                         }
