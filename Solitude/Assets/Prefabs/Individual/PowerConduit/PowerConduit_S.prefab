@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4237213107401560}
   - component: {fileID: 33150005479861346}
   - component: {fileID: 23500679706466404}
-  - component: {fileID: 95032924674418582}
+  - component: {fileID: 64040628033523882}
   m_Layer: 0
   m_Name: PowerConduit_S
   m_TagString: Untagged
@@ -81,20 +81,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150481944719672}
   m_Mesh: {fileID: 4300000, guid: 48f233c1e3ee4ef44917be1d8e3931c0, type: 3}
---- !u!95 &95032924674418582
-Animator:
-  serializedVersion: 3
+--- !u!64 &64040628033523882
+MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1150481944719672}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 48f233c1e3ee4ef44917be1d8e3931c0, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Convex: 0
+  m_InflateMesh: 0
+  m_SkinWidth: 0.01
+  m_Mesh: {fileID: 4300000, guid: 48f233c1e3ee4ef44917be1d8e3931c0, type: 3}
