@@ -13,7 +13,7 @@ public class Torch : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.E))
+		if (Input.GetKeyDown(KeyCode.F))
         {
             toggleFlashLight();
         }
@@ -22,6 +22,6 @@ public class Torch : MonoBehaviour {
     void toggleFlashLight()
     {
         lightOn = !lightOn;
-        transform.GetChild(0).gameObject.SetActive(lightOn);
+        GetComponentInChildren<Light>().enabled = lightOn;
     }
 }

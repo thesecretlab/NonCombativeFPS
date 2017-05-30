@@ -8,9 +8,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MenuScene.unity
   - enabled: 1
-    path: Assets/Scenes/SettingScene.unity
+    path: Assets/Scenes/MainGame.unity
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/SettingScene.unity
   - enabled: 1
     path: Assets/Scenes/CreditScene.unity
   - enabled: 1

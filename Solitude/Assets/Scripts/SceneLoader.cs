@@ -11,7 +11,7 @@ public class SceneLoader : MonoBehaviour {
 	}
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene("MainGame");
     }
 
     public void LoadHighScores()
