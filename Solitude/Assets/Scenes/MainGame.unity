@@ -967,7 +967,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b01f093c290ea84b82534cca644a1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPSController: {fileID: 0}
   interactableText: {fileID: 492192868}
 --- !u!1 &1872079032
 GameObject:
@@ -1087,6 +1086,10 @@ Prefab:
     - target: {fileID: 100006, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
+      propertyPath: m_Name
+      value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 2}
