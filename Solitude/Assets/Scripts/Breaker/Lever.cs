@@ -11,6 +11,10 @@ public class Lever : Interactable {
 
     bool blown;
 
+    public string getName() {
+        return gameObject.name;
+    }
+
     public void blow() {
         if (!blown) {
             anim.SetTrigger("blow");
