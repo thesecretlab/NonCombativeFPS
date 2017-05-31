@@ -15,11 +15,20 @@ public class PauseScript : MonoBehaviour {
     //unpauses game, can be called by button in pause menu itself
     public void Unpause()
     {
+        Debug.Log("Unpause");
         Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         paused = false;
         pauseUI.gameObject.SetActive(false);
         pauseSettingsUI.SetActive(false);
+        Player.playerObj.FPSEnable(true);
+    }
+
+    private void pause(){
+        Debug.Log("Pause");
+        Player.playerObj.FPSEnable(false);
+        Time.timeScale = 0;
+        pauseUI.gameObject.SetActive(true);
     }
 
     // Use this for initialization
@@ -29,16 +38,14 @@ public class PauseScript : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = true;
+            paused = !paused;
         }
 
         if (paused)
         {
-            Cursor.lockState = CursorLockMode.Confined;
-            Time.timeScale = 0;
-            pauseUI.gameObject.SetActive(true);
+            pause();
         }
          else //I have no idea why this needs to be here but it makes it work the way it should
         {
@@ -53,6 +60,7 @@ public class PauseScript : MonoBehaviour {
 
     public void hideSettingsUI()
     {
+        Debug.Log("hide settings");
         pauseSettingsUI.SetActive(false);
     }
 
