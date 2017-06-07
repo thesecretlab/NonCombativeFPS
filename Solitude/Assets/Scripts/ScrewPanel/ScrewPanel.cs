@@ -27,7 +27,6 @@ public class ScrewPanel : Terminal, Breakable {
     public void onBreak() {
         screwed = 0;
         this.setActive(true);
-        Debug.Log("TT");
     }
 
     protected override void initialise() {
@@ -45,7 +44,7 @@ public class ScrewPanel : Terminal, Breakable {
     public void onFix() {
         showUI(false);
         isFixing = false;
-        Debug.Log("YAY");
+        this.setActive(false);
     }
 
     protected override void doUpdate() {
