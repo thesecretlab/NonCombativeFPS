@@ -77,7 +77,7 @@ public class Ship : MonoBehaviour {
     }
 
     public void addBreakEvent(BreakEvent e) {
-        Debug.Log(e.breakPercent);
+        //Debug.Log(e.breakPercent);
         breakables.Add(e);
     }
 }

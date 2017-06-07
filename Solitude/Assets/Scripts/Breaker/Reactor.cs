@@ -10,7 +10,7 @@ public class Reactor : MonoBehaviour, Breakable {
         Ship.ship.setPower(false);
         Debug.Log("boom");
         foreach(Lever lev in levers) {
-            Debug.Log(lev.getName());
+            //Debug.Log(lev.getName());
             lev.blow();
         }
     }
