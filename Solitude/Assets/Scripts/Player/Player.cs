@@ -20,11 +20,18 @@ public class Player : MonoBehaviour {
 
     private bool canInteract = false;
 
-    private bool FPSActive = true;
+    public bool FPSActive = true;
 
-    private RigidbodyFirstPersonController FPSController;
+    private RigidbodyFirstPersonController _FPSController;
 
     public GameObject interactableText; //
+
+    private RigidbodyFirstPersonController getFPSControler() {
+        if (_FPSController == null) {
+            _FPSController = GetComponent<RigidbodyFirstPersonController>();
+        }
+        return _FPSController;
+    }
 
 
 
@@ -47,22 +54,15 @@ public class Player : MonoBehaviour {
     // Use this for initialization
 
     void Start() {
-
         interactableText.SetActive(false); //hides the ui text on starting the game
-
-        FPSController = GetComponent<RigidbodyFirstPersonController>();
-
     }
 
 
 
     public void FPSEnable(bool enable) {
-
         FPSActive = enable;
-
-        FPSController.enabled = enable;
-
-        FPSController.mouseLook.SetCursorLock(enable);
+        getFPSControler().enabled = enable;
+        getFPSControler().mouseLook.SetCursorLock(enable);
 
     }
 
