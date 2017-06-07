@@ -154,6 +154,7 @@ public class CommandTerminal : Terminal, Breakable {
             mat[ScreenElement] = matBlackReff;
             rend.materials = mat;
         }
+        this.setActive(false);
         isBroken = false;
         showUI(false);
     }
