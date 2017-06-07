@@ -22,6 +22,8 @@ public class CommandTerminal : Terminal, Breakable {
     //the number of frames the dash is shown and not shown on
     int dashFrames = 20;
 
+    public bool backspacepressed = false;
+
     List<string> console = new List<string>();
 
     public List<string> commands = new List<string>();
@@ -78,7 +80,7 @@ public class CommandTerminal : Terminal, Breakable {
         addline(line);
         String entry = line.ToLower();
         entry = entry.Trim();
-        switch (entry.ToLower()) {
+        switch (entry) {
             case "cd /navigation":
                 addline("moving to navigation directory");
                 navDir = true;
@@ -123,22 +125,26 @@ public class CommandTerminal : Terminal, Breakable {
             dashCount -= 2 * dashFrames;
         }
         if (isVis) {
-            if (Input.GetKeyDown(KeyCode.Return)) {
-                onSubmit(line.Trim());
-                line = "";
-            }
-            if (Input.GetKey(KeyCode.Backspace)) {
-                if (line.Length > 0) {
-                    line = line.Substring(0, line.Length - 1);
+            
+            foreach(char c in Input.inputString) {
+                if(c == "\b"[0]) {
+                    if (line.Length > 0) {
+                        line = line.Substring(0, line.Length - 1);
+                    }
+                } else if (c == "\n"[0] || c == "\r"[0]) {
+                    onSubmit(line);
+                    line = "";
+                } else {
+                    line += c;
                 }
             }
-            line += Input.inputString;
             t.text = "";
             foreach (string l in console) {
                 t.text += "   " + l + "\n";
             }
             t.text += ">";
             t.text += line;
+            
             if (dashCount < dashFrames) { t.text += "_"; };
         }
     }
