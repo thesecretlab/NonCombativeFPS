@@ -33,7 +33,7 @@ public class Ship : MonoBehaviour {
 
         InvokeRepeating("tryBreak", waitSec, repeatSec);
         lights = GetComponentsInChildren<Light>();
-		///*
+		/*
 		AllRenderers = GetComponentsInChildren<Renderer>();			//Get all of the children's renderrs
 		foreach (Renderer re in AllRenderers) {						//For Each Renderer
 			//Debug.Log("Test");
@@ -54,7 +54,7 @@ public class Ship : MonoBehaviour {
 			Emmision [i] = Temp [i];								//Copy from Temp to Emission
 		}
 		 
-		// */
+		*/
 	}
 
     public void setPower(bool power) {
