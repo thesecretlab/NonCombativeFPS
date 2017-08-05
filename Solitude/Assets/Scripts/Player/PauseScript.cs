@@ -12,11 +12,20 @@ public class PauseScript : MonoBehaviour {
     //used to point to the settings ui
     public GameObject pauseSettingsUI;
 
+    public void setPause(bool pause) {
+        Time.timeScale = System.Convert.ToInt32(!pause);
+        paused = pause;
+        pauseUI.gameObject.SetActive(pause);
+        if (pause == false) { pauseSettingsUI.SetActive(false); }
+        Player.playerObj.FPSEnable(!pause);
+    }
+
+    #region Legacy pause
     //unpauses game, can be called by button in pause menu itself
     public void Unpause()
     {
-        Debug.Log("Unpause");
-        Cursor.lockState = CursorLockMode.Locked;
+        //Debug.Log("Unpause");
+        //Cursor.lockState = CursorLockMode.Locked;
         Time.timeScale = 1;
         paused = false;
         pauseUI.gameObject.SetActive(false);
@@ -25,11 +34,12 @@ public class PauseScript : MonoBehaviour {
     }
 
     private void pause(){
-        Debug.Log("Pause");
+        //Debug.Log("Pause");
         Player.playerObj.FPSEnable(false);
         Time.timeScale = 0;
         pauseUI.gameObject.SetActive(true);
     }
+    #endregion
 
     // Use this for initialization
     void Start() {
@@ -40,16 +50,7 @@ public class PauseScript : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            paused = !paused;
-        }
-
-        if (paused)
-        {
-            pause();
-        }
-         else //I have no idea why this needs to be here but it makes it work the way it should
-        {
-            Unpause();
+            setPause(!paused);
         }
     }
 
