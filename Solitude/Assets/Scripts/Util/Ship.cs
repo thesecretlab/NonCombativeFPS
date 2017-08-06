@@ -8,7 +8,8 @@ public class Ship : MonoBehaviour {
 
     public static Ship ship;
     Light[] lights;
-	Material[] Emmision;			//Array of Material's with Emmission maps
+	//Material[] Emmision;			//Array of Material's with Emmission maps
+	List<Material> Emmission = new List<Material>();
 
     int breakmod = 0;
 
@@ -27,20 +28,26 @@ public class Ship : MonoBehaviour {
 
     void Start () {
 		Renderer[] AllRenderers;					//An array of all objects renderes
-		Material[] Temp = new Material[200];		//A temporary array of all materials
+		Material[] reMats;
+		Material[] Temp = new Material[300];		//A temporary array of all materials
 		Texture test;								//A tenporary testing var
 		int i = 0;									//Used to set the size of the Emissions Array
+		MaterialGlobalIlluminationFlags flags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
 
         InvokeRepeating("tryBreak", waitSec, repeatSec);
         lights = GetComponentsInChildren<Light>();
+
+		getIlluminationMaterials ();
 		/*
-		AllRenderers = GetComponentsInChildren<Renderer>();			//Get all of the children's renderrs
-		foreach (Renderer re in AllRenderers) {						//For Each Renderer
+		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
+		//foreach( Material me in mats){ This wont work
+		foreach (Renderer re in AllRenderers) {									//For Each Renderer
 			//Debug.Log("Test");
-			test = re.material.GetTexture("_EmissionMap");			//Get Emission Map of Renderer
-			if (test != null) {										//If has map
-				Debug.Log("Height not equal to null");
-				Temp [i] = re.material;								//Add material to Temp
+			//Tried "_EmissionMap"
+			//test = re.material.GetTexture("_EmissionMap");					//Get Emission Map of Renderer
+			if (re.material.globalIlluminationFlags.CompareTo(flags) == 0 && i < 1000) {	//If has map (test != null)
+				Debug.Log("Height not equal to null || flag true");
+				Temp [i] = re.material;											//Add material to Temp
 				i++;
 				if (i >= 90) {	
 					Debug.Log ("Test"+i+" ");
@@ -50,20 +57,47 @@ public class Ship : MonoBehaviour {
 		}
 		Debug.Log("New Emmission Array of size:"+i);
 		Emmision = new Material[i];									//Create Emission Array to exact size
-		while(i >= 0){
-			Emmision [i] = Temp [i];								//Copy from Temp to Emission
+		while(i-1 >= 0){
+			Emmision [i-1] = Temp [i-1];								//Copy from Temp to Emission
+			i--;
 		}
-		 
-		*/
+		 */
+
 	}
 
     public void setPower(bool power) {
+		//MaterialGlobalIlluminationFlags on = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+		//MaterialGlobalIlluminationFlags off = MaterialGlobalIlluminationFlags.None;
+		Color on = Color.white;
+		Color off = Color.black;
+
         foreach (Light light in lights) {
             light.enabled = power;
 			/*
 			 
 			 */
         }
+
+		if (power) {
+			foreach (Material mat in Emmission) {
+				//mat.globalIlluminationFlags = on;
+				//mat.SetFloat("_Emission",2.0f);
+				mat.SetColor("_EmissionColor",on);
+
+			}
+			Debug.Log ("Power On");
+		} else {
+			foreach (Material mat in Emmission) {
+				//mat.globalIlluminationFlags = off;
+				mat.SetColor("_EmissionColor",off);
+				/*mat.SetFloat("_Emission",-1.0f);
+				mat.SetFloat("Emission",-1.0f);
+				mat.SetFloat("emission",-1.0f);
+				mat.SetFloat("_Lightmapper",-1.0f);
+				mat.SetFloat("Lightmapper",-1.0f);*/
+			}
+			Debug.Log ("Power Off");
+		}
     }
 
     void tryBreak() {
@@ -80,4 +114,23 @@ public class Ship : MonoBehaviour {
         //Debug.Log(e.breakPercent);
         breakables.Add(e);
     }
+
+	public void getIlluminationMaterials(){
+		MaterialGlobalIlluminationFlags flags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+		Material[] temp;
+		temp = (Material[]) Resources.FindObjectsOfTypeAll(typeof(Material));
+		Debug.Log ("There are " + temp.Length+" Materials");
+
+		for (int i = 0; i < temp.Length; i++) {
+			if (temp[i].globalIlluminationFlags.CompareTo(flags) == 0) {	//If has map (test != null)
+				temp[i].EnableKeyword("_EMISSION");
+				Emmission.Add (temp [i]);
+			}	
+		}
+		Debug.Log ("Found " + Emmission.Count + " Self Illuminating Materials");
+		/*foreach (Material mat in Emmission) {
+			mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+		}*/
+
+	}
 }
