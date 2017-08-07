@@ -8,6 +8,7 @@ public class Ship : MonoBehaviour {
 
     public static Ship ship;
     Light[] lights;
+	List<GameObject> floodlights = new List<GameObject>();
 	//Material[] Emmision;			//Array of Material's with Emmission maps
 	List<Material> Emmission = new List<Material>();
 
@@ -32,12 +33,24 @@ public class Ship : MonoBehaviour {
 		Material[] Temp = new Material[300];		//A temporary array of all materials
 		Texture test;								//A tenporary testing var
 		int i = 0;									//Used to set the size of the Emissions Array
+		//AnotheScript
 		MaterialGlobalIlluminationFlags flags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
 
         InvokeRepeating("tryBreak", waitSec, repeatSec);
         lights = GetComponentsInChildren<Light>();
+		//floodlights = GameObject[].Find ("FloodLight****");
 
-		getIlluminationMaterials ();
+		foreach(GameObject obj in GameObject.FindObjectsOfType<GameObject>()){		//For each obj
+			if (obj.name.Length >= 10) {
+				if(obj.name.Substring(0,10).CompareTo("FloodLight") == 0){			//named FloodLight*****
+					floodlights.Add(obj);											//add to floodlights
+				}
+			}
+		}
+		Debug.Log ("flood lights found: " + floodlights.Count);
+
+
+		//getIlluminationMaterials ();
 		/*
 		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
 		//foreach( Material me in mats){ This wont work
@@ -66,18 +79,19 @@ public class Ship : MonoBehaviour {
 	}
 
     public void setPower(bool power) {
+		
 		//MaterialGlobalIlluminationFlags on = MaterialGlobalIlluminationFlags.RealtimeEmissive;
 		//MaterialGlobalIlluminationFlags off = MaterialGlobalIlluminationFlags.None;
 		Color on = Color.white;
 		Color off = Color.black;
 
         foreach (Light light in lights) {
-            light.enabled = power;
+            //light.enabled = power;
 			/*
 			 
 			 */
         }
-
+		/*
 		if (power) {
 			foreach (Material mat in Emmission) {
 				//mat.globalIlluminationFlags = on;
@@ -94,10 +108,10 @@ public class Ship : MonoBehaviour {
 				mat.SetFloat("Emission",-1.0f);
 				mat.SetFloat("emission",-1.0f);
 				mat.SetFloat("_Lightmapper",-1.0f);
-				mat.SetFloat("Lightmapper",-1.0f);*/
+				mat.SetFloat("Lightmapper",-1.0f);
 			}
 			Debug.Log ("Power Off");
-		}
+		}*/
     }
 
     void tryBreak() {
