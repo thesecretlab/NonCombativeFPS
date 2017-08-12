@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 /*
  * Switches between two gameObjects (Diffrent Models) by boolean value.
  * 
  * If the whole ship or room the light is in power is down then var power
  * should reflect this state and be changed in another script.
  * 
- *  Created By Alexander Tilley 12/08/2017
+ * Created By Alexander Tilley 12/08/2017
  */
-public class FloodLight : MonoBehaviour {
+
+public class FluroLight : MonoBehaviour {
 
 	public bool power = false;		//Power State Only used an initialization
 
@@ -33,10 +35,10 @@ public class FloodLight : MonoBehaviour {
 			}
 		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	//Switches the between the diffrent game objects
