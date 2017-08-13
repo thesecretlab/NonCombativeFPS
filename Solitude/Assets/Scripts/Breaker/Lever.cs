@@ -9,6 +9,8 @@ public class Lever : Interactable {
     Reactor rec;
     public int num;
 
+    public ParticleSystem particle;
+
     bool blown;
 
     public string getName() {
@@ -17,6 +19,7 @@ public class Lever : Interactable {
 
     public void blow() {
         if (!blown) {
+            particle.Play();
             anim.SetTrigger("blow");
             blown = true;
             active = true;
@@ -29,6 +32,7 @@ public class Lever : Interactable {
 
     public override void interact() {
         if (blown) {
+            particle.Stop();
             active = false;
             anim.SetTrigger("pull");
             blown = false;
