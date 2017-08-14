@@ -53,11 +53,11 @@ public class CommandTerminal : Terminal, Breakable {
         broken = new BreakEvent(this, 50);
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
-        commands.Add("cd /navigation");
-        commands.Add("service stop navigation");
-        commands.Add("mv navigation.back navigation");
-        commands.Add("service start navigation");
-        commands.Add("help");
+        commands.Add("Go to Navigation");
+        commands.Add("Stop Navigation");
+        commands.Add("Load Navigation Backups");
+        commands.Add("Start Navigation");
+        commands.Add("Help");
         addline("Available Commands");
         foreach (string command in commands) {
             addline(command);
@@ -81,17 +81,17 @@ public class CommandTerminal : Terminal, Breakable {
         String entry = line.ToLower();
         entry = entry.Trim();
         switch (entry) {
-            case "cd /navigation":
+            case "Go to Navigation":
                 addline("moving to navigation directory");
                 navDir = true;
                 break;
-            case "service stop navigation":
+            case "Stop Navigation":
                 addline("service stopping");
                 service = false;
                 break;
-            case "mv navigation.back navigation":
+            case "Load Navigation Backups":
                 if (!navDir) {
-                    addline("Unable to locate Navigation.back");
+                    addline("Unable to locate Navigation back-ups");
                     break;
                 }
                 if (service) {
@@ -101,14 +101,14 @@ public class CommandTerminal : Terminal, Breakable {
                 addline("Restoring back up files");
                 isBroken = false;
                 break;
-            case "service start navigation":
+            case "Start Navigation":
                 addline("starting service");
                 service = true;
                 if (!isBroken) {
                     onFix();
                 }
                 break;
-            case "help":
+            case "Help":
                 addline("Available Commands");
                 foreach (string command in commands) {
                     addline(command);
