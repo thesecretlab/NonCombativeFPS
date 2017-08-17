@@ -10,7 +10,8 @@ public class Lever : Interactable {
     public int num;
 
     public ParticleSystem particle;
-    AudioSource audioSource;
+    AudioSource sparkSound;
+    public AudioClip switchSound;
 
     bool blown;
 
@@ -21,7 +22,7 @@ public class Lever : Interactable {
     public void blow() {
         if (!blown) {
             particle.Play();
-            audioSource.Play();
+            sparkSound.Play();
             anim.SetTrigger("blow");
             blown = true;
             active = true;
@@ -35,11 +36,12 @@ public class Lever : Interactable {
     public override void interact() {
         if (blown) {
             particle.Stop();
-            audioSource.Stop();
+            sparkSound.Stop();
             active = false;
             anim.SetTrigger("pull");
             blown = false;
             rec.throwLever(num);
+            sparkSound.PlayOneShot(switchSound,1.5f);
         }
     }
 
@@ -51,7 +53,7 @@ public class Lever : Interactable {
     protected override void setup() {
         active = false;
         anim = GetComponent<Animator>();
-        audioSource = GetComponent<AudioSource>();
+        sparkSound = GetComponent<AudioSource>();
         blown = false;
     }
 }
