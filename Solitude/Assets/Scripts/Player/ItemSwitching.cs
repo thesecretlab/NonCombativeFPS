@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public struct item{
 	public int id { get; set; }		//Object Type
@@ -11,6 +12,10 @@ public class ItemSwitching : MonoBehaviour {
 
     //code adapted from https://www.youtube.com/watch?v=Dn_BUIVdAPg&ab_channel=Brackeys
     //items should be made a child of the itemholder object on the player for this to work
+	public Image[] items;
+	//public GameObject[] items;
+	public int xcords;
+	public int ycords;
 
     public int selectedItem = 0;
 
@@ -35,6 +40,15 @@ public class ItemSwitching : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SelectItem();
+		item blank;
+		blank.ammount = 0;
+		blank.id = 0;
+		for (int r = 0; r < INV_ROWS; r++) {				//For all rows in inventory
+			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory 
+				inventory[r,c]=blank;						//Set to empty
+			}
+		}
+
 	}
 
     // Update is called once per frame
