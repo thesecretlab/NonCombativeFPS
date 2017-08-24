@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Nodeaccessable : MonoBehaviour {
+public class Nodeaccess4 : MonoBehaviour
+{
 
     public Button Button1;
     public Button Button2;
     public Button Button3;
     public Button Button4;
     public Button Button5;
+ 
 
     int button1_on;
     int button2_on;
     int button3_on;
     int button4_on;
+
     // Use this for initialization
     void Start()
     {
@@ -25,10 +28,11 @@ public class Nodeaccessable : MonoBehaviour {
         btn2.onClick.AddListener(TaskButton2);
 
         Button btn3 = Button3.GetComponent<Button>();
-        btn.onClick.AddListener(TaskButton3);
+        btn3.onClick.AddListener(TaskButton3);
 
         Button btn4 = Button4.GetComponent<Button>();
-        btn2.onClick.AddListener(TaskButton4);
+        btn4.onClick.AddListener(TaskButton4);
+
 
         if (Button1.gameObject.name == ("START"))
         {
@@ -51,6 +55,7 @@ public class Nodeaccessable : MonoBehaviour {
     {
         button4_on = 1;
     }
+
     // Update is called once per frame
     void Update()
     {

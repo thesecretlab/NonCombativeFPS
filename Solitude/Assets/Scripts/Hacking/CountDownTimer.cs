@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class CountDownTimer : MonoBehaviour
 {
-    float timeLeft = 10.0f;
+    float timeLeft = 50.0f;
     float closetime = 3.0f;
 
     public Text text;
