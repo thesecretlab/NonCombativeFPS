@@ -5,11 +5,13 @@ using UnityEngine;
 public class Torch : MonoBehaviour {
 
     public bool lightOn = true;
+    public AudioSource lightSound;
+
 
 	// Use this for initialization
 	void Start () {
         toggleFlashLight();
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -22,6 +24,7 @@ public class Torch : MonoBehaviour {
     void toggleFlashLight()
     {
         lightOn = !lightOn;
+        lightSound.Play();
         GetComponentInChildren<Light>().enabled = lightOn;
     }
 }
