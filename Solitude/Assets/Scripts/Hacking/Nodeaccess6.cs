@@ -40,7 +40,8 @@ public class Nodeaccess6 : MonoBehaviour {
         Button btn6 = Button6.GetComponent<Button>();
         btn6.onClick.AddListener(TaskButton6);
 
-        if (Button1.gameObject.name == ("START"))
+    
+        if (Button3.gameObject.name == ("START"))
         {
             button1_on = 1;
         }
