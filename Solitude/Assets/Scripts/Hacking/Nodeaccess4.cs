@@ -41,19 +41,47 @@ public class Nodeaccess4 : MonoBehaviour
     }
     void TaskButton1()
     {
-        button1_on = 1;
+        if(GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        {
+            button1_on = 0;
+        }
+        else
+        {
+            button1_on = 1;
+        }
     }
     void TaskButton2()
     {
-        button2_on = 1;
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        {
+            button2_on = 0;
+        }
+        else
+        {
+            button2_on = 1;
+        }
     }
     void TaskButton3()
     {
-        button3_on = 1;
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        {
+            button3_on = 0;
+        }
+        else
+        {
+            button3_on = 1;
+        }
     }
     void TaskButton4()
     {
-        button4_on = 1;
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        {
+            button4_on = 0;
+        }
+        else
+        {
+            button4_on = 1;
+        }
     }
 
     // Update is called once per frame
