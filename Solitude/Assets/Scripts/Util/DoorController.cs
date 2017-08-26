@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour {
     Animator anim;
     bool open;
     GameObject player;
+    AudioSource doorNoise;
 
 
 	// Use this for initialization
@@ -14,6 +15,7 @@ public class DoorController : MonoBehaviour {
         anim = GetComponent<Animator>();
         open = false;
         player = GameObject.FindGameObjectWithTag("Player");
+        doorNoise = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -25,6 +27,7 @@ public class DoorController : MonoBehaviour {
             {
                 Debug.Log("Door should open!");
                 anim.SetTrigger("Open");
+                doorNoise.Play();
                 open = true;
             }
         }
@@ -36,6 +39,7 @@ public class DoorController : MonoBehaviour {
                 //close doors
                 Debug.Log("Door should close!");
                 anim.SetTrigger("Close");
+                doorNoise.Play();
                 open = false;
             }
         }
