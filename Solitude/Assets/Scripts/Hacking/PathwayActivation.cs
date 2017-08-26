@@ -14,10 +14,10 @@ public class PathwayActivation : MonoBehaviour {
     // Use this for initialization
     public void Start() {
         Button btn = Button1.GetComponent<Button>();
-        btn.onClick.AddListener(TaskButton1);
+        btn.onClick.AddListener(Button1active);
     
         Button btn2 = Button2.GetComponent<Button>();
-        btn2.onClick.AddListener(TaskButton2);
+        btn2.onClick.AddListener(Button2active);
 
         if (Button1.gameObject.name == ("START"))
         {
@@ -26,11 +26,11 @@ public class PathwayActivation : MonoBehaviour {
 
     }
 
-    void TaskButton1()
+    void Button1active()
     {
         button1_on = 1;
     }
-    void TaskButton2()
+    void Button2active()
     {
         button2_on = 1;
     }

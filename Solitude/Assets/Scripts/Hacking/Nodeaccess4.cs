@@ -21,8 +21,8 @@ public class Nodeaccess4 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Button btn = Button1.GetComponent<Button>();
-        btn.onClick.AddListener(TaskButton1);
+        Button btn1 = Button1.GetComponent<Button>();
+        btn1.onClick.AddListener(TaskButton1);
 
         Button btn2 = Button2.GetComponent<Button>();
         btn2.onClick.AddListener(TaskButton2);
@@ -34,16 +34,17 @@ public class Nodeaccess4 : MonoBehaviour
         btn4.onClick.AddListener(TaskButton4);
 
 
-        if (Button1.gameObject.name == ("START"))
+        if(Button1.gameObject.name == ("START"))
         {
             button1_on = 1;
         }
     }
     void TaskButton1()
     {
-        if(GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
         {
             button1_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
         }
         else
         {
@@ -52,9 +53,10 @@ public class Nodeaccess4 : MonoBehaviour
     }
     void TaskButton2()
     {
-        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
         {
             button2_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
         }
         else
         {
@@ -63,9 +65,10 @@ public class Nodeaccess4 : MonoBehaviour
     }
     void TaskButton3()
     {
-        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
         {
             button3_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
         }
         else
         {
@@ -74,9 +77,10 @@ public class Nodeaccess4 : MonoBehaviour
     }
     void TaskButton4()
     {
-        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1.0f)
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
         {
             button4_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
         }
         else
         {

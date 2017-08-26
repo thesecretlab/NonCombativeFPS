@@ -6,7 +6,7 @@ using UnityEngine.Sprites;
 
 public class SystemDefenseFirewall : MonoBehaviour {
 
-    GameObject Button;
+    public GameObject Button;
  
     public Sprite Firewall;
 
@@ -15,6 +15,6 @@ public class SystemDefenseFirewall : MonoBehaviour {
 
         Button.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 40);
         Button.GetComponent<Image>().sprite = Firewall;
-        GlobalVars.GlobalVariables.INACCESSIBLE = 1.0f;
+        GlobalVars.GlobalVariables.INACCESSIBLE = 1;
     }
 }

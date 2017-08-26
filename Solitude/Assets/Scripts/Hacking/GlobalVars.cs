@@ -6,6 +6,6 @@ public class GlobalVars : MonoBehaviour {
 
     public static class GlobalVariables
     {
-        public static float INACCESSIBLE;
+        public static int INACCESSIBLE;
     } 
 }

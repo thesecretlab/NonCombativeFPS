@@ -29,11 +29,27 @@ public class Nodeaccess2 : MonoBehaviour
     }
     void TaskButton1()
     {
-        button1_on = 1;
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
+        {
+            button1_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
+        }
+        else
+        {
+            button1_on = 1;
+        }
     }
     void TaskButton2()
     {
-        button2_on = 1;
+        if (GlobalVars.GlobalVariables.INACCESSIBLE == 1)
+        {
+            button2_on = 0;
+            GlobalVars.GlobalVariables.INACCESSIBLE = 0;
+        }
+        else
+        {
+            button2_on = 1;
+        }
     }
 
 
