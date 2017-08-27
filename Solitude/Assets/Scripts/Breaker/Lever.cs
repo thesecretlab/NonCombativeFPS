@@ -21,6 +21,7 @@ public class Lever : Interactable {
 
     public void blow() {
         if (!blown) {
+            sparkSound.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.3f);
             particle.Play();
             sparkSound.Play();
             anim.SetTrigger("blow");
@@ -30,6 +31,7 @@ public class Lever : Interactable {
     }
 
     public bool isBlown() {
+        sparkSound.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.5f);
         return blown;
     }
 
@@ -41,7 +43,7 @@ public class Lever : Interactable {
             anim.SetTrigger("pull");
             blown = false;
             rec.throwLever(num);
-            sparkSound.PlayOneShot(switchSound,1.5f);
+            sparkSound.PlayOneShot(switchSound,1.5f * PlayerPrefs.GetFloat("SFXSound"));
         }
     }
 

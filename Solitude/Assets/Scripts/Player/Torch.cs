@@ -17,6 +17,7 @@ public class Torch : MonoBehaviour {
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.F))
         {
+            lightSound.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.4f);
             toggleFlashLight();
         }
 	}

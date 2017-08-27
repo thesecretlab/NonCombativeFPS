@@ -4,17 +4,10 @@ using UnityEngine;
 
 public class BackgroundAudioManager : MonoBehaviour {
 
-    public AudioClip backgroundSound;
-
-    private AudioSource source;
-
-	// Use this for initialization
-	void Start () {
-		
-	}
+    public AudioSource BGSound;
 	
 	// Update is called once per frame
 	void Update () {
-		
-	}
+        BGSound.volume = ((PlayerPrefs.GetFloat("BGSound")) * 0.2f);
+    }
 }
