@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 /*
  * Switches between two gameObjects (Diffrent Models) by boolean value.
  * 
@@ -9,9 +8,9 @@ using UnityEngine;
  * should reflect this state and be changed in another script.
  * 
  * Created By Alexander Tilley 12/08/2017
+ * Edited By Jeffrey Albion: Added interaction through Light Interface
  */
-
-public class FluroLight : MonoBehaviour {
+public class FloodLight : MonoBehaviour, shipLight {
 
 	public bool power = false;		//Power State Only used an initialization
 
@@ -35,10 +34,10 @@ public class FluroLight : MonoBehaviour {
 			}
 		}
 	}
-
+	
 	// Update is called once per frame
 	void Update () {
-
+		
 	}
 
 	//Switches the between the diffrent game objects
