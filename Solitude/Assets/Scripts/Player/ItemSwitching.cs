@@ -12,10 +12,13 @@ public class ItemSwitching : MonoBehaviour {
 
     //code adapted from https://www.youtube.com/watch?v=Dn_BUIVdAPg&ab_channel=Brackeys
     //items should be made a child of the itemholder object on the player for this to work
+	public GameObject row;
+	public GameObject[] display;
 	public Image[] items;
 	//public GameObject[] items;
 	public int xcords;
 	public int ycords;
+	public int zcords;
 
     public int selectedItem = 0;
 
@@ -24,6 +27,15 @@ public class ItemSwitching : MonoBehaviour {
 	private const int INV_COLUMNS = 4;				//Inventory columns
 
 	//public struct item items[][];
+	public GameObject emptyImage;
+	public GameObject [,] visible = new GameObject[INV_ROWS,INV_COLUMNS];
+
+	public Sprite SCREWDRIVER_PIC;
+
+
+
+
+
 	public item [,] inventory = new item[INV_ROWS,INV_COLUMNS];	//2D array of items
 
 	public const int EMPTYID = 0;					//Empty Inventory Slot ID
@@ -35,10 +47,15 @@ public class ItemSwitching : MonoBehaviour {
 	public const int CIRCUITBOARD = 	5;			//Circuit Board ID
 	public const int SCRAPMETAL = 		6;			//Scrap Metal ID
 	public const int SCREWS = 			7;			//Screws ID
+	public float HEIGHT =  Screen.height;		//Window Height
+	public float WIDTH = Screen.width;			//Window Width
+	//public Vector3 NextPos = new Vector3(0.0f+(0.01f*WIDTH),0.0f+(HEIGHT-10.0f),1.0f);
+
 
 
     // Use this for initialization
     void Start () {
+		Debug.Log ("Screen Width: " + WIDTH + " Height: " + HEIGHT);
         SelectItem();
 		item blank;
 		blank.ammount = 0;
@@ -46,11 +63,18 @@ public class ItemSwitching : MonoBehaviour {
 		for (int r = 0; r < INV_ROWS; r++) {				//For all rows in inventory
 			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory 
 				inventory[r,c]=blank;						//Set to empty
+				visible[r,c]= Instantiate(emptyImage);
+				visible [r, c].transform.SetParent (this.gameObject.transform);
+				visible [r, c].GetComponent<RectTransform> ().localScale = Vector3.one;
+				visible [r, c].GetComponent<RectTransform> ().localPosition = Vector3.one;
+				visible [r, c].GetComponent<RectTransform> ().localPosition = newVector(0.0f-(WIDTH/0.24f),5.0f,5.0f);			
+				//visible[r,c].GetComponent<RectTransform> ().position.Set (1.0f, 1.0f, 1.0f);
+				//visible [r, c].transform.localPosition.Set (1.0f, 1.0f, 1.0f);
 			}
 		}
-
+		visible [0, 0].transform.localPosition.Set (10.0f, 10.0f, 0.0f);
+		visible [0, 0].GetComponent<Image>().sprite = SCREWDRIVER_PIC;
 	}
-
     // Update is called once per frame
     void Update() {
 
@@ -164,6 +188,12 @@ public class ItemSwitching : MonoBehaviour {
 			}
 		}
 		return false;
+	}
+
+	//Returns a vector as a var to satsify Unity
+	Vector3 newVector(float x, float y,float z){
+		Vector3 toReturn = new Vector3 (x, y, z);
+		return toReturn;
 	}
 
 }
