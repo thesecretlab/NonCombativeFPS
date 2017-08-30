@@ -13,14 +13,16 @@ public class Room : MonoBehaviour {
         Lights = GetComponentsInChildren<shipLight>();
     }
 
-    public void setPower(int power) {
+    public int setPower(int power) {
         this.power = power;
         updatePower();
+        return power;
     }
 
-    public void changePower(bool up) {
+    public int changePower(bool up) {
         power += up ? 1 : -1;
         updatePower();
+        return power;
     }
 
     public void updatePower() {

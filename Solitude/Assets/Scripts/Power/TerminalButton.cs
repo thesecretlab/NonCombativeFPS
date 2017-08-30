@@ -4,14 +4,17 @@ using UnityEngine.EventSystems;
 
 public class TerminalButton : MonoBehaviour, IPointerClickHandler {
     PowerSystem ps;
+    Text tb;
+    string roomName;
+    int p = 0;
+
     void Start() {
         ps = GetComponentInParent<PowerSystem>();
+        tb = GetComponent<Text>();
+        tb.text = name + "\n" + p;
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        if (eventData.button == PointerEventData.InputButton.Left)
-            ps.changePower(this.name, true);
-        else if (eventData.button == PointerEventData.InputButton.Right)
-            ps.changePower(this.name, false);
+        tb.text = name + "\n" + ps.changePower(this.name, eventData.button == PointerEventData.InputButton.Left);
     }
 }

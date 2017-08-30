@@ -19,10 +19,15 @@ public class PowerSystem : MonoBehaviour {
         Rooms = FindObjectsOfType(typeof(Room)) as Room[];
     }
 	
-    public void changePower(string room, bool up) {
+    public int changePower(string room, bool up) {
         foreach(Room r in Rooms) {
-            if (r.name.ToLower() == room.ToLower()) r.changePower(up);
+            if (r.name.ToLower() == room.ToLower()) return updatePower(r, up);
         }
+        return -1;
+    }
+
+    int updatePower(Room r,bool up) {
+
     }
 
 	// Update is called once per frame
