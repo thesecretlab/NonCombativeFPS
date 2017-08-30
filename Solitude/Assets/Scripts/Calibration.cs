@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Calibration : Terminal, Breakable{
 
     Renderer rend;
-    public int accuracy;
+    public int accuracy = 100;
     public GameObject reticle;
     public GameObject square;
     public Text accuracyText;
@@ -53,22 +53,21 @@ public class Calibration : Terminal, Breakable{
         //move square in random direction
         square.transform.localPosition = (randDir - square.transform.localPosition).normalized * 10 * Time.deltaTime;
 
-        if (1==1) //TODO:square and circle not overlapping
+        if (Vector3.Distance(reticle.transform.position, square.transform.position) <= 4) //TODO:square and circle not overlapping
         {
             if (1!=1) //TODO:square touches the edge of the canvas
             {
                 randDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0.0f);
             }
 
-
         }
-        else if (2==1)//TODO:square and circle are overlapping oh baby
+        else if (1==1)//TODO:square and circle are overlapping oh baby
         {
             //shrink
             square.transform.localScale = square.transform.localScale - (square.transform.localScale / 1000);
 
 
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
+            if (Input.GetKeyDown(KeyCode.KeypadEnter)) //TODO: change to mouse down
             {
                 //TODO: This comparison doesn't really work
                 if (reticle.transform.localScale.magnitude < square.transform.localScale.magnitude)
