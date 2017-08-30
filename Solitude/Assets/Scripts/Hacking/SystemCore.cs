@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Sprites;
 
-public class SystemDefenseFirewall : MonoBehaviour {
+public class SystemCore : MonoBehaviour {
 
     public GameObject Button;
  
-    public Sprite Firewall;
 
-     public void activate_defense_Fire()
+    public Sprite systemcore;
+
+    public void activate_system_core()
     {
-
         Button.GetComponent<RectTransform>().sizeDelta = new Vector2(80, 40);
-        Button.GetComponent<Image>().sprite = Firewall;
-        GlobalVars.GlobalVariables.INACCESSIBLE = 1;
+        Button.GetComponent<Image>().sprite = systemcore;
+        GlobalVars.GlobalVariables.SYSCORE_FOUND = 1;    
     }
 }
