@@ -15,8 +15,8 @@ public class Ship : MonoBehaviour {
     public static Ship ship;
     Light[] lights;
 
-	List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
-	List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
+	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
+	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
 
     int breakmod = 0;

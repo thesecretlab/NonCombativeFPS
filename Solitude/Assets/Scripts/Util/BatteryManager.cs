@@ -26,7 +26,7 @@ public class BatteryManager : MonoBehaviour {
             {
                 CurrentDrain = 0;
             }
-            else if (torchLight.active == true)
+            else if (torchLight.activeInHierarchy == true)
             {
                 CurrentDrain = 2;
             }
