@@ -7,6 +7,7 @@ public abstract class Terminal : Interactable {
     protected abstract void doUpdate();
     protected bool isVis;
     public override abstract void interact();
+
     protected override void setup() {
         ui = Instantiate(uiPrefab);
         ui.transform.SetParent(UICanvas.Canvas.transform, false);

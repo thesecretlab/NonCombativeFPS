@@ -33,6 +33,10 @@ public class Calibration : Terminal, Breakable{
     {
         if (rend != null)
         {
+            if (accuracy < 20)
+            {
+                accuracy =  (accuracy/2);
+            }
             mat[ScreenElement] = matRedReff;
             rend.materials = mat;
         }
@@ -42,7 +46,7 @@ public class Calibration : Terminal, Breakable{
         rend = GetComponent<Renderer>();
         mat = rend.materials;
         matBlackReff = mat[ScreenElement];
-        broken = new BreakEvent(this, 100 - accuracy);
+        broken = new BreakEvent(this, 90 - accuracy); //should be fine, but this ~might~ cause a crash somewhere
         randDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0.0f);
     }
 
@@ -53,27 +57,31 @@ public class Calibration : Terminal, Breakable{
         //move square in random direction
         square.transform.localPosition = (randDir - square.transform.localPosition).normalized * 10 * Time.deltaTime;
 
-        if (Vector3.Distance(reticle.transform.position, square.transform.position) <= 4) //TODO:square and circle not overlapping
+        //square and circle not overlapping
+        if (Vector3.Distance(reticle.transform.position, square.transform.position) > square.transform.localScale.magnitude) 
         {
+            Debug.Log("Not touching");
+            //It does get to here
             if (1!=1) //TODO:square touches the edge of the canvas
             {
                 randDir = new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f), 0.0f);
             }
 
         }
-        else if (1==1)//TODO:square and circle are overlapping oh baby
+        //square and circle are overlapping oh baby
+        else if (Vector3.Distance(reticle.transform.position, square.transform.position) <= square.transform.localScale.magnitude)
         {
+            Debug.Log("touching");
             //shrink
-            square.transform.localScale = square.transform.localScale - (square.transform.localScale / 1000);
+            square.transform.localScale = square.transform.localScale - (square.transform.localScale / 500);
 
-
-            if (Input.GetKeyDown(KeyCode.KeypadEnter)) //TODO: change to mouse down
+            if (Input.GetMouseButtonDown(0)) //player is updating the accuracy value
             {
                 //TODO: This comparison doesn't really work
                 if (reticle.transform.localScale.magnitude < square.transform.localScale.magnitude)
                 {
                     //TODO: need to make this way more accurate
-                    accuracy = accuracy + (int)(reticle.transform.localScale.magnitude - square.transform.localScale.magnitude);
+                    accuracy = (int)(100 - Mathf.Abs(reticle.transform.localScale.magnitude - square.transform.localScale.magnitude));
                 }
             }
 
