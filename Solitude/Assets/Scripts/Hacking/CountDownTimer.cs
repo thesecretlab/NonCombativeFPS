@@ -4,7 +4,7 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 
-public class CountDownTimer : Terminal
+public class CountDownTimer
 {
     float timeLeft = 50.0f;
     float closetime = 3.0f;
@@ -12,7 +12,7 @@ public class CountDownTimer : Terminal
 
     public Text text;
 
-    protected override void doUpdate()
+    void Update()
     {
         if (!Gameover)
         {
@@ -37,15 +37,5 @@ public class CountDownTimer : Terminal
             SceneManager.LoadScene("MainGame");
         }
 
-    }
-
-    protected override void initialise()
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void interact()
-    {
-        throw new NotImplementedException();
     }
 }
