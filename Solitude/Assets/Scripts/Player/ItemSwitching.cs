@@ -31,6 +31,8 @@ public class ItemSwitching : MonoBehaviour {
 	public GameObject [,] visible = new GameObject[INV_ROWS,INV_COLUMNS];
 
 	public Sprite SCREWDRIVER_PIC;
+	public Sprite PLASMACUTTER_PIC;
+	public Sprite WELDER_PIC;
 
 
 
@@ -55,19 +57,24 @@ public class ItemSwitching : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+		int hotBarOffSet = 0;
 		Debug.Log ("Screen Width: " + WIDTH + " Height: " + HEIGHT);
         SelectItem();
 		item blank;
 		blank.ammount = 0;
 		blank.id = 0;
 		for (int r = 0; r < INV_ROWS; r++) {				//For all rows in inventory
-			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory 
+			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory
+				if (r == 1) {
+					hotBarOffSet = 200;
+				}
 				inventory[r,c]=blank;						//Set to empty
 				visible[r,c]= Instantiate(emptyImage);
 				visible [r, c].transform.SetParent (this.gameObject.transform);
 				visible [r, c].GetComponent<RectTransform> ().localScale = Vector3.one;
 				visible [r, c].GetComponent<RectTransform> ().localPosition = Vector3.one;
-				visible [r, c].GetComponent<RectTransform> ().localPosition = newVector(0.0f-(WIDTH/0.24f),5.0f,5.0f);			
+				visible [r, c].GetComponent<RectTransform> ().localPosition = 
+					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);			
 				//visible[r,c].GetComponent<RectTransform> ().position.Set (1.0f, 1.0f, 1.0f);
 				//visible [r, c].transform.localPosition.Set (1.0f, 1.0f, 1.0f);
 			}
