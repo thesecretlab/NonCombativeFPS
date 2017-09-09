@@ -30,6 +30,7 @@ public class ItemSwitching : MonoBehaviour {
 	public GameObject emptyImage;
 	public GameObject [,] visible = new GameObject[INV_ROWS,INV_COLUMNS];
 
+	public Sprite[] pictures = new Sprite[7];
 	public Sprite SCREWDRIVER_PIC;
 	public Sprite PLASMACUTTER_PIC;
 	public Sprite WELDER_PIC;
@@ -58,6 +59,7 @@ public class ItemSwitching : MonoBehaviour {
     // Use this for initialization
     void Start () {
 		int hotBarOffSet = 0;
+		//------------------------------------------------------------------------------------ Inventory Display Setup
 		Debug.Log ("Screen Width: " + WIDTH + " Height: " + HEIGHT);
         SelectItem();
 		item blank;
@@ -79,8 +81,20 @@ public class ItemSwitching : MonoBehaviour {
 				//visible [r, c].transform.localPosition.Set (1.0f, 1.0f, 1.0f);
 			}
 		}
-		visible [0, 0].transform.localPosition.Set (10.0f, 10.0f, 0.0f);
+		//visible [0, 0].transform.localPosition.Set (10.0f, 10.0f, 0.0f); Doesent work/update
 		visible [0, 0].GetComponent<Image>().sprite = SCREWDRIVER_PIC;
+		//---------------------------------------------------------------------------------- Image Set Up
+		/*public const int EMPTYID = 0;					Empty Inventory Slot ID
+
+		public const int SCREWDRIVER = 	1;				ScrewDriver ID
+		public const int PLASMACUTTER = 	2;			PlasmaCutter ID
+		public const int WELDER = 			3;			Welder ID
+		public const int POWERCABLE = 		4;			PowerCable ID
+		public const int CIRCUITBOARD = 	5;			Circuit Board ID
+		public const int SCRAPMETAL = 		6;			Scrap Metal ID
+		public const int SCREWS = 			7;			Screws ID */
+
+		//pictures = new Sprite[7];
 	}
     // Update is called once per frame
     void Update() {
