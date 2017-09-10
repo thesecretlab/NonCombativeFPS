@@ -15,6 +15,11 @@ public class TerminalButton : MonoBehaviour, IPointerClickHandler {
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        tb.text = name + "\n" + ps.changePower(this.name, eventData.button == PointerEventData.InputButton.Left);
+        int np = ps.changePower(this.name, eventData.button == PointerEventData.InputButton.Left);
+        tb.text = name + "\n" + np;
+        tb.color = np < 1 ? Color.red : Color.blue;
+        if (np == -1) {
+            Debug.LogError("Error in PowerChange at " + name);
+        }
     }
 }

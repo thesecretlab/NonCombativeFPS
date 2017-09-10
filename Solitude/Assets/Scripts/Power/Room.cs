@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface PowerConsumer {
+    void updatePower(int power);
+}
+
 public class Room : MonoBehaviour {
     PowerConsumer[] PowerConsumers;
     shipLight[] Lights;
