@@ -7,7 +7,7 @@ using UnityEngine;
  * If the whole ship or room the light is in power is down then var power
  * should reflect this state and be changed in another script.
  * 
- *  Created By Alexander Tilley 12/08/2017
+ * Created By Alexander Tilley 12/08/2017
  */
 public class FloodLight : MonoBehaviour {
 
