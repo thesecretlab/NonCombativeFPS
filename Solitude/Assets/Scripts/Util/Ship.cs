@@ -10,6 +10,10 @@ using UnityEngine;
  * 		Modified By Alexander Tilley (Last Edit: 12/08/2017)
  */
 
+public interface shipLight {
+    void setPower(bool powerState);
+}
+
 public class Ship : MonoBehaviour {
 
     public static Ship ship;
