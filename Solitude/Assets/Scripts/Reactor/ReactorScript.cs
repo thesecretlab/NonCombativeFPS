@@ -6,238 +6,245 @@ using UnityEngine.UI;
 public class ReactorScript : MonoBehaviour {
 
 
-    int recTemp = 25; // This will able to be accessed from everywhere to get the reactor temperature
     Text powerUsage;
     int powerUnits;
     Slider controlRod;
     Slider tempGage;
-    float heatInc;
     Text status;
-    bool online;
-    bool cooling;
-    bool offline;
-    GameObject shutdown;
+    Button ldraw;
+    Button mdraw;
+    Button hdraw;
+
+
+
+    Button shutdown;
     Text tempNum;
     Text cRodNum;
+    bool online;
+    bool overload;
+    float fillRate = 0.1f;
+    int fillRateMult = 2;
 
-	// Use this for initialization
-	void Start () {
 
-        online = false;
-        cooling = false;
-        offline = false;
-        heatInc = 0;
+    // Use this for initialization
+    void Awake() {
+
+       
         status = GameObject.Find("ReacStat").GetComponent<Text>();
         tempGage = GameObject.Find("tempGage").GetComponent<Slider>();
         powerUsage = GameObject.Find("PowerUnitVal").GetComponent<Text>();
         controlRod = GameObject.Find("cRod").GetComponent<Slider>();
-        shutdown = GameObject.Find("EmerBut");
+        shutdown = GameObject.Find("EmerBut").GetComponent<Button>();
+        ldraw = GameObject.Find("LowLoad").GetComponent<Button>();
+        mdraw = GameObject.Find("MedLoad").GetComponent<Button>();
+        hdraw = GameObject.Find("HighLoad").GetComponent<Button>();
         tempNum = GameObject.Find("tempNum").GetComponent<Text>();
         cRodNum = GameObject.Find("cRodNum").GetComponent<Text>();
+        powerUP();
     }
 
-    public void increaseTemp(int powerOutput)
+
+    public void SetRod(int rod)
     {
-        
-        if (online)
-        {
-            if (powerOutput <= 4 && powerOutput > 0)
-            {
-                heatInc = heatInc + (float)0.05;
-                controlRod.value = 75;
-            }
-
-            else if (powerOutput > 4 && powerOutput <= 8)
-            {
-                heatInc = heatInc + (float)0.1;
-                controlRod.value = 50;
-            }
-            else if (powerOutput >= 9 && powerOutput < 12)
-            {
-                heatInc = heatInc + (float)0.2;
-                controlRod.value = 25;
-            }
-            else if (powerOutput >= 12)
-            {
-                heatInc = heatInc + (float)0.4;
-                controlRod.value = 0;
-            }
-        }
-
-      
-
-    }
-
-    public void medDraw()
-    {
-        powerUnits = 5;
-        powerUsage.text = powerUnits.ToString();
-        controlRod.value = 50;
+        controlRod.value = rod;
         cRodNum.text = controlRod.value.ToString();
     }
-    public void liteDraw()
-    {
-        powerUnits = 2;
-        powerUsage.text = powerUnits.ToString();
-        controlRod.value = 75;
-        cRodNum.text = controlRod.value.ToString();
-    }
+  
 
-    public void heavyDraw()
-    {
-        powerUnits = 10;
-        powerUsage.text = powerUnits.ToString();
-        controlRod.value = 25;
-        cRodNum.text = controlRod.value.ToString();
-    }
 
     public void powerUP()
     {
+
         if (tempGage.value == 0)
         {
+
+            powerUnits = 2;
+            lowDraw();
             online = true;
-            cooling = false;
-            offline = false;
-            status.text = "online";
-            liteDraw();
             powerUsage.text = powerUnits.ToString();
-            controlRod.value = 75;
-            cRodNum.text = controlRod.value.ToString();
+            status.text = "Light Load";
             shutdown.GetComponent<Button>().interactable = true;
         }
+        
     }
+
+
+   
+
 
     public void ReactorOverload()
     {
-        online = false;
-        cooling = true;
-        offline = false;
-        powerUnits = 0; //removed when set draw is implemented
-        controlRod.value = 100;
-        cRodNum.text = controlRod.value.ToString();
-        powerUsage.text = powerUnits.ToString();
         status.text = "Cooling";
+        online = false;
+        overload = true;
+        SetRod(100);
+        powerUnits = 0; //removed when set draw is implemented
+        powerUsage.text = powerUnits.ToString();
+        //code to flip breakers.
         shutdown.GetComponent<Button>().interactable = false;
     }
     
     public void EmergencyPowerDown()
     {
 
+       
+        status.text = "Cooling";
         online = false;
-        cooling = false;
-        offline = true;
-
-        powerUsage.text = "0";
-        controlRod.value = 100;
-        cRodNum.text = controlRod.value.ToString();
+        overload = false;
+        SetRod(100);
         powerUnits = 0; //Remove when set draw is implemented
         powerUsage.text = powerUnits.ToString();
-        status.text = "Offline";
         shutdown.GetComponent<Button>().interactable = false;
 
-
-        Debug.Log("button value");
-        Debug.Log(online);
-
-
+        
     }
 
     public void setDraw(int draw)
     {
-        if (online)
-        {
+       
+        
             powerUnits = draw;
             powerUsage.text = draw.ToString();
            
-        }
+        
 
     }
 
-  
+    void drawLow()
+    {
+        powerUnits = 2; //Remove when set draw is implemented
+        powerUsage.text = powerUnits.ToString();
+
+    }
+    void drawMed()
+    {
+        powerUnits = 5; //Remove when set draw is implemented
+        powerUsage.text = powerUnits.ToString();
+    }
+    void drawHigh()
+    {
+        powerUnits = 8; //Remove when set draw is implemented
+        powerUsage.text = powerUnits.ToString();
+    }
+
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
+        if(Input.GetMouseButtonUp(0))
+        {
+            shutdown.onClick.AddListener(() => EmergencyPowerDown());
+            ldraw.onClick.AddListener(() => drawLow());
+            mdraw.onClick.AddListener(() => drawMed());
+            hdraw.onClick.AddListener(() => drawHigh());
+        }
+
+        if (tempGage.value == 0)
+        {
+            powerUP();
+        }
+        if (tempGage.value == 100)
+        {
+            ReactorOverload();
+        }
 
 
-        /*
-                if (online)
-                {
-                    Debug.Log("online");
-                    Debug.Log(online);
-                }
-                if (cooling)
-                {
-                    Debug.Log("cooling");
-                    Debug.Log(cooling);
-                }
-                if (offline)
-                {
-                    Debug.Log("offline");
-                    Debug.Log(offline);
-                }
-                */
-
-        tempNum.text = heatInc.ToString();
-        
+    }
 
 
+       
+    void LateUpdate()
+    {
 
+
+        powerUsage.text = powerUnits.ToString();
+        tempNum.text = tempGage.value.ToString();
         if (online)
         {
-            Debug.Log("increasing heat");
-            increaseTemp(powerUnits);
-            tempGage.value = (float)heatInc;
-            tempNum.text = heatInc.ToString();
-            powerUsage.text = powerUnits.ToString();
+            if (powerUnits <= 3)
+            {
+                status.text = "Light Load";
+                lowDraw();
+                SetRod(75);
+
+            }
+
+            if (powerUnits > 3 && powerUnits < 7)
+            {
+                status.text = "Medium Load";
+                medDraw();
+                SetRod(50);
+            }
+
+            if (powerUnits > 7 && powerUnits < 10)
+            {
+                status.text = "Heavy Load";
+                hiDraw();
+                SetRod(25);
+            }
+
+            if (powerUnits >= 10)
+            {
+                status.text = "Max Load";
+                maxDraw();
+                SetRod(100);
+            }
+
         }
         if(!online)
         {
-            if (cooling)
+            if(overload)
             {
-                Debug.Log("decreasing heat");
-                heatInc = heatInc - (float)0.2;
-                tempGage.value = (float)heatInc;
-                tempNum.text = heatInc.ToString();
-                powerUsage.text = powerUnits.ToString();
-                Debug.Log("cooling");
+                sCool();
             }
-            else if (offline)
+            else if(!overload)
             {
-                Debug.Log("decreasing heat");
-                heatInc = heatInc - (float)0.5;
-                tempNum.text = heatInc.ToString();
-                tempGage.value = (float)heatInc;
-                powerUsage.text = powerUnits.ToString();
-                Debug.Log("fast cooling");
+                fCool();
 
             }
+
         }
 
+  
 
-
-        if (online)
-        {
-
-
-
-            if (tempGage.value >= 100)
-            {
-                ReactorOverload();
-            }
-
-
-        }
-        else if(!online)
-        {
-            if (tempGage.value <= 0)
-            {
-                powerUP();
-                Debug.Log("powering up");
-            }
-        }
-
-        tempNum.text = heatInc.ToString();
-
-
-
+        
     }
+
+
+    public void lowDraw()
+    {
+        
+
+        tempGage.value += fillRate;
+    }
+
+    public void medDraw()
+    {
+       
+
+        tempGage.value += fillRate * fillRateMult;
+    }
+
+    public void hiDraw()
+    {
+        
+        tempGage.value += fillRate * (fillRateMult + fillRateMult);
+    }
+    public void maxDraw()
+    {
+        
+        tempGage.value += fillRate * (fillRateMult + fillRateMult + fillRateMult);
+    }
+
+    public void fCool()
+    {
+      
+
+        tempGage.value -= fillRate * fillRateMult;
+    }
+    public void sCool()
+    {
+     
+        tempGage.value -= fillRate;
+    }
+
 }
