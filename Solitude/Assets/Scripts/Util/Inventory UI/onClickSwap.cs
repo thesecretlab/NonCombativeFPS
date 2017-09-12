@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Swap : MonoBehaviour {
+public class onClickSwap : MonoBehaviour {
 
 	private Button self;
 	public ItemSwitching parent;
