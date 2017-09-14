@@ -11,6 +11,8 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     public bool isExit;
     public nodeLink[] links;
 
+    public bool isActive;
+
     private Color OPEN = Color.grey;
     private Color ACTIVE = Color.cyan;
     private Color CLOSED = new Color(0.3f, 0.3f, 0.3f);
@@ -38,8 +40,9 @@ public class Node : MonoBehaviour, IPointerClickHandler {
                 return;
             }
             image.color = isFirewall ? ERROR : ACTIVE;
+            isActive = !isFirewall;
             foreach (nodeLink l in links) {
-                if (l.node.isOpen) {
+                if (l.node.isActive) {
                     l.link.setColor(ACTIVE);
                 } else {
                     if (!isFirewall) {
