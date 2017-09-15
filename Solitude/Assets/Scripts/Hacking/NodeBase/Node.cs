@@ -18,7 +18,7 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     private Color CLOSED = new Color(0.3f, 0.3f, 0.3f);
     private Color ERROR = Color.red;
 
-    private HackingTerminal t;
+    private HackingUI UI;
 
     private Image image;
 
@@ -33,6 +33,10 @@ public class Node : MonoBehaviour, IPointerClickHandler {
         }
     }
 
+    public void setUI(HackingUI ui) {
+        UI = ui;
+    }
+
     public void OnPointerClick(PointerEventData eventData) {
         if (isOpen) {
             if (isExit) {
@@ -40,6 +44,8 @@ public class Node : MonoBehaviour, IPointerClickHandler {
                 return;
             }
             image.color = isFirewall ? ERROR : ACTIVE;
+            Debug.Log(UI.name);
+            if (isFirewall) image.sprite = UI.Firewall;
             isActive = true;
             foreach (nodeLink l in links) {
                 if (l.node.isActive) {
@@ -52,10 +58,6 @@ public class Node : MonoBehaviour, IPointerClickHandler {
                 }
             }
         }
-    }
-
-    public void setTerminal(HackingTerminal t) {
-        this.t = t;
     }
 
     public Color getColor() {
