@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HackingUI : MonoBehaviour {
     public Sprite Firewall;
+    public Sprite systemcore;
+    public Sprite IDS;
 
     HackingTerminal t;
 

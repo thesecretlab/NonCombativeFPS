@@ -6,7 +6,7 @@ using System;
 
 public class CountDownTimer : MonoBehaviour
 {
-    float timeLeft = 50.0f;
+    float timeLeft = 20.0f;
     float closetime = 3.0f;
     bool Gameover = false;
 

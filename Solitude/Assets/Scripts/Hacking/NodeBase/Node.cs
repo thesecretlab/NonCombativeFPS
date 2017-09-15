@@ -9,6 +9,7 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     public bool isFirewall;
     public bool isOpen;
     public bool isExit;
+    public bool isIDS;
     public nodeLink[] links;
 
     public bool isActive;
@@ -40,12 +41,15 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData eventData) {
         if (isOpen) {
             if (isExit) {
-                transform.parent.SendMessageUpwards("doneHacking");
-                return;
+                GlobalVars.GlobalVariables.SYSCORE_FOUND = 1;
+                //transform.parent.SendMessageUpwards("doneHacking");
+               // return;
             }
             image.color = isFirewall ? ERROR : ACTIVE;
             Debug.Log(UI.name);
             if (isFirewall) image.sprite = UI.Firewall;
+            if (isExit) image.sprite = UI.systemcore;
+            if (isIDS) image.sprite = UI.IDS;
             isActive = true;
             foreach (nodeLink l in links) {
                 if (l.node.isActive) {
