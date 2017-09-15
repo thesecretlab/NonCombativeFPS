@@ -40,10 +40,10 @@ public class Node : MonoBehaviour, IPointerClickHandler {
                 return;
             }
             image.color = isFirewall ? ERROR : ACTIVE;
-            isActive = !isFirewall;
+            isActive = true;
             foreach (nodeLink l in links) {
                 if (l.node.isActive) {
-                    l.link.setColor(ACTIVE);
+                    l.link.setColor(isFirewall || l.node.isFirewall ? ERROR : ACTIVE);
                 } else {
                     if (!isFirewall) {
                         l.node.open();
@@ -58,8 +58,17 @@ public class Node : MonoBehaviour, IPointerClickHandler {
         this.t = t;
     }
 
+    public Color getColor() {
+        if (isFirewall) return ERROR;
+        if (isActive) return ACTIVE;
+        if (isOpen) return OPEN;
+        return CLOSED;
+    }
+
     public void open() {
-        isOpen = true;
-        image.color = OPEN;
+        if (!isOpen) {
+            isOpen = true;
+            image.color = OPEN;
+        }
     }
 }
