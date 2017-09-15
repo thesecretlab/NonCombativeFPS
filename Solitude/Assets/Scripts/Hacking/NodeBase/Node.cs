@@ -41,17 +41,25 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData eventData) {
         if (isOpen) {
             if (isFirewall) setImage(UI.Firewall);
-            else if (isIDS) setImage(UI.IDS);
-            else if (isExit) {
+            else if (isIDS)
+            {
+                setImage(UI.IDS);
+                UI.IDSclicked();
+            }
+            else if (isExit)
+            {
                 setImage(UI.systemcore);
                 UI.Hacked();
-                foreach (nodeLink l in links) {
-                    if (l.node.isActive) {
+                foreach (nodeLink l in links)
+                {
+                    if (l.node.isActive)
+                    {
                         l.link.setColor(isFirewall || l.node.isFirewall ? ERROR : ACTIVE);
                     }
                 }
                 return;
-            } else image.color = ACTIVE;
+            }
+            else image.color = ACTIVE;
             Debug.Log(UI.name);
             isActive = true;
             foreach (nodeLink l in links) {
@@ -69,7 +77,7 @@ public class Node : MonoBehaviour, IPointerClickHandler {
 
     public void setImage(Sprite sprite) {
         image.sprite = sprite;
-        image.transform.localScale = new Vector3(2, 2, 2);
+        image.transform.localScale = new Vector3(1, 1, 1);
         gameObject.transform.SetAsLastSibling();
     }
 

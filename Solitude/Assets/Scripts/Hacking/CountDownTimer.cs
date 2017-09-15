@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using System;
 
 public class CountDownTimer : MonoBehaviour {
-    public float Time = 20.0f;
+    public float Time = 50.0f;
     float closetime = 3.0f;
     bool Gameover = false;
 
@@ -41,5 +41,10 @@ public class CountDownTimer : MonoBehaviour {
 
     public void setUI(HackingUI ui) {
         UI = ui;
+    }
+
+    public void IDSclicked()
+    {
+        Time = Time - 10;
     }
 }

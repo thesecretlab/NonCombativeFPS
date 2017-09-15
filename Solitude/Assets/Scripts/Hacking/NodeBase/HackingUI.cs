@@ -14,6 +14,11 @@ public class HackingUI : MonoBehaviour {
         timer.Hacked();
     }
 
+    public void IDSclicked()
+    {
+        timer.IDSclicked();
+    }
+
    public void doneTimer() {
         Debug.LogError("Hack Closing: Not Implemented");
     }
