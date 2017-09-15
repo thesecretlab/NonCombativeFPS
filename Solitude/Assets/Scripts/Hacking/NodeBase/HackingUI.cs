@@ -8,15 +8,22 @@ public class HackingUI : MonoBehaviour {
     public Sprite IDS;
 
     HackingTerminal t;
+    CountDownTimer timer;
 
-    void doneHacking() {
-        t.onFix();
+    public void Hacked() {
+        timer.Hacked();
+    }
+
+   public void doneTimer() {
+        Debug.LogError("Hack Closing: Not Implemented");
     }
 
     void Start() {
         foreach (Node n in gameObject.GetComponentsInChildren<Node>()) {
             n.setUI(this);
         }
+        timer = GetComponentInChildren<CountDownTimer>();
+        timer.setUI(this);
     }
 
     public void setTerminal(HackingTerminal t) {

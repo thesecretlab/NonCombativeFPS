@@ -40,16 +40,19 @@ public class Node : MonoBehaviour, IPointerClickHandler {
 
     public void OnPointerClick(PointerEventData eventData) {
         if (isOpen) {
-            if (isExit) {
-                GlobalVars.GlobalVariables.SYSCORE_FOUND = 1;
-                //transform.parent.SendMessageUpwards("doneHacking");
-               // return;
-            }
-            image.color = isFirewall ? ERROR : ACTIVE;
-            Debug.Log(UI.name);
             if (isFirewall) image.sprite = UI.Firewall;
-            if (isExit) image.sprite = UI.systemcore;
-            if (isIDS) image.sprite = UI.IDS;
+            else if (isIDS) image.sprite = UI.IDS;
+            else if (isExit) {
+                image.sprite = UI.systemcore;
+                UI.Hacked();
+                foreach (nodeLink l in links) {
+                    if (l.node.isActive) {
+                        l.link.setColor(isFirewall || l.node.isFirewall ? ERROR : ACTIVE);
+                    }
+                }
+                return;
+            } else image.color = ACTIVE;
+            Debug.Log(UI.name);
             isActive = true;
             foreach (nodeLink l in links) {
                 if (l.node.isActive) {

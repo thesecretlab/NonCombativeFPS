@@ -4,38 +4,42 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 using System;
 
-public class CountDownTimer : MonoBehaviour
-{
-    float timeLeft = 20.0f;
+public class CountDownTimer : MonoBehaviour {
+    public float Time = 20.0f;
     float closetime = 3.0f;
     bool Gameover = false;
 
+    HackingUI UI;
+
     public Text text;
 
-    void Update()
-    {
-        if (!Gameover)
-        {
-            timeLeft -= Time.deltaTime;
-            text.text = "Time Remaining:" + Mathf.Round(timeLeft);
+    void Update() {
+        if (Gameover) {
+            closetime -= UnityEngine.Time.deltaTime;
+        } else { 
+            Time -= UnityEngine.Time.deltaTime;
+            text.text = "Time Remaining:" + Mathf.Round(Time);
         }
 
-        if (timeLeft < 0)
-        {
-            Gameover = true;
-            text.text = "#!HACK FAILED!#";
-            closetime -= Time.deltaTime;
-            SceneManager.LoadScene("MainGame");
-
+        if (closetime < 0) {
+            UI.doneTimer();
         }
 
-        if(GlobalVars.GlobalVariables.SYSCORE_FOUND == 1)
-        {
-            Gameover = true;
-            text.text = "HACK SUCCESSFUL";
-            closetime -= Time.deltaTime;
-            SceneManager.LoadScene("MainGame");
+        if (Time < 0) {
+            fail();
         }
+    }
+    public void fail() {
+        Gameover = true;
+        Time = 1.0f;
+        text.text = "#!HACK FAILED!#";
+    }
+    public void Hacked() {
+        Gameover = true;
+        text.text = "HACK SUCCESSFUL";
+    }
 
+    public void setUI(HackingUI ui) {
+        UI = ui;
     }
 }
