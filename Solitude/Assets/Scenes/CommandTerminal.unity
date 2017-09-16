@@ -222,7 +222,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b01f093c290ea84b82534cca644a1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FPSController: {fileID: 0}
+  FPSActive: 1
+  interactableText: {fileID: 0}
 --- !u!4 &695947650
 Transform:
   m_ObjectHideFlags: 0
@@ -268,8 +269,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   uiPrefab: {fileID: 1478820287496784, guid: 89b6a46c6c3e7474090254b2d2ec55e9, type: 2}
-  ui: {fileID: 0}
-  t: {fileID: 0}
+  ScreenElement: 0
+  matRedReff: {fileID: 0}
+  backspacepressed: 0
   commands: []
 --- !u!23 &997787286
 MeshRenderer:
