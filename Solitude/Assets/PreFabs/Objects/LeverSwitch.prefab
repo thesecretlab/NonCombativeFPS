@@ -242,3 +242,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
+  num: 0
+  particle: {fileID: 0}
+  switchSound: {fileID: 0}
