@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterController))]
-
 public class UICanvas : MonoBehaviour {
-
-
 
     public static UICanvas Canvas;
 
