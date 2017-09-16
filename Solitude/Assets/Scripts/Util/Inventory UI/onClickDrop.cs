@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class Swap : MonoBehaviour {
+public class onClickDrop : MonoBehaviour {
 
 	private Button self;
 	public ItemSwitching parent;
@@ -20,7 +20,8 @@ public class Swap : MonoBehaviour {
 	}
 
 	void pressed(){
-		Debug.Log ("Button Pressed Swap");
+		//Debug.Log ("Button Pressed Drop");
+		parent.drop (-1,-1);
 		//parent.swap();
 	}
 }

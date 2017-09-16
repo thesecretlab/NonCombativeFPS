@@ -7,6 +7,7 @@ public class onClickSwap : MonoBehaviour {
 
 	private Button self;
 	public ItemSwitching parent;
+	public bool swap = false;
 
 	// Use this for initialization
 	void Start () {
@@ -20,7 +21,12 @@ public class onClickSwap : MonoBehaviour {
 	}
 
 	void pressed(){
-		Debug.Log ("Button Pressed Swap");
+		//Debug.Log ("Button Pressed Swap");
+		if (swap) {
+			swap = false;
+		} else {
+			swap = true;
+		}
 		//parent.swap();
 	}
 }

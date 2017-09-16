@@ -7,6 +7,7 @@ public struct item{
 	public int id { get; set; }			//Object Type
 	public int ammount { get; set; }	//Ammount of object or left uses of obbject;
 	public GameObject obj {get; set;}	//Sprite Image
+	public GameObject text {get; set;}	//Text to display ammount
 }
 	
 
@@ -21,7 +22,7 @@ public struct item{
  * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
  * 
  * By Brendan
- * Modified by Alexander Tilley 11/09/2017
+ * Modified for inventory storage by Alexander Tilley 16/09/2017
 */
 public class ItemSwitching : MonoBehaviour {
 
@@ -42,6 +43,7 @@ public class ItemSwitching : MonoBehaviour {
 	private const int INV_COLUMNS = 4;				//Inventory columns
 
 	public GameObject emptyImage;					//Base Object Spirte (pre-set in Unity)
+	public GameObject emptyText;					//Base Object text (pre-set in Unity)
 
 	public item [,] inventory = new item[INV_ROWS,INV_COLUMNS];	//2D array of items
 
@@ -55,7 +57,10 @@ public class ItemSwitching : MonoBehaviour {
 	public const int SCRAPMETAL_ID = 		6;			//Scrap Metal ID
 	public const int SCREWS_ID = 			7;			//Screws ID
 
-	public Sprite[] pictures = new Sprite[8];		//Array of sprites corisponding to item ids (pics pre-set in Unity)
+	public bool displayed = false;						//Current display status of the main inventory (does not update)
+
+	public Sprite[] pictures = new Sprite[8];			//Array of sprites corisponding to item ids (pics pre-set in Unity)
+	public GameObject[] heldItem = new GameObject[8];	//Array of Gameobjects corisponding to item ids for hand held objects
 
 	public float HEIGHT =  Screen.height;		//Window Height
 	public float WIDTH = Screen.width;			//Window Width
@@ -66,11 +71,16 @@ public class ItemSwitching : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		SelectItem();
+		try{//Allows button click comminication to this script
+			options.GetComponentsInChildren<onClickSwap> () [0].parent = this;	//Link Swap Button		
+			options.GetComponentsInChildren<onClickDrop> () [0].parent = this;	//Link Drop Button
+		}catch{
+			Debug.Log("WARNING ITEM OPTIONS IS BROKEN");
+		}
 		//------------------------------------------------------------------------------------ Inventory Display Setup
-		WIDTH = mainCam.pixelWidth;
+		WIDTH = mainCam.pixelWidth;							//Gets Camera width and height for HUD display
 		HEIGHT = mainCam.pixelHeight;
-		options.SetActive (false);
+		options.SetActive(false);							//Disable Options
 
 		int hotBarOffSet = 0;
 		item blank = new item();							//Empty object to intialise
@@ -85,17 +95,43 @@ public class ItemSwitching : MonoBehaviour {
 				blank.ammount = 0;
 				blank.id = 0;
 				blank.obj = Instantiate(emptyImage);
-				blank.obj.GetComponent<onClickItem> ().parent = this;
-				blank.obj.GetComponent<onClickItem> ().row = r;
-				blank.obj.GetComponent<onClickItem> ().col = c;
+				blank.text = Instantiate (emptyText);
+				blank.text.GetComponent<onClickItem> ().parent = this;
+				blank.text.GetComponent<onClickItem> ().row = r;
+				blank.text.GetComponent<onClickItem> ().col = c;
 				inventory[r,c]=blank;																		//Set to empty
+
 				inventory [r, c].obj.transform.SetParent (this.gameObject.transform);						//Position within Parent
 				inventory [r, c].obj.GetComponent<RectTransform> ().localScale = Vector3.one;				//Set Scale to normal	
 				inventory [r, c].obj.GetComponent<RectTransform> ().localPosition = Vector3.one;			//Centre Postion
 				inventory [r, c].obj.GetComponent<RectTransform> ().localPosition = 
-					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form			//TODO Adjust gap sizing by screen size
+					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
+				
+				inventory [r, c].text.transform.SetParent (this.gameObject.transform);						//Position within Parent
+				inventory [r, c].text.GetComponent<RectTransform> ().localScale = Vector3.one;				//Set Scale to normal	
+				inventory [r, c].text.GetComponent<RectTransform> ().localPosition = Vector3.one;			//Centre Postion
+				inventory [r, c].text.GetComponent<RectTransform> ().localPosition = 
+					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
+				updateText(r,c);
+
+				//inventory [r, c].obj.GetComponentsInChildren<Text> () [0].text = "";
 			}
 		}
+		toggleInventory ();		//Closes the main inventory by defualt
+
+		//TODO Set Up GameObject Like in video in discrption for hand held items setActive false for all
+
+		SelectItem(INV_COLUMNS-1);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
+		giveRandomItem (1, 3);
 	}
 
 
@@ -108,22 +144,24 @@ public class ItemSwitching : MonoBehaviour {
 
         if (Input.GetAxis("Mouse ScrollWheel") > 0f)
         {
-            if (selectedItem >= transform.childCount - 1)
+			selectedItem = (selectedItem + 1) % INV_COLUMNS;
+				
+            /*if (selectedItem >= transform.childCount - 1)
                 selectedItem = 0;
             else
-                selectedItem++;
+                selectedItem++;*/
         }
         if (Input.GetAxis("Mouse ScrollWheel") < 0f)
         {
-            if (selectedItem <= 0)
+			if (selectedItem - 1 >= 0) {
+				selectedItem--;
+			}else{
+				selectedItem = INV_COLUMNS-1;
+			}
+            /*if (selectedItem <= 0)
                 selectedItem = transform.childCount - 1;
             else
-                selectedItem--;
-        }
-
-        if (prevSelectedItem != selectedItem)
-        {
-            SelectItem();
+                selectedItem--;*/
         }
 
         //can be expanded up to 9 if needed by copy-pasting the second statement and incrementing values
@@ -137,33 +175,94 @@ public class ItemSwitching : MonoBehaviour {
             selectedItem = 1;
         }
 
+		if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
+		{
+			selectedItem = 2;
+		}
 
+		if (Input.GetKeyDown(KeyCode.Alpha4) && transform.childCount >= 4)
+		{
+			selectedItem = 3;
+		}
+
+		if (prevSelectedItem != selectedItem)
+		{
+			SelectItem(prevSelectedItem);
+		}
+
+		if (Input.GetKeyDown(KeyCode.E)) {				//Player Opens/Closes Inventory
+			if (displayed == true) {
+				displayed = false;			//If Open: Close
+			} else {
+				displayed = true;			//If Closed: Open
+			}
+			toggleInventory ();		//Updates to display status
+		}
 
     }
 
-    void SelectItem()
+	//Displays Held Item on Game Screen
+    void SelectItem(int prevItem)
     {
-        int i = 0;
-        foreach (Transform item in transform)
+		Debug.Log ("Selected Item: "+selectedItem + "Prev Item: "+prevItem);
+        //int i = 0;
+		//TODO make sure heldItem is filled in Unity
+
+		if (heldItem [inventory [0, selectedItem].id] != null) {		//Therotically Works
+			heldItem[inventory[0,selectedItem].id].SetActive(true);		//Display this held item
+
+			if (heldItem [inventory [0, prevItem].id] != null) {
+				heldItem[inventory[0,prevItem].id].SetActive(false);
+			}
+		}
+
+        /*foreach (Transform item in transform) DO NOT USE THIS
         {
             if (i == selectedItem)
                     item.gameObject.SetActive(true);
                 else
                     item.gameObject.SetActive(false);
             i++;
-        }
+        }*/
+		
 
     }
 
+	//changes if the main inventory is displayed or not
+	public void toggleInventory(){
+		for (int r = 1; r < INV_ROWS; r++) {
+			for (int c = 0; c < INV_COLUMNS; c++) {		//For Everything but the hotbar
+				inventory[r,c].obj.SetActive(displayed);//SetActive True or False
+				inventory[r,c].text.SetActive(displayed);//SetActive True or False
+			}
+		}
+	}
+
+	//Gives any random possible item in ammounts between min and max
+	public void giveRandomItem(int min,int max){
+		if (max > MAXSTACK || max <= 0) {			//If max is valid
+			max = MAXSTACK;
+		}
+		if (min <= 0) {						//If min is valid
+			min = 1;
+		} else if (min > MAXSTACK) {
+			min = MAXSTACK;
+		}
+		insertAtTop (Random.Range (1, 7), Random.Range (min, max));	//Insert random item of random ammount
+	}
+
+	//Displays Options when an inventory item is selected and executes Swap() if needed
 	public void itemClicked(int row,int col){
-		Debug.Log ("Activated  row:" + row + " col: " + col);
+		//Debug.Log ("Activated  row:" + row + " col: " + col);
 
 		if (options.activeSelf) {			//Options Already Displaued
 			sel_row_2 = row;				//Get Second Selection
 			sel_col_2 = col;
-			//TODO swap();
+			if (options.GetComponentsInChildren<onClickSwap> () [0].swap) {
+				swap (sel_row_1, sel_col_1, sel_row_2, sel_col_2);
+			}
 			options.SetActive (false);		//Hide options
-		} else {
+		} else if(inventory[row,col].id != EMPTY_ID) {
 			options.SetActive (true);		//Display Options
 			sel_row_1 = row;				//First Selection
 			sel_col_1 = col;
@@ -174,6 +273,39 @@ public class ItemSwitching : MonoBehaviour {
 			//TODO set postion of options
 		}
 
+	}
+
+	//Swaps an items postion in the array with anothers
+	public void swap(int row,int col,int r, int c){
+		int holdAmmount = inventory[r,c].ammount;		//Holds item ammount
+		int holdId = inventory [r, c].id;				//Holdes item id
+
+		inventory [r, c].id = inventory [row, col].id;											//Copy item row col into r c
+		inventory [r, c].ammount = inventory [row, col].ammount;
+		inventory [r, c].obj.GetComponent<Image> ().sprite = pictures [inventory [r, c].id];
+		updateText(r,c);
+
+		inventory [row, col].id = holdId;															//Copy item hold into row col
+		inventory [row, col].ammount = holdAmmount;
+		inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [inventory [row, col].id];
+		updateText(row,col);
+
+	}
+
+	//Drops one item
+	public void drop(int row, int col){
+		if (row <= -1 || col <= -1) {						//If No value default to selected postion
+			row = sel_row_1;
+			col = sel_col_1;
+		}
+		if (inventory [row, col].ammount > 1) {				//Drop one of item
+			inventory [row, col].ammount--;
+		}else if(inventory [row, col].ammount <= 1){		//If it will be empty change to empty
+			inventory [row, col].id = EMPTY_ID;
+			inventory [row, col].ammount = 0;
+			inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
+		}
+		updateText(row,col);
 	}
 
 
@@ -212,8 +344,10 @@ public class ItemSwitching : MonoBehaviour {
 							} else if(inventory[row,col].id != EMPTY_ID) {					//Where full swap with empty
 								inventory [r,c].id = inventory [row,col].id;
 								inventory [r,c].ammount = inventory [row,col].ammount;
+								inventory [r, c].obj.GetComponent<Image> ().sprite = pictures [inventory [row,col].id];
 								inventory [row,col].id = EMPTY_ID;
 								inventory [row,col].ammount = 0;
+								inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
 								floated = true;
 							}
 							
@@ -226,16 +360,44 @@ public class ItemSwitching : MonoBehaviour {
 	}
 
 	//Insert an item to the top most empty slot
-	bool insertAtTop(item insert){
-		for (int r = INV_ROWS - 1; r >= 1; r--) {										//For all rows in inventory top to bottom
-			for (int c = INV_COLUMNS - 1; c >= 0; c--) {								//For all cols in inventory top to bottom
-				if (inventory [r,c].id == EMPTY_ID) {									//Where slot is empty
-					inventory[r,c] = insert;											//Insert
-					return true;
-				}
+	bool insertAtTop(int id, int ammount){
+		int row = -1;
+		int col = -1;
+		if (findNextItem (0, 0, id,out row, out col)) {										//If Object Exists
+			inventory [row, col].ammount = inventory [row, col].ammount + ammount;		//Add to stack
+			updateText(row,col);
+			if (inventory [row, col].ammount > MAXSTACK) {								//If Larger Than Max Stack
+				ammount = inventory [row, col].ammount - MAXSTACK;						//Ammount = diffrence
+			} else {
+				id = 0;																	//If Not Larger than Max Stack do not insert new object
 			}
 		}
+		if (id != 0) {
+			for (int r = INV_ROWS - 1; r >= 1; r--) {										//For all rows in inventory top to bottom
+				for (int c = INV_COLUMNS - 1; c >= 0; c--) {								//For all cols in inventory top to bottom
+					if (inventory [r,c].id == EMPTY_ID) {									//Where slot is empty
+						inventory[r,c].id = id;											//Insert
+						inventory[r,c].ammount = ammount;
+						inventory [r, c].obj.GetComponent<Image> ().sprite = pictures [id];
+						updateText(r,c);
+						return true;
+					}
+				}
+			}	
+		}
 		return false;
+		Debug.Log ("Inventory Full Or Max Stack Achieved");	//TODO display message to player
+	}
+
+	//Updates the displayed text of a specific item //TODO Could also update item image in this function
+	public void updateText(int row,int col){
+		if (inventory [row, col].id == 0) {
+			inventory [row, col].text.GetComponent<Text> ().text = "";										//If there is no ammount
+		} else if (inventory [row, col].ammount <= 9) {
+			inventory [row, col].text.GetComponent<Text> ().text = "x0" + inventory [row, col].ammount;		//If there is less than 10
+		} else {
+			inventory [row, col].text.GetComponent<Text> ().text = "x" + inventory [row, col].ammount;		//If there is more than 9
+		}
 	}
 
 	//Returns a vector as a var to satsify Unity
