@@ -242,3 +242,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   active: 1
+  num: 0
