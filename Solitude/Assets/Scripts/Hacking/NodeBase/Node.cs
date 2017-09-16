@@ -45,6 +45,7 @@ public class Node : MonoBehaviour, IPointerClickHandler {
             {
                 setImage(UI.IDS);
                 UI.IDSclicked();
+
             }
             else if (isExit)
             {
