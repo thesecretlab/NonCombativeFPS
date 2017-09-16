@@ -20,7 +20,12 @@ public class HackingUI : MonoBehaviour {
         timer.IDSclicked();
     }
 
-   public void doneTimer() {
+    public void Firewallclicked()
+    {
+        timer.Firewallclicked();
+    }
+
+    public void doneTimer() {
         Debug.LogError("Hack Closing: Not Implemented");
     }
 

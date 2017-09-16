@@ -12,7 +12,8 @@ public class CountDownTimer : MonoBehaviour {
     bool Gameover = false;
     public AudioClip IDSALERTclip;
     public AudioSource IDSALERTsource;
-
+    public AudioClip Firewallclip;
+    public AudioSource Firewallsource;
 
 
     HackingUI UI;
@@ -23,6 +24,7 @@ public class CountDownTimer : MonoBehaviour {
     private void Start()
     {
         IDSALERTsource.clip = IDSALERTclip;
+        Firewallsource.clip = Firewallclip;
     }
 
     void Update() {
@@ -60,5 +62,11 @@ public class CountDownTimer : MonoBehaviour {
         Time = Time - 10;
         alertText.text = "INTRUSION DETECTED!";
         IDSALERTsource.Play();
+    }
+
+    public void Firewallclicked()
+    {
+
+       Firewallsource.Play();
     }
 }

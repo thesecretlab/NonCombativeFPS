@@ -40,7 +40,11 @@ public class Node : MonoBehaviour, IPointerClickHandler {
 
     public void OnPointerClick(PointerEventData eventData) {
         if (isOpen) {
-            if (isFirewall) setImage(UI.Firewall);
+            if (isFirewall)
+            {
+                setImage(UI.Firewall);
+                UI.Firewallclicked();
+            }
             else if (isIDS)
             {
                 setImage(UI.IDS);
