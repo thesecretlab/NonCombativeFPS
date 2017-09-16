@@ -1,9 +1,22 @@
+<<<<<<< HEAD
 fileFormatVersion: 2
-guid: 4ebb00bcf28040f438c6249f5dbdcf8e
+guid: eab3a7fca22b15c4ca3d42cef03d3c67
 folderAsset: yes
-timeCreated: 1502942994
+timeCreated: 1503621394
 licenseType: Free
 DefaultImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+|||||||
+=======
+fileFormatVersion: 2
+guid: e7b40bc0b5525f64b889cc03c5253da3
+folderAsset: yes
+timeCreated: 1503545768
+licenseType: Free
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+>>>>>>> PowerSystem
