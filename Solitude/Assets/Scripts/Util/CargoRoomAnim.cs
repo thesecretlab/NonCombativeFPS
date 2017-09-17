@@ -27,7 +27,7 @@ public class CargoRoomAnim : MonoBehaviour
         source.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.7f);
     }
 
-    void playAnim()
+    public void playAnim()
     {
         if (!returnCrateNext)
         {
