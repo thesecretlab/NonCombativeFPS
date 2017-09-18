@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1236baec4a3d3264f8630a862a92636e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirewall: 0
+  isFirewall: 1
   isOpen: 0
   isExit: 0
   isIDS: 0
@@ -2040,7 +2040,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571, y: 298.5}
+  m_AnchoredPosition: {x: 573, y: 230}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &103620946
@@ -6271,7 +6271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571, y: -89}
+  m_AnchoredPosition: {x: 573, y: -158}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &320574336
@@ -8280,7 +8280,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571, y: 12}
+  m_AnchoredPosition: {x: 573, y: -57}
   m_SizeDelta: {x: 130, y: 53}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &467632282
@@ -12583,7 +12583,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &789064008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16352,6 +16352,11 @@ Prefab:
       propertyPath: links.Array.data[1].link
       value: 
       objectReference: {fileID: 1636831075}
+    - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
+        type: 2}
+      propertyPath: isIDS
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d8c8e042750beb448785e92eca77d71, type: 2}
   m_IsPrefabParent: 0
@@ -17641,7 +17646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dba49764da1d9384fbe20e14bc25af7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Time: 50
+  Time: 80
   IDSALERTclip: {fileID: 8300000, guid: 281d67b4904a56a43a94d541e10a5726, type: 3}
   IDSALERTsource: {fileID: 269599840}
   Firewallclip: {fileID: 8300000, guid: d72341d24f900034da28320b98fdec45, type: 3}
@@ -19114,7 +19119,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 584, y: 209}
+  m_AnchoredPosition: {x: 586, y: 140}
   m_SizeDelta: {x: 186, y: 55}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1187186556
@@ -20158,7 +20163,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571, y: -182}
+  m_AnchoredPosition: {x: 573, y: -251}
   m_SizeDelta: {x: 61, y: 52}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1250369514
@@ -23140,6 +23145,11 @@ Prefab:
       propertyPath: links.Array.data[1].link
       value: 
       objectReference: {fileID: 1640305172}
+    - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
+        type: 2}
+      propertyPath: isFirewall
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d8c8e042750beb448785e92eca77d71, type: 2}
   m_IsPrefabParent: 0
@@ -23955,6 +23965,11 @@ Prefab:
       propertyPath: links.Array.data[3].link
       value: 
       objectReference: {fileID: 919013738}
+    - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
+        type: 2}
+      propertyPath: isIDS
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d8c8e042750beb448785e92eca77d71, type: 2}
   m_IsPrefabParent: 0
@@ -26984,7 +26999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 571, y: 105}
+  m_AnchoredPosition: {x: 573, y: 36}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1628546732
@@ -27176,8 +27191,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -185, y: 91}
-  m_SizeDelta: {x: 967, y: 516}
+  m_AnchoredPosition: {x: -80, y: 26}
+  m_SizeDelta: {x: 1010, y: 421}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1635595475
 MonoBehaviour:
@@ -27288,7 +27303,7 @@ MonoBehaviour:
   isFirewall: 0
   isOpen: 0
   isExit: 0
-  isIDS: 0
+  isIDS: 1
   links:
   - node: {fileID: 1869265645}
     link: {fileID: 712875626}
@@ -28522,6 +28537,11 @@ Prefab:
       propertyPath: links.Array.data[1].link
       value: 
       objectReference: {fileID: 919013738}
+    - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
+        type: 2}
+      propertyPath: isFirewall
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d8c8e042750beb448785e92eca77d71, type: 2}
   m_IsPrefabParent: 0
@@ -28822,7 +28842,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1236baec4a3d3264f8630a862a92636e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirewall: 0
+  isFirewall: 1
   isOpen: 0
   isExit: 0
   isIDS: 0
@@ -29711,7 +29731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1236baec4a3d3264f8630a862a92636e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFirewall: 0
+  isFirewall: 1
   isOpen: 0
   isExit: 0
   isIDS: 0
@@ -29820,7 +29840,7 @@ MonoBehaviour:
   isFirewall: 0
   isOpen: 0
   isExit: 0
-  isIDS: 0
+  isIDS: 1
   links:
   - node: {fileID: 1106028068}
     link: {fileID: 1976224658}
@@ -30786,7 +30806,7 @@ Prefab:
     - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
         type: 2}
       propertyPath: isFirewall
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114917537517779266, guid: 1d8c8e042750beb448785e92eca77d71,
         type: 2}

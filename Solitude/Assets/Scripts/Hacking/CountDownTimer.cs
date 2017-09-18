@@ -59,7 +59,7 @@ public class CountDownTimer : MonoBehaviour {
 
     public void IDSclicked()
     {
-        Time = Time - 10;
+        Time = Time - 15;
         alertText.text = "INTRUSION DETECTED!";
         IDSALERTsource.Play();
     }
