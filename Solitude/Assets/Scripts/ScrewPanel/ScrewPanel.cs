@@ -50,4 +50,7 @@ public class ScrewPanel : Terminal, Breakable {
     protected override void doUpdate() {
         
     }
+    protected override void onClose() {
+        showUI(false);
+    }
 }
