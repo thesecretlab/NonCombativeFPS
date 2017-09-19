@@ -14,6 +14,8 @@ public class Node : MonoBehaviour, IPointerClickHandler {
 
     public bool isActive;
 
+    Sprite defaultSpt;
+
     private Color OPEN = Color.grey;
     private Color ACTIVE = Color.cyan;
     private Color CLOSED = new Color(0.3f, 0.3f, 0.3f);
@@ -29,6 +31,7 @@ public class Node : MonoBehaviour, IPointerClickHandler {
     }
 
     void Start() {
+        defaultSpt = image.sprite;
         foreach (nodeLink l in links) {
             l.link.setColor(CLOSED);
         }
@@ -76,6 +79,20 @@ public class Node : MonoBehaviour, IPointerClickHandler {
                         l.link.setColor(OPEN);
                     }
                 }
+            }
+        }
+    }
+
+    public void close() {
+        isActive = false;
+        isOpen = false;
+        image.sprite = defaultSpt;
+        image.color = CLOSED;
+        foreach (nodeLink l in links) {
+            if (l.node.isActive) {
+                l.link.setColor(OPEN);
+            } else {
+                l.link.setColor(CLOSED);
             }
         }
     }

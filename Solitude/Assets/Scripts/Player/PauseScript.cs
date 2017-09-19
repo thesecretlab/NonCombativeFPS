@@ -51,7 +51,7 @@ public class PauseScript : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            setPause(!paused);
+            if (Player.pausable) setPause(!paused);
         }
     }
 

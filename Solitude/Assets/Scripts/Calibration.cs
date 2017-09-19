@@ -100,4 +100,7 @@ public class Calibration : Terminal, Breakable{
         showUI(false);
     }
 
+    protected override void onClose() {
+        showUI(false);
+    }
 }

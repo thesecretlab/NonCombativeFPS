@@ -1,16 +1,21 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerTerminal : MonoBehaviour {
+public class PowerTerminal : Terminal {
+    public override void interact() {
+        showUI(true);
+    }
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    protected override void doUpdate() {
+        
+    }
+
+    protected override void initialise() {
+        
+    }
+    protected override void onClose() {
+        showUI(false);
+    }
 }

@@ -23,6 +23,8 @@ public class ItemNode : Terminal
     {
         throw new NotImplementedException();
     }
+    protected override void onClose() {
+        showUI(false);
+    }
 
-   
 }
