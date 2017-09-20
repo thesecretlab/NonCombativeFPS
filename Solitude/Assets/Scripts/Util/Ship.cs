@@ -2,13 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//#define MaxEmmisionGrab = 50;			//The Max ammount of materials that are grabbed intitally (NOT USED)
+/*		Main controller for game functions
+ * 		
+ * 		*INSERT ALL INFORMATION HERE*
+ * 		
+ * 		Created By Jeffery Albion
+ * 		Modified By Alexander Tilley (Last Edit: 12/08/2017)
+ */
+
+public interface shipLight {
+    void setPower(bool powerState);
+}
 
 public class Ship : MonoBehaviour {
 
     public static Ship ship;
     Light[] lights;
-	Material[] Emmision;			//Array of Material's with Emmission maps
+
+	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
+	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
+
 
     int breakmod = 0;
 
@@ -26,21 +39,32 @@ public class Ship : MonoBehaviour {
     }
 
     void Start () {
-		Renderer[] AllRenderers;					//An array of all objects renderes
-		Material[] Temp = new Material[200];		//A temporary array of all materials
-		Texture test;								//A tenporary testing var
-		int i = 0;									//Used to set the size of the Emissions Array
-
         InvokeRepeating("tryBreak", waitSec, repeatSec);
-        lights = GetComponentsInChildren<Light>();
-		/*
-		AllRenderers = GetComponentsInChildren<Renderer>();			//Get all of the children's renderrs
-		foreach (Renderer re in AllRenderers) {						//For Each Renderer
+        lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
+
+		foreach(GameObject obj in GameObject.FindObjectsOfType<GameObject>()){		//For each obj
+			if (obj.name.Length >= 10) {
+				if(obj.name.Substring(0,10).CompareTo("FloodLight") == 0){			//named FloodLight*****
+					floodlights.Add(obj);											//add to floodlights
+				}
+				if(obj.name.Substring(0,10).CompareTo("FluroLight") == 0){			//named FluroLight*****
+					flurolights.Add(obj);											//add to FluroLight
+				}
+			}
+		}
+		Debug.Log ("flood lights found: " + floodlights.Count);
+		Debug.Log ("fluro lights found: " + flurolights.Count);
+
+		/* 										KEEP ME JUST IN CASE -ALEX
+		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
+		//foreach( Material me in mats){ This wont work
+		foreach (Renderer re in AllRenderers) {									//For Each Renderer
 			//Debug.Log("Test");
-			test = re.material.GetTexture("_EmissionMap");			//Get Emission Map of Renderer
-			if (test != null) {										//If has map
-				Debug.Log("Height not equal to null");
-				Temp [i] = re.material;								//Add material to Temp
+			//Tried "_EmissionMap"
+			//test = re.material.GetTexture("_EmissionMap");					//Get Emission Map of Renderer
+			if (re.material.globalIlluminationFlags.CompareTo(flags) == 0 && i < 1000) {	//If has map (test != null)
+				Debug.Log("Height not equal to null || flag true");
+				Temp [i] = re.material;											//Add material to Temp
 				i++;
 				if (i >= 90) {	
 					Debug.Log ("Test"+i+" ");
@@ -50,20 +74,28 @@ public class Ship : MonoBehaviour {
 		}
 		Debug.Log("New Emmission Array of size:"+i);
 		Emmision = new Material[i];									//Create Emission Array to exact size
-		while(i >= 0){
-			Emmision [i] = Temp [i];								//Copy from Temp to Emission
+		while(i-1 >= 0){
+			Emmision [i-1] = Temp [i-1];								//Copy from Temp to Emission
+			i--;
 		}
-		 
-		*/
+		 */
+
 	}
 
     public void setPower(bool power) {
-        foreach (Light light in lights) {
-            light.enabled = power;
-			/*
-			 
-			 */
+
+		foreach (GameObject light in floodlights) {						//ForEach FloodLight
+			FloodLight[] script = light.GetComponents<FloodLight>();
+			if (script.Length >= 0) {
+				script [0].setPower (power);							//Change Power State
+			}
         }
+		foreach (GameObject light in flurolights) {						//ForEach FluroLight
+			FluroLight[] script = light.GetComponents<FluroLight>();
+			if (script.Length >= 0) {
+				script [0].setPower (power);							//Change power state
+			}
+		}
     }
 
     void tryBreak() {
@@ -80,4 +112,24 @@ public class Ship : MonoBehaviour {
         //Debug.Log(e.breakPercent);
         breakables.Add(e);
     }
+
+	/*											KEEP ME JUST IN CASE -ALEX
+	public void getIlluminationMaterials(){
+		MaterialGlobalIlluminationFlags flags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+		Material[] temp;
+		temp = (Material[]) Resources.FindObjectsOfTypeAll(typeof(Material));
+		Debug.Log ("There are " + temp.Length+" Materials");
+
+		for (int i = 0; i < temp.Length; i++) {
+			if (temp[i].globalIlluminationFlags.CompareTo(flags) == 0) {	//If has map (test != null)
+				temp[i].EnableKeyword("_EMISSION");
+				Emmission.Add (temp [i]);
+			}	
+		}
+		Debug.Log ("Found " + Emmission.Count + " Self Illuminating Materials");
+		/*foreach (Material mat in Emmission) {
+			mat.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
+		}
+
+	} */
 }

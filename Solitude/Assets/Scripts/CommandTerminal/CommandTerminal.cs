@@ -13,51 +13,36 @@ public class CommandTerminal : Terminal, Breakable {
     Boolean isBroken = true;
     BreakEvent broken;
 
-    public int ScreenElement;
-    public Material matRedReff;
-    Material matBlackReff;
-    Renderer rend;
-    Material[] mat;
     int dashCount = 0;
     //the number of frames the dash is shown and not shown on
     int dashFrames = 20;
 
-    public bool backspacepressed = false;
+    //bool backspacepressed = false;
 
     List<string> console = new List<string>();
 
-    public List<string> commands = new List<string>();
+    List<string> commands = new List<string>();
 
     int LINES = 6;
 
     public override void interact() {
-        if (rend != null) {
-            mat[ScreenElement] = matRedReff;
-            rend.materials = mat;
-        }
         showUI(true);
         navDir = false;
     }
 
     public void onBreak() {
-        if (rend != null) {
-            mat[ScreenElement] = matRedReff;
-            rend.materials = mat;
-        }
+
     }
 
     protected override void initialise() {
-        rend = GetComponent<Renderer>();
-        mat = rend.materials;
-        matBlackReff = mat[ScreenElement];
         broken = new BreakEvent(this, 50);
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
-        commands.Add("cd /navigation");
-        commands.Add("service stop navigation");
-        commands.Add("mv navigation.back navigation");
-        commands.Add("service start navigation");
-        commands.Add("help");
+        commands.Add("Go to Navigation");
+        commands.Add("Stop Navigation");
+        commands.Add("Load Navigation Backups");
+        commands.Add("Start Navigation");
+        commands.Add("Help");
         addline("Available Commands");
         foreach (string command in commands) {
             addline(command);
@@ -65,6 +50,7 @@ public class CommandTerminal : Terminal, Breakable {
         for (int i = commands.Count; i < LINES; i++) {
             addline("");
         }
+        onBreak();
     }
 
     //used to add a line to the console;
@@ -81,17 +67,17 @@ public class CommandTerminal : Terminal, Breakable {
         String entry = line.ToLower();
         entry = entry.Trim();
         switch (entry) {
-            case "cd /navigation":
+            case "go to navigation":
                 addline("moving to navigation directory");
                 navDir = true;
                 break;
-            case "service stop navigation":
+            case "stop navigation":
                 addline("service stopping");
                 service = false;
                 break;
-            case "mv navigation.back navigation":
+            case "load navigation backups":
                 if (!navDir) {
-                    addline("Unable to locate Navigation.back");
+                    addline("Unable to locate Navigation back-ups");
                     break;
                 }
                 if (service) {
@@ -101,7 +87,7 @@ public class CommandTerminal : Terminal, Breakable {
                 addline("Restoring back up files");
                 isBroken = false;
                 break;
-            case "service start navigation":
+            case "start navigation":
                 addline("starting service");
                 service = true;
                 if (!isBroken) {
@@ -150,12 +136,11 @@ public class CommandTerminal : Terminal, Breakable {
     }
     
     public void onFix() {
-        if (rend != null) {
-            mat[ScreenElement] = matBlackReff;
-            rend.materials = mat;
-        }
         this.setActive(false);
         isBroken = false;
+        showUI(false);
+    }
+    protected override void onClose() {
         showUI(false);
     }
 }

@@ -7,16 +7,18 @@ public abstract class Terminal : Interactable {
     protected abstract void doUpdate();
     protected bool isVis;
     public override abstract void interact();
+    protected abstract void onClose();
+
     protected override void setup() {
         ui = Instantiate(uiPrefab);
         ui.transform.SetParent(UICanvas.Canvas.transform, false);
+        this.initialise();
         ui.SetActive(false);
         isVis = false;
-        this.initialise();
     }
     void Update() {
         if (isVis & CrossPlatformInputManager.GetButtonDown("Esc")) {
-            showUI(false);
+            onClose();
         }
         doUpdate();
     }
@@ -24,5 +26,6 @@ public abstract class Terminal : Interactable {
         ui.SetActive(show);
         isVis = show;
         Player.playerObj.FPSEnable(!show);
+        Player.allowPause(!show);
     }
 }

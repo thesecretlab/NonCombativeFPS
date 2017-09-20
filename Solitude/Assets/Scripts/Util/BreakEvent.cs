@@ -7,7 +7,7 @@ public interface Breakable {
     void onFix();
 }
 
-public class BreakEvent{
+public class BreakEvent {
     Breakable parent;
     public int breakPercent;
 

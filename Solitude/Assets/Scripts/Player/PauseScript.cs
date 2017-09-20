@@ -11,6 +11,7 @@ public class PauseScript : MonoBehaviour {
     public GameObject pauseUI;
     //used to point to the settings ui
     public GameObject pauseSettingsUI;
+    public GameObject HelpWindow;
 
     public void setPause(bool pause) {
         Time.timeScale = System.Convert.ToInt32(!pause);
@@ -50,7 +51,7 @@ public class PauseScript : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            setPause(!paused);
+            if (Player.pausable) setPause(!paused);
         }
     }
 
@@ -63,6 +64,16 @@ public class PauseScript : MonoBehaviour {
     {
         Debug.Log("hide settings");
         pauseSettingsUI.SetActive(false);
+    }
+
+    public void showHelp()
+    {
+       HelpWindow.SetActive(true);
+    }
+
+    public void hideHelp()
+    {
+        HelpWindow.SetActive(false);
     }
 
 }

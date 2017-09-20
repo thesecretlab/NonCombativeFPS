@@ -4,9 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Angled
   - Straight
+  - Angled
   - Canvas
+  - Fire
   layers:
   - Default
   - TransparentFX

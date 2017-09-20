@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1421938574469634}
+  m_IsPrefabParent: 1
+--- !u!1 &1421938574469634
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 224813160140071852}
+  - component: {fileID: 114619649850324818}
+  m_Layer: 5
+  m_Name: Inventory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &114619649850324818
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421938574469634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 775f8790367ef27448e1f29c6b184af1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  selectedItem: 0
+  mainCam: {fileID: 0}
+  options: {fileID: 0}
+  sel_row_1: 0
+  sel_col_1: 0
+  sel_row_2: 0
+  sel_col_2: 0
+  emptyImage: {fileID: 1691275657588942, guid: 9cafc531b2efc4148a5c9e093ce80e17, type: 2}
+  emptyText: {fileID: 1501627591774338, guid: 30f169807b25aa14e8b666a69c5b42b1, type: 2}
+  displayed: 0
+  pictures:
+  - {fileID: 21300000, guid: 4d50d7e7be55e844cb4548bfefeaf78c, type: 3}
+  - {fileID: 21300000, guid: 6615e6f35a2869740b3e79393bba405c, type: 3}
+  - {fileID: 21300000, guid: c6d8527a3a77e1e40a88df72efe7faef, type: 3}
+  - {fileID: 21300000, guid: 27857f9bdfa70a641be733f22c0d271e, type: 3}
+  - {fileID: 21300000, guid: f06df521872145c459fe40a55dc9ac3d, type: 3}
+  - {fileID: 21300000, guid: f616ff0f28dae7f48a391fe479afad84, type: 3}
+  - {fileID: 21300000, guid: af558383c54b5464c90c33b7e3013dc1, type: 3}
+  - {fileID: 21300000, guid: 71ff0e2cb4f6a354bae128c87c1ef165, type: 3}
+  heldItem:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  HEIGHT: 1080
+  WIDTH: 1920
+--- !u!224 &224813160140071852
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1421938574469634}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}

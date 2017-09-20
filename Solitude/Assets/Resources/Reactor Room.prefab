@@ -94283,6 +94283,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   num: 0
+  particle: {fileID: 0}
+  switchSound: {fileID: 0}
 --- !u!114 &114470960589958676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94296,6 +94298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   num: 0
+  particle: {fileID: 0}
+  switchSound: {fileID: 0}
 --- !u!114 &114693726619964586
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94309,6 +94313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   num: 0
+  particle: {fileID: 0}
+  switchSound: {fileID: 0}
 --- !u!114 &114872208506932642
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94322,6 +94328,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   num: 0
+  particle: {fileID: 0}
+  switchSound: {fileID: 0}
 --- !u!114 &114888612395741382
 MonoBehaviour:
   m_ObjectHideFlags: 1
