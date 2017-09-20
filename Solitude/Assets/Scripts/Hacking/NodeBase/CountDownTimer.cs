@@ -32,6 +32,8 @@ public class CountDownTimer : MonoBehaviour {
     {
         IDSALERTsource.clip = IDSALERTclip;
         Firewallsource.clip = Firewallclip;
+        Firewallsource.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 1f);
+        IDSALERTsource.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 1f);
     }
 
     void Update() {
