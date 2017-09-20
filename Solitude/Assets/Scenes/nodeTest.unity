@@ -10948,6 +10948,7 @@ MonoBehaviour:
   Firewall: {fileID: 21300000, guid: 65b6713f74d8c0945a9efb41b549a49f, type: 3}
   systemcore: {fileID: 21300000, guid: 99c3df0ebe410394cb5924baf09bc105, type: 3}
   IDS: {fileID: 21300000, guid: aa227515ed93c31468c9c4a7da514177, type: 3}
+  ishacked: 0
 --- !u!114 &649845700 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114354762761966226, guid: 7a087fe2b7f964f47b5e2c12e53f9304,
@@ -12583,7 +12584,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &789064008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17651,6 +17652,7 @@ MonoBehaviour:
   IDSALERTsource: {fileID: 269599840}
   Firewallclip: {fileID: 8300000, guid: d72341d24f900034da28320b98fdec45, type: 3}
   Firewallsource: {fileID: 1327937396}
+  tutorialwindow: {fileID: 789064007}
   text: {fileID: 1093390734}
   alertText: {fileID: 1052508610}
 --- !u!114 &1093390734

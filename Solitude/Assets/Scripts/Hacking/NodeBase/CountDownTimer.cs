@@ -14,6 +14,7 @@ public class CountDownTimer : MonoBehaviour {
     public AudioSource IDSALERTsource;
     public AudioClip Firewallclip;
     public AudioSource Firewallsource;
+    public GameObject tutorialwindow;
 
 
     HackingUI UI;
@@ -36,7 +37,10 @@ public class CountDownTimer : MonoBehaviour {
     void Update() {
         if (Gameover) {
             closetime -= UnityEngine.Time.deltaTime;
-        } else { 
+        }
+        else
+        { 
+            if(!tutorialwindow.activeInHierarchy)
             Time -= UnityEngine.Time.deltaTime;
             text.text = "Time Remaining:" + Mathf.Round(Time);  
         }
