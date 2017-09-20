@@ -19,6 +19,7 @@ public class PauseScript : MonoBehaviour {
         pauseUI.gameObject.SetActive(pause);
         if (pause == false) { pauseSettingsUI.SetActive(false); }
         Player.playerObj.FPSEnable(!pause);
+
     }
 
     #region Legacy pause
@@ -45,6 +46,7 @@ public class PauseScript : MonoBehaviour {
     // Use this for initialization
     void Start() {
         Unpause();
+
     }
 
     // Update is called once per frame
@@ -53,6 +55,7 @@ public class PauseScript : MonoBehaviour {
         {
             if (Player.pausable) setPause(!paused);
         }
+
     }
 
     public void showSettingsUI()
