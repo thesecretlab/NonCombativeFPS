@@ -131,6 +131,6 @@ public class ReactorTerminal : Terminal {
     }
 
     protected override void onClose() {
-        showUI(true);
+        showUI(false);
     }
 }
