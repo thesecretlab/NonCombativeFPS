@@ -59,11 +59,7 @@ public class PauseScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(!HelpWindow.activeInHierarchy && !pauseUI.activeInHierarchy)
-        {
-            Unpause();
-        }
-       
+        
          if(Input.GetKeyDown(KeyCode.Escape))
             {
                 if (Player.pausable) setPause(!paused);
