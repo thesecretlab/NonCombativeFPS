@@ -13,6 +13,10 @@ public class HackingUI : MonoBehaviour {
         ishacked = true;
         timer.Hacked();
     }
+
+    public HackingTerminal getTerminal() {
+        return t;
+    }
     public void IDSclicked()
     {
         timer.IDSclicked();

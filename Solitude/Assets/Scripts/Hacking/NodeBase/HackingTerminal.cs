@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 public class HackingTerminal : Terminal, Breakable {
     HackingUI hackUI;
+
+    public AudioSource IDSALERTsource;
+    public AudioSource Firewallsource;
+
     public override void interact() {
         showUI(true);
     }
