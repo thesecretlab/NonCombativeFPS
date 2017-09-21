@@ -22,7 +22,7 @@ public struct item{
  * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
  * 
  * By Brendan
- * Modified for inventory storage by Alexander Tilley 16/09/2017
+ * Modified for inventory storage by Alexander Tilley 21/09/2017
 */
 public class ItemSwitching : MonoBehaviour {
 
@@ -118,6 +118,11 @@ public class ItemSwitching : MonoBehaviour {
 			}
 		}
 		toggleInventory ();		//Closes the main inventory by defualt
+
+		//options.transform.SetParent(this.gameObject.transform);
+		options.transform.localPosition = Vector3.one;			//Centre Postion
+		//Debug.Log ("Mouse Pos "+Input.mousePosition);
+		options.transform.localPosition = newVector((((INV_COLUMNS-1)/2.0f)*150)+0.0f-(WIDTH*0.45f),(hotBarOffSet+INV_ROWS*150-50)+0.0f-(HEIGHT*0.40f),5.0f);
 
 		//TODO Set Up GameObject Like in video in discrption for hand held items setActive false for all
 
@@ -270,10 +275,7 @@ public class ItemSwitching : MonoBehaviour {
 			options.SetActive (true);		//Display Options
 			sel_row_1 = row;				//First Selection
 			sel_col_1 = col;
-			options.transform.SetParent(this.gameObject.transform);
-			options.transform.localPosition = Vector3.one;			//Centre Postion
 			//Debug.Log ("Mouse Pos "+Input.mousePosition);
-			options.transform.localPosition = inventory[row,col].obj.GetComponent<RectTransform>().localPosition;
 			//TODO set postion of options
 		}
 
