@@ -9,7 +9,7 @@ public struct item{
 	public GameObject obj {get; set;}	//Sprite Image
 	public GameObject text {get; set;}	//Text to display ammount
 }
-	
+
 
 
 //code for item switching adapted from https://www.youtube.com/watch?v=Dn_BUIVdAPg&ab_channel=Brackeys
@@ -22,11 +22,11 @@ public struct item{
  * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
  * 
  * By Brendan
- * Modified for inventory storage by Alexander Tilley 16/09/2017
+ * Modified for inventory storage by Alexander Tilley 21/09/2017
 */
 public class ItemSwitching : MonoBehaviour {
 
-    public int selectedItem = 0;					//
+	public int selectedItem = 0;					//
 
 	public Camera mainCam;							//Main Camera to make sure inventory fits screen (pre-Set Unity)
 	public GameObject options;						//Item Options to perform opertions (pre-set Unity)
@@ -69,8 +69,8 @@ public class ItemSwitching : MonoBehaviour {
 
 
 
-    // Use this for initialization
-    void Start () {
+	// Use this for initialization
+	void Start () {
 		try{//Allows button click comminication to this script
 			options.GetComponentsInChildren<onClickSwap> () [0].parent = this;	//Link Swap Button		
 			options.GetComponentsInChildren<onClickDrop> () [0].parent = this;	//Link Drop Button
@@ -90,7 +90,7 @@ public class ItemSwitching : MonoBehaviour {
 		for (int r = 0; r < INV_ROWS; r++) {				//For all rows in inventory
 			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory
 				if (r == 1) {
-					hotBarOffSet = 200;
+					hotBarOffSet = 90;
 				}
 				blank.ammount = 0;
 				blank.id = 0;
@@ -102,22 +102,27 @@ public class ItemSwitching : MonoBehaviour {
 				inventory[r,c]=blank;																		//Set to empty
 
 				inventory [r, c].obj.transform.SetParent (this.gameObject.transform);						//Position within Parent
-				inventory [r, c].obj.GetComponent<RectTransform> ().localScale = Vector3.one;				//Set Scale to normal	
+				inventory [r, c].obj.GetComponent<RectTransform> ().localScale = Vector3.one+(Vector3.one/2);				//Set Scale to normal	
 				inventory [r, c].obj.GetComponent<RectTransform> ().localPosition = Vector3.one;			//Centre Postion
 				inventory [r, c].obj.GetComponent<RectTransform> ().localPosition = 
-					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
-				
+					newVector((c*150)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*150)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
+
 				inventory [r, c].text.transform.SetParent (this.gameObject.transform);						//Position within Parent
-				inventory [r, c].text.GetComponent<RectTransform> ().localScale = Vector3.one;				//Set Scale to normal	
+				inventory [r, c].text.GetComponent<RectTransform> ().localScale = Vector3.one+(Vector3.one/2);				//Set Scale to normal	
 				inventory [r, c].text.GetComponent<RectTransform> ().localPosition = Vector3.one;			//Centre Postion
 				inventory [r, c].text.GetComponent<RectTransform> ().localPosition = 
-					newVector((c*100)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*100)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
+					newVector((c*150)+0.0f-(WIDTH*0.45f),(hotBarOffSet+r*150)+0.0f-(HEIGHT*0.40f),5.0f);	//Position In Table form
 				updateText(r,c);
 
 				//inventory [r, c].obj.GetComponentsInChildren<Text> () [0].text = "";
 			}
 		}
 		toggleInventory ();		//Closes the main inventory by defualt
+
+		//options.transform.SetParent(this.gameObject.transform);
+		options.transform.localPosition = Vector3.one;			//Centre Postion
+		//Debug.Log ("Mouse Pos "+Input.mousePosition);
+		options.transform.localPosition = newVector((((INV_COLUMNS-1)/2.0f)*150)+0.0f-(WIDTH*0.45f),(hotBarOffSet+INV_ROWS*150-50)+0.0f-(HEIGHT*0.40f),5.0f);
 
 		//TODO Set Up GameObject Like in video in discrption for hand held items setActive false for all
 
@@ -137,43 +142,43 @@ public class ItemSwitching : MonoBehaviour {
 
 
 
-    // Update is called once per frame
-    void Update() {
+	// Update is called once per frame
+	void Update() {
 
-        int prevSelectedItem = selectedItem;
+		int prevSelectedItem = selectedItem;
 
-        if (Input.GetAxis("Mouse ScrollWheel") > 0f)
-        {
+		if (Input.GetAxis("Mouse ScrollWheel") > 0f)
+		{
 			selectedItem = (selectedItem + 1) % INV_COLUMNS;
-				
-            /*if (selectedItem >= transform.childCount - 1)
+
+			/*if (selectedItem >= transform.childCount - 1)
                 selectedItem = 0;
             else
                 selectedItem++;*/
-        }
-        if (Input.GetAxis("Mouse ScrollWheel") < 0f)
-        {
+		}
+		if (Input.GetAxis("Mouse ScrollWheel") < 0f)
+		{
 			if (selectedItem - 1 >= 0) {
 				selectedItem--;
 			}else{
 				selectedItem = INV_COLUMNS-1;
 			}
-            /*if (selectedItem <= 0)
+			/*if (selectedItem <= 0)
                 selectedItem = transform.childCount - 1;
             else
                 selectedItem--;*/
-        }
+		}
 
-        //can be expanded up to 9 if needed by copy-pasting the second statement and incrementing values
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            selectedItem = 0;
-        }
+		//can be expanded up to 9 if needed by copy-pasting the second statement and incrementing values
+		if (Input.GetKeyDown(KeyCode.Alpha1))
+		{
+			selectedItem = 0;
+		}
 
-        if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
-        {
-            selectedItem = 1;
-        }
+		if (Input.GetKeyDown(KeyCode.Alpha2) && transform.childCount >= 2)
+		{
+			selectedItem = 1;
+		}
 
 		if (Input.GetKeyDown(KeyCode.Alpha3) && transform.childCount >= 3)
 		{
@@ -190,22 +195,26 @@ public class ItemSwitching : MonoBehaviour {
 			SelectItem(prevSelectedItem);
 		}
 
-		if (Input.GetKeyDown(KeyCode.E)) {				//Player Opens/Closes Inventory
+		if (Input.GetKeyDown(KeyCode.Q)) {				//Player Opens/Closes Inventory
 			if (displayed == true) {
 				displayed = false;			//If Open: Close
+				Player.playerObj.FPSEnable(true);
+				options.SetActive (false);		//Hide options
 			} else {
 				displayed = true;			//If Closed: Open
+				Player.playerObj.FPSEnable(false);
+
 			}
 			toggleInventory ();		//Updates to display status
 		}
 
-    }
+	}
 
 	//Displays Held Item on Game Screen
-    void SelectItem(int prevItem)
-    {
+	void SelectItem(int prevItem)
+	{
 		Debug.Log ("Selected Item: "+selectedItem + "Prev Item: "+prevItem);
-        //int i = 0;
+		//int i = 0;
 		//TODO make sure heldItem is filled in Unity
 
 		if (heldItem [inventory [0, selectedItem].id] != null) {		//Therotically Works
@@ -216,7 +225,7 @@ public class ItemSwitching : MonoBehaviour {
 			}
 		}
 
-        /*foreach (Transform item in transform) DO NOT USE THIS
+		/*foreach (Transform item in transform) DO NOT USE THIS
         {
             if (i == selectedItem)
                     item.gameObject.SetActive(true);
@@ -224,9 +233,9 @@ public class ItemSwitching : MonoBehaviour {
                     item.gameObject.SetActive(false);
             i++;
         }*/
-		
 
-    }
+
+	}
 
 	//changes if the main inventory is displayed or not
 	public void toggleInventory(){
@@ -248,7 +257,7 @@ public class ItemSwitching : MonoBehaviour {
 		} else if (min > MAXSTACK) {
 			min = MAXSTACK;
 		}
-		insertAtTop (Random.Range (1, 7), Random.Range (min, max));	//Insert random item of random ammount
+		insertAtTop (Random.Range (4, 7), Random.Range (min, max));	//Insert random item of random ammount
 	}
 
 	//Displays Options when an inventory item is selected and executes Swap() if needed
@@ -266,10 +275,7 @@ public class ItemSwitching : MonoBehaviour {
 			options.SetActive (true);		//Display Options
 			sel_row_1 = row;				//First Selection
 			sel_col_1 = col;
-			options.transform.SetParent(this.gameObject.transform);
-			options.transform.localPosition = Vector3.one;			//Centre Postion
 			//Debug.Log ("Mouse Pos "+Input.mousePosition);
-			options.transform.localPosition = inventory[row,col].obj.GetComponent<RectTransform>().localPosition;
 			//TODO set postion of options
 		}
 
@@ -350,7 +356,7 @@ public class ItemSwitching : MonoBehaviour {
 								inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
 								floated = true;
 							}
-							
+
 						}
 					}
 					floated = false;
