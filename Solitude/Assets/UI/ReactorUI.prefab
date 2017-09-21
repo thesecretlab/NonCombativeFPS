@@ -52,7 +52,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224754099410275926}
   - component: {fileID: 114181675699985670}
-  - component: {fileID: 114762339909640812}
   m_Layer: 5
   m_Name: tempGage
   m_TagString: Untagged
@@ -752,6 +751,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6220908f07201f848a400bfe2cb62234, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUsage: {fileID: 0}
+  controlRod: {fileID: 0}
+  tempGage: {fileID: 0}
+  status: {fileID: 0}
+  ldraw: {fileID: 0}
+  mdraw: {fileID: 0}
+  hdraw: {fileID: 0}
+  shutdown: {fileID: 0}
+  tempNum: {fileID: 0}
+  cRodNum: {fileID: 0}
 --- !u!114 &114254605648754268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1363,17 +1372,6 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114762339909640812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1134276563824694}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114763967104875120
 MonoBehaviour:
   m_ObjectHideFlags: 1

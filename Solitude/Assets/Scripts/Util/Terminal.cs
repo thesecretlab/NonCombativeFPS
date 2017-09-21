@@ -11,6 +11,7 @@ public abstract class Terminal : Interactable {
 
     protected override void setup() {
         ui = Instantiate(uiPrefab);
+        //Debug.LogWarning(name + ":" + uiPrefab.name);
         ui.transform.SetParent(UICanvas.Canvas.transform, false);
         this.initialise();
         ui.SetActive(false);
