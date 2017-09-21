@@ -10,28 +10,52 @@ public class TurretCalibration : MonoBehaviour {
     Text accuracyText;
     float cWidth;
     float cHeight;
-    
+    Vector3 scale;
     float randomX;
     float randomY;
     float change;
     float moveSpeed;
     bool overTarget;
-    Image target;
-    RectTransform canvas;
+    Sprite target;
+    private Rigidbody2D rb2d;
     
     // Use this for initialization
     void Awake()
     {
-        canvas = gameObject.GetComponent<RectTransform>();
-        cWidth = canvas.rect.width;
-        cHeight = canvas.rect.height;
-        target = GameObject.Find("Target").GetComponent<Image>();
+       
+        target = GameObject.Find("cirTarget").GetComponent<Sprite>();
+        rb2d = GameObject.Find("cirTarget").GetComponent<Rigidbody2D>();
         accuracyText = GameObject.Find("AccuracyN").GetComponent<Text>();
        
 
         
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("colliding");
+
+
+        BounceTarget();
+
+
+
+    }
+
+    private void OnMouseEnter()
+    {
+        setOverTarget();
+    }
+
+    private void OnMouseExit()
+    {
+
+
+        setLostTarget();
+        
+            
+        
+    }
     /*
     private void OnMouseOver()
     {
@@ -48,6 +72,7 @@ public class TurretCalibration : MonoBehaviour {
         }
     }
     */
+    
 
     public void setOverTarget()
     {
@@ -69,40 +94,38 @@ public class TurretCalibration : MonoBehaviour {
             //Used to change the direction of the sprite.
             change = Time.time + Random.Range((float)0.5, (float)1.5);
         }
-        target.rectTransform.Translate((randomX * moveSpeed * Time.deltaTime), (randomY * moveSpeed * Time.deltaTime), 0);
-    
-       
-        //Used if the sprite reaches a left or right border.
-        if(target.rectTransform.position.x >= (cWidth / 2) || target.rectTransform.position.x <= (cWidth /2) - cWidth)
-        {
-            randomX =- randomX;
-            
-         
-        }
-        //Used if the Sprite reaches a upper or lower border.
-        if (target.rectTransform.position.y >= (cHeight / 2) || target.rectTransform.position.y <= (cHeight / 2) - cHeight)
-        {
-            randomY =- randomY;
-            
-            
-        }
-        
+        //transform.Translate((randomX * moveSpeed), (randomY * moveSpeed), 0);
+        rb2d.AddForce(new Vector2((randomX * moveSpeed), (randomY * moveSpeed)));
+
     }
 
+    void BounceTarget()
+    {
+        float random = Random.Range(0, 2);
+        if (random < 1)
+        {
+            rb2d.AddForce(new Vector2(20, -15));
+        }
+        else
+        {
+            rb2d.AddForce(new Vector2(-20, -15));
+        }
+    }
     private void LateUpdate()
     {
         if(overTarget && accuracy != 100)
         {
 
-            target.rectTransform.sizeDelta -= new Vector2(0.25f, 0.25f);
-            //scale.localScale -= new Vector3(1F, 1F, 1F);
+            //target.rectTransform.sizeDelta -= new Vector2(0.25f, 0.25f);
+            transform.localScale -= new Vector3(0.35F, 0.35F, 0.35F);
             accuracy += fillRate;
             accuracyText.text = accuracy.ToString();
 
         }
         else if(!overTarget && accuracy != 0)
         {
-            target.rectTransform.sizeDelta += new Vector2(0.25f, 0.25f);
+            //target.rectTransform.sizeDelta += new Vector2(0.25f, 0.25f);
+            transform.localScale += new Vector3(0.35F, 0.35F, 0.35F);
             accuracy -= fillRate;
             accuracyText.text = accuracy.ToString();
         }
