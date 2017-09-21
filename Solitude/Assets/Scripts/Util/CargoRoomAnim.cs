@@ -6,18 +6,13 @@ public class CargoRoomAnim : MonoBehaviour
 {
 
     Animator anim;
-    bool returnCrateNext; //keeps track of if the next action is to return a crate
-    GameObject player;
     int nextCrate;
     AudioSource source;
-    public AudioClip winchsound;
 
     // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
-        returnCrateNext = false;
-        player = GameObject.FindGameObjectWithTag("Player");
         source = GetComponent<AudioSource>();
     }
 
@@ -29,52 +24,51 @@ public class CargoRoomAnim : MonoBehaviour
 
     public void playAnim()
     {
-        if (!returnCrateNext)
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Default State"))
         {
             nextCrate = Random.Range(1, 4);
             switch (nextCrate)
             {
                 case 1:
                     anim.SetTrigger("Crate1Fetch");
-                    returnCrateNext = !returnCrateNext;
+                    Debug.Log("crate1");
                     break;
                 case 2:
                     anim.SetTrigger("Crate2Fetch");
-                    returnCrateNext = !returnCrateNext;
+                    Debug.Log("crate2");
                     break;
                 case 3:
                     anim.SetTrigger("Crate3Fetch");
-                    returnCrateNext = !returnCrateNext;
+                    Debug.Log("crate3");
                     break;
                 case 4:
                     anim.SetTrigger("Crate4Fetch");
-                    returnCrateNext = !returnCrateNext;
+                    Debug.Log("crate4");
                     break;
             }
         }
-        else
+        else if (
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 1 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 2 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 3 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 4 Resting")
+            )
         {
             switch (nextCrate)
             {
                 case 1:
                     anim.SetTrigger("Crate1Return");
-                    returnCrateNext = !returnCrateNext;
                     break;
                 case 2:
                     anim.SetTrigger("Crate2Return");
-                    returnCrateNext = !returnCrateNext;
                     break;
                 case 3:
                     anim.SetTrigger("Crate3Return");
-                    returnCrateNext = !returnCrateNext;
                     break;
                 case 4:
                     anim.SetTrigger("Crate4Return");
-                    returnCrateNext = !returnCrateNext;
                     break;
             }
-
         }
-
     } //end of playanim();
 }
