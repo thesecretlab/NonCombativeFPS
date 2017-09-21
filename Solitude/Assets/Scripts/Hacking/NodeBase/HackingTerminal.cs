@@ -15,7 +15,8 @@ public class HackingTerminal : Terminal, Breakable {
         throw new NotImplementedException();
     }
     public void onFix() {
-        throw new NotImplementedException();
+        hackUI.reset();
+        showUI(false);
     }
     protected override void doUpdate() {
     }
