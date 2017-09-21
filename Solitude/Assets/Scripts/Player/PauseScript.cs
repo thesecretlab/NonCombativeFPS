@@ -17,8 +17,14 @@ public class PauseScript : MonoBehaviour {
         Time.timeScale = System.Convert.ToInt32(!pause);
         paused = pause;
         pauseUI.gameObject.SetActive(pause);
-        if (pause == false) { pauseSettingsUI.SetActive(false); }
+        if (pause == false)
+        {
+            pauseSettingsUI.SetActive(false);
+            HelpWindow.SetActive(false);
+
+        }
         Player.playerObj.FPSEnable(!pause);
+
     }
 
     #region Legacy pause
@@ -44,15 +50,21 @@ public class PauseScript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        Unpause();
+        pause();
+        pauseUI.SetActive(false);
+        HelpWindow.SetActive(true);
+
     }
 
     // Update is called once per frame
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (Player.pausable) setPause(!paused);
-        }
+    void Update()
+    {
+        
+         if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (Player.pausable) setPause(!paused);
+            }
+
     }
 
     public void showSettingsUI()
