@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class GameConditions : MonoBehaviour {
 
-    public float Time = 600.0f;
+    public float Time = 5.0f;
     public Text text;
+    bool Gameover = false;
+    public GameObject gameoverWindow;
     // Use this for initialization
     void Start () {
 		
@@ -18,5 +20,11 @@ public class GameConditions : MonoBehaviour {
 
         Time -= UnityEngine.Time.deltaTime;
         text.text = "Time \nRemaining:  " + Mathf.Round(Time);
+
+        if(Time < 0)
+        {
+            gameoverWindow.SetActive(true);
+            Player.playerObj.FPSEnable(false);
+        }
     }
 }
