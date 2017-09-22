@@ -15,6 +15,7 @@ public class BatteryManager : MonoBehaviour {
 
     public void RechargeBattery() //enables charging by other objects, namely charging stations
     {
+        Debug.Log("charged");
         BatteryRemaining = MaxBattery;
     }
 
