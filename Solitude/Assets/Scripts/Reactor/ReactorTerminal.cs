@@ -11,7 +11,8 @@ public class ReactorTerminal : Terminal {
     public int powerUnits;
     bool online;
     bool overload;
-    float fillRate = 0.1f;
+    float fillRate = 0.01f;
+    float DecRate = 0.1f;
     int fillRateMult = 2;
     // Use this for initialization
     void Awake() {
@@ -32,7 +33,6 @@ public class ReactorTerminal : Terminal {
     public void powerUP() {
         if (RecUI.tempGage.value == 0) {
             powerUnits = PowerSystem.powersystem.restore();
-            lowDraw();
             online = true;
             RecUI.powerUsage.text = powerUnits.ToString();
             RecUI.status.text = "Light Load";
@@ -120,10 +120,10 @@ public class ReactorTerminal : Terminal {
         RecUI.tempGage.value += fillRate * (fillRateMult + fillRateMult + fillRateMult);
     }
     public void fCool() {
-        RecUI.tempGage.value -= fillRate * fillRateMult;
+        RecUI.tempGage.value -= DecRate * fillRateMult;
     }
     public void sCool() {
-        RecUI.tempGage.value -= fillRate;
+        RecUI.tempGage.value -= DecRate;
     }
 
     public override void interact() {
