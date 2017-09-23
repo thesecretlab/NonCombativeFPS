@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*		Main controller for game functions
  * 		
@@ -25,7 +26,7 @@ public class Ship : MonoBehaviour {
 	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
 	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
-    bool access;
+    public bool access;
 
     int breakmod = 0;
 
@@ -52,10 +53,12 @@ public class Ship : MonoBehaviour {
 
     public void showAccess(bool show) {
         AccessUI.SetActive(show);
+        Player.playerObj.FPSEnable(!show);
     }
 
     void Start () {
         AccessUI = Instantiate(AccessUIPrefab);
+        AccessUI.GetComponentInChildren<Button>().onClick.AddListener(delegate { showAccess(false); });
         //Debug.LogWarning(name + ":" + uiPrefab.name);
         AccessUI.transform.SetParent(UICanvas.Canvas.transform, false);
         AccessUI.SetActive(false);
