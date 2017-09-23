@@ -77,28 +77,7 @@ public class ReactorTerminal : Terminal {
     void LateUpdate() {
         RecUI.powerUsage.text = powerUnits.ToString();
         RecUI.tempNum.text = RecUI.tempGage.value.ToString();
-        if (online) {
-            if (powerUnits <= 3) {
-                RecUI.status.text = "Light Load";
-                lowDraw();
-                SetRod(75);
-            }
-            if (powerUnits > 3 && powerUnits < 7) {
-                RecUI.status.text = "Medium Load";
-                medDraw();
-                SetRod(50);
-            }
-            if (powerUnits > 7 && powerUnits < 10) {
-                RecUI.status.text = "Heavy Load";
-                hiDraw();
-                SetRod(25);
-            }
-            if (powerUnits >= 10) {
-                RecUI.status.text = "Max Load";
-                maxDraw();
-                SetRod(100);
-            }
-        }
+        
         if (!online) {
             if (overload) {
                 sCool();
@@ -107,18 +86,7 @@ public class ReactorTerminal : Terminal {
             }
         }
     }
-    public void lowDraw() {
-        RecUI.tempGage.value += fillRate;
-    }
-    public void medDraw() {
-        RecUI.tempGage.value += fillRate * fillRateMult;
-    }
-    public void hiDraw() {
-        RecUI.tempGage.value += fillRate * (fillRateMult + fillRateMult);
-    }
-    public void maxDraw() {
-        RecUI.tempGage.value += fillRate * (fillRateMult + fillRateMult + fillRateMult);
-    }
+
     public void fCool() {
         RecUI.tempGage.value -= DecRate * fillRateMult;
     }

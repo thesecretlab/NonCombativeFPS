@@ -8,9 +8,6 @@ public class ReactorUI : MonoBehaviour {
     public Slider controlRod;
     public Slider tempGage;
     public Text status;
-    public Button ldraw;
-    public Button mdraw;
-    public Button hdraw;
     public Button shutdown;
     public Text tempNum;
     public Text cRodNum;
@@ -21,9 +18,6 @@ public class ReactorUI : MonoBehaviour {
         powerUsage = GameObject.Find("PowerUnitVal").GetComponent<Text>();
         controlRod = GameObject.Find("cRod").GetComponent<Slider>();
         shutdown = GameObject.Find("EmerBut").GetComponent<Button>();
-        ldraw = GameObject.Find("LowLoad").GetComponent<Button>();
-        mdraw = GameObject.Find("MedLoad").GetComponent<Button>();
-        hdraw = GameObject.Find("HighLoad").GetComponent<Button>();
         tempNum = GameObject.Find("tempNum").GetComponent<Text>();
         cRodNum = GameObject.Find("cRodNum").GetComponent<Text>();
     }
