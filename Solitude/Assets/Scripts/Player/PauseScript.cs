@@ -12,6 +12,7 @@ public class PauseScript : MonoBehaviour {
     //used to point to the settings ui
     public GameObject pauseSettingsUI;
     public GameObject HelpWindow;
+    int count = 1;
 
     public void setPause(bool pause) {
         Time.timeScale = System.Convert.ToInt32(!pause);
@@ -59,6 +60,11 @@ public class PauseScript : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        if(count == 1 && !HelpWindow.activeInHierarchy)
+        {
+            Unpause();
+            count = 2;
+        }
         
          if(Input.GetKeyDown(KeyCode.Escape))
             {
