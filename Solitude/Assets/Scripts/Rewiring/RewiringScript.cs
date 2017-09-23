@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,12 +23,14 @@ public class RewiringScript : MonoBehaviour {
     GameObject greenBtn1;
     GameObject greenBtn2;
 
+    public GameObject AlertWindowWiring;
+
     // Use this for initialization
     void Start () {
         lastColourPressed = "null";
         colourPressed = "null";
         InvokeRepeating("resetWires", 3.0f, 3.0f);
-
+        AlertWindowWiring.SetActive(false);
     }
 
     
@@ -119,13 +123,18 @@ public class RewiringScript : MonoBehaviour {
             }
         }
 
-     if(blue1 + blue2 + red1 + red2 + green1 + green2 == 18)
+     if(blue1 + blue2 + red1 + red2 + green1 + green2 == 12)
         {
-            //end the minigame with success
+            AlertWindowWiring.SetActive(true);
         }
-     
+    
 
 	}
+
+    public void gameOver()
+    {
+
+    }
 
     public void resetWires()
     {
