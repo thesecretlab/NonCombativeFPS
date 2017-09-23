@@ -17,11 +17,15 @@ public interface shipLight {
 public class Ship : MonoBehaviour {
 
     public static Ship ship;
+    public GameObject AccessUIPrefab;
+    GameObject AccessUI;
+
     Light[] lights;
 
 	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
 	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
+    bool access;
 
     int breakmod = 0;
 
@@ -38,7 +42,24 @@ public class Ship : MonoBehaviour {
         }
     }
 
+    public bool getAccess() {
+        return access;
+    }
+
+    public void setAccess(bool access) {
+        this.access = access;
+    }
+
+    public void showAccess(bool show) {
+        AccessUI.SetActive(show);
+    }
+
     void Start () {
+        AccessUI = Instantiate(AccessUIPrefab);
+        //Debug.LogWarning(name + ":" + uiPrefab.name);
+        AccessUI.transform.SetParent(UICanvas.Canvas.transform, false);
+        AccessUI.SetActive(false);
+
         InvokeRepeating("tryBreak", waitSec, repeatSec);
         lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
 
