@@ -19,7 +19,8 @@ public class HackingTerminal : Terminal, Breakable {
         Ship.ship.setAccess(false);
     }
     public void onFix() {
-        Ship.ship.setAccess(false);
+        Debug.Log("Fix");
+        Ship.ship.setAccess(true);
         hackUI.reset();
         showUI(false);
     }
