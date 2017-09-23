@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
+
+
+
 public class Player : MonoBehaviour {
+
     public static bool pausable;
     public static Player playerObj;
     private List<Interactable> interactables = new List<Interactable>();
@@ -12,6 +16,8 @@ public class Player : MonoBehaviour {
     public bool FPSActive = true;
     private RigidbodyFirstPersonController _FPSController;
     public GameObject interactableText; //
+
+
     private RigidbodyFirstPersonController getFPSControler() {
         if (_FPSController == null) {
             _FPSController = GetComponent<RigidbodyFirstPersonController>();
