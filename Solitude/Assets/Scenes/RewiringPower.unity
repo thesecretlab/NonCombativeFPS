@@ -402,7 +402,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: 'Socket 1C
+
+'
 --- !u!222 &527641250
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -539,7 +541,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: 'Socket 2A
+
+'
 --- !u!222 &677212282
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -920,7 +924,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: 'Socket 2C
+
+'
 --- !u!222 &1078993528
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -959,7 +965,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2352941, g: 0.14705881, b: 0.14705881, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -1127,7 +1133,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: 'Socket 1A
+
+'
 --- !u!222 &1232928340
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1385,7 +1393,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: 'Socket 1B
+
+'
 --- !u!222 &1778673669
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1459,7 +1469,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Wiring
+  m_Text: Socket 2B
 --- !u!222 &1995079387
 CanvasRenderer:
   m_ObjectHideFlags: 0
