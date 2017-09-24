@@ -32,7 +32,7 @@ public class ReactorTerminal : Terminal {
     }
     public void powerUP() {
         if (RecUI.tempGage.value == 0) {
-            powerUnits = PowerSystem.powersystem.restore();
+            powerUnits = PowerSystem.restore();
             online = true;
             RecUI.powerUsage.text = powerUnits.ToString();
             RecUI.status.text = "Light Load";
@@ -44,7 +44,7 @@ public class ReactorTerminal : Terminal {
         online = false;
         overload = true;
         SetRod(100);
-        powerUnits = PowerSystem.powersystem.crash(); //removed when set draw is implemented
+        powerUnits = PowerSystem.crash(); //removed when set draw is implemented
         RecUI.powerUsage.text = powerUnits.ToString();
         //code to flip breakers.
         RecUI.shutdown.interactable = false;
@@ -54,7 +54,7 @@ public class ReactorTerminal : Terminal {
         online = false;
         overload = false;
         SetRod(100);
-        powerUnits = PowerSystem.powersystem.crash(); //removed when set draw is implemented
+        powerUnits = PowerSystem.crash(); //removed when set draw is implemented
         RecUI.powerUsage.text = powerUnits.ToString();
         RecUI.shutdown.interactable = false;
     }

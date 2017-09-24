@@ -7,7 +7,7 @@ public class Reactor : MonoBehaviour, Breakable {
     public Lever[] levers;
 
     public void onBreak() {
-        PowerSystem.powersystem.crash();
+        PowerSystem.crash();
         Debug.Log("boom");
         foreach(Lever lev in levers) {
             //Debug.Log(lev.getName());
@@ -17,7 +17,7 @@ public class Reactor : MonoBehaviour, Breakable {
 
     public void onFix() {
         Debug.Log("Breakers Fixed");
-        PowerSystem.powersystem.restore();
+        PowerSystem.restore();
     }
 
     public void throwLever(int lever) {
