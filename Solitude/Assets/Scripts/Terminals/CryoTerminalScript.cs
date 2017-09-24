@@ -12,8 +12,11 @@ public class CryoTerminalScript : Terminal
     Text crew_power_text;
     Text crew_health_text;
     bool powervalue = false;
+    bool crewdead = false;
+    public bool allcrewdead = false;
     float CrewHealthNum = 100.0f;
-    float decreasehealthRate = 0.01f;
+    int crewcount = 0;
+
 
     public override void interact()
     {
@@ -41,15 +44,36 @@ public class CryoTerminalScript : Terminal
             crew_health = c.transform.Find("HEALTH").gameObject;
             crew_health_text = crew_health.GetComponent<Text>();
 
-            if(powervalue == false)
+            if (powervalue == false && allcrewdead == false)
             {
-                CrewHealthNum = CrewHealthNum - 0.01f;
-                crew_health_text.text = Mathf.Floor(CrewHealthNum) + "%";
-            }   
-            else if (CrewHealthNum <= 100)
+                if(CrewHealthNum > 0.0f)
+                {
+                    CrewHealthNum = CrewHealthNum - 0.0001f;
+                    crew_health_text.text = Mathf.Floor(CrewHealthNum) + "%";
+                }
+                else
+                {
+                    crew_health_text.text = "DECEASED";
+                    crewdead = true;
+                    crewcount++;
+
+                }
+            }
+
+            if(crewcount == 41) 
             {
-                CrewHealthNum += 0.05f;
-               
+                allcrewdead = true;
+            }
+            
+
+            if (powervalue == true && allcrewdead == false)
+            {
+                if(CrewHealthNum < 100)
+                {
+                    CrewHealthNum = CrewHealthNum + 0.00005f;
+                    crew_health_text.text = Mathf.Floor(CrewHealthNum) + "%";
+                }
+       
             }
         }
     }

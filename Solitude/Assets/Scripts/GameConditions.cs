@@ -13,21 +13,29 @@ using UnityEngine;
  */
 public class GameConditions : MonoBehaviour {
 
+
     public float Time = 5.0f;
     public Text text;							//Text to display on bridge screen to update time
-    //bool Gameover = false;					
+    bool Gameover;					
     public GameObject EndGameWindow;			//Window that displays the end game screen
 
 	public Text EndGameText;					//Text Object to display at endgame
 
     // Use this for initialization
-    void Start () {
-		
+    void Start ()
+    {
+
+
+
+        
 	}
 	
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+    {
+        GameObject terminalObject = GameObject.Find("TerminalConsole5 (1)");
+        CryoTerminalScript cryotermscript = terminalObject.GetComponent<CryoTerminalScript>();
+        Gameover = cryotermscript.allcrewdead;
 
         Time -= UnityEngine.Time.deltaTime;
         text.text = "Time \nRemaining:  " + Mathf.Round(Time);
@@ -37,6 +45,12 @@ public class GameConditions : MonoBehaviour {
 			EndGameWindow.SetActive(true);						//Display EndGame Window
             Player.playerObj.FPSEnable(false);
         }
+        if (Gameover)
+        {
+            loseGame("The crew are dead");
+        }
+       
+
     }
 
 	//Triggers lose game state and displays addtional text if needed
