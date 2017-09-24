@@ -85,7 +85,7 @@ public class ItemSwitching : MonoBehaviour {
 		int hotBarOffSet = 0;
 		item blank = new item();							//Empty object to intialise
 
-		Debug.Log ("Screen Width: " + WIDTH + " Height: " + HEIGHT);
+		//Debug.Log ("Screen Width: " + WIDTH + " Height: " + HEIGHT);
 
 		for (int r = 0; r < INV_ROWS; r++) {				//For all rows in inventory
 			for (int c = 0; c < INV_COLUMNS; c++) {			//For all cols in inventory
@@ -213,7 +213,7 @@ public class ItemSwitching : MonoBehaviour {
 	//Displays Held Item on Game Screen
 	void SelectItem(int prevItem)
 	{
-		Debug.Log ("Selected Item: "+selectedItem + "Prev Item: "+prevItem);
+		//Debug.Log ("Selected Item: "+selectedItem + "Prev Item: "+prevItem);
 		//int i = 0;
 		//TODO make sure heldItem is filled in Unity
 

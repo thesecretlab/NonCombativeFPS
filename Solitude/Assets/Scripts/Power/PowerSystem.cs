@@ -68,7 +68,7 @@ public class PowerSystem : MonoBehaviour {
 
     void Awake() {
         if (powersystem == null) {
-            Debug.Log("Added Powersystem at: " + gameObject.name);
+            //Debug.Log("Added Powersystem at: " + gameObject.name);
             powersystem = this;
         } else {
             Debug.LogError("Multiple PowerSystems");
@@ -83,7 +83,7 @@ public class PowerSystem : MonoBehaviour {
 	void Start () {
         rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[]);
         foreach (Room r in rooms.rooms) {
-            Debug.Log(r.name);
+            //Debug.Log(r.name);
         }
     }
 
