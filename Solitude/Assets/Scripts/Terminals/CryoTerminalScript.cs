@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class CryoTerminalScript : Terminal
 {
-    GameObject[] crew;
+    public GameObject[] crew;
     GameObject crew_power;
     Text crew_power_text;
     Text crew_health;
@@ -15,24 +15,19 @@ public class CryoTerminalScript : Terminal
     public override void interact()
     {
         showUI(true);
+        foreach (GameObject c in crew) {
+            crew_power = c.transform.Find("POWER").gameObject;
+            crew_power_text = crew_power.GetComponent<Text>();
+
+            if (powervalue == false) {
+                crew_power_text.text = ("TEST");
+            }
+        }
     }
 
     protected override void doUpdate()
     {
 
-
-        for (int i = 0; i < crew.Length; i++)
-        {
-       
-           crew_power = crew[i].transform.Find("POWER").gameObject;
-           crew_power_text = crew_power.GetComponent<Text>();
-            
-            if(powervalue == false)
-            {
-                crew_power_text.text = ("TEST"); 
-            }
-            
-        }
     }
 
     protected override void initialise()
