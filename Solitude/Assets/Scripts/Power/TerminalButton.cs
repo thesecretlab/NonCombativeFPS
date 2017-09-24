@@ -8,11 +8,11 @@ public class TerminalButton : MonoBehaviour, IPointerClickHandler {
 
     void Start() {
         tb = GetComponent<Text>();
-        tb.text = name.Substring(0, name.IndexOf("_")) + "\n" + PowerSystem.getPower(name);
+        tb.text = name.Substring(0, name.IndexOf("_")) + "\n" + PowerSystem.getRoom(name);
     }
 
     public void OnPointerClick(PointerEventData eventData) {
-        int np = PowerSystem.changePower(this.name, eventData.button == PointerEventData.InputButton.Left);
+        int np = PowerSystem.changeRoom(this.name, eventData.button == PointerEventData.InputButton.Left);
         tb.text = name.Substring(0,name.IndexOf("_")) + "\n" + np;
         tb.color = np < 1 ? Color.red : Color.blue;
         if (np == -1) {
