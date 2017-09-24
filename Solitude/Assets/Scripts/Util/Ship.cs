@@ -12,7 +12,7 @@ using UnityEngine.UI;
  */
 
 public interface shipLight {
-    void setPower(bool powerState);
+    void setPower(int powerState);
 }
 
 public class Ship : MonoBehaviour {
@@ -39,7 +39,7 @@ public class Ship : MonoBehaviour {
             Destroy(gameObject);
         } else {
             ship = this;
-            Debug.Log("Ship");
+            //Debug.Log("Ship");
         }
     }
 
@@ -76,8 +76,8 @@ public class Ship : MonoBehaviour {
 				}
 			}
 		}
-		Debug.Log ("flood lights found: " + floodlights.Count);
-		Debug.Log ("fluro lights found: " + flurolights.Count);
+		//Debug.Log ("flood lights found: " + floodlights.Count);
+		//Debug.Log ("fluro lights found: " + flurolights.Count);
 
 		/* 										KEEP ME JUST IN CASE -ALEX
 		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
@@ -106,7 +106,7 @@ public class Ship : MonoBehaviour {
 
 	}
 
-    public void setPower(bool power) {
+    /*public void setPower(bool power) {
 
 		foreach (GameObject light in floodlights) {						//ForEach FloodLight
 			FloodLight[] script = light.GetComponents<FloodLight>();
@@ -120,7 +120,7 @@ public class Ship : MonoBehaviour {
 				script [0].setPower (power);							//Change power state
 			}
 		}
-    }
+    }*/
 
     void tryBreak() {
         Debug.Log("tryBreak");
