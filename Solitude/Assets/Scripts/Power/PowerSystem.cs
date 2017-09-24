@@ -81,14 +81,17 @@ public class PowerSystem : MonoBehaviour {
     public static int restore() {
         return powersystem._restore();
     }
-    public static int getPower(string room) {
-        return powersystem._getPower(room);
+    public static int getRoom(string room) {
+        return powersystem._getRoom(room);
     }
-    public static int changePower(string room, bool up) {
-        return powersystem._changePower(room, up);
+    public static int changeRoom(string room, bool up) {
+        return powersystem._changeRoom(room, up);
     }
-    public static int setPower(string room, int power) {
-        return powersystem._setPower(room, power);
+    public static int setRoom(string room, int power) {
+        return powersystem._setRoom(room, power);
+    }
+    public static void setPower(int power) {
+        powersystem._setPower(power);
     }
 
     void Awake() {
@@ -101,7 +104,7 @@ public class PowerSystem : MonoBehaviour {
         }
     }
 
-    public RoomLevels rooms;
+    RoomLevels rooms;
     public int tick=0;
     public int wait=10;
 	// Use this for initialization
@@ -112,27 +115,30 @@ public class PowerSystem : MonoBehaviour {
         }
     }
 
-    public int _restore() {
+    int _restore() {
         rooms.restart();
         return rooms.total();
     }
 
-    public int _crash() {
+    int _crash() {
         rooms.crash();
         return 0;
     }
 
-    public int _changePower(string room, bool up) {
+    int _changeRoom(string room, bool up) {
         int ret = rooms.changePower(room, up);
         ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
     }
-    public int _setPower(string room, int power) {
+    int _setRoom(string room, int power) {
         int ret = rooms.setPower(room, power);
         ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
     }
-    public int _getPower(string room) {
+    int _getRoom(string room) {
         return rooms.getPower(room);
+    }
+    void _setPower(int power) {
+
     }
 }
