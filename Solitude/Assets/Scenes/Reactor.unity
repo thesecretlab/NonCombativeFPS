@@ -315,6 +315,26 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 224728884412735508, guid: 6614d5f0f6d9ec94397c47761e33bad5,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224400314478848658, guid: 6614d5f0f6d9ec94397c47761e33bad5,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224400314478848658, guid: 6614d5f0f6d9ec94397c47761e33bad5,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224400314478848658, guid: 6614d5f0f6d9ec94397c47761e33bad5,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6614d5f0f6d9ec94397c47761e33bad5, type: 2}
   m_IsPrefabParent: 0
@@ -396,7 +416,6 @@ GameObject:
   - component: {fileID: 2125830961}
   - component: {fileID: 2125830960}
   - component: {fileID: 2125830959}
-  - component: {fileID: 2125830963}
   - component: {fileID: 2125830965}
   - component: {fileID: 2125830964}
   m_Layer: 5
@@ -481,24 +500,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &2125830963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2125830958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6220908f07201f848a400bfe2cb62234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  powerUsage: {fileID: 0}
-  controlRod: {fileID: 0}
-  tempGage: {fileID: 0}
-  status: {fileID: 0}
-  shutdown: {fileID: 0}
-  tempNum: {fileID: 0}
-  cRodNum: {fileID: 0}
 --- !u!114 &2125830964
 MonoBehaviour:
   m_ObjectHideFlags: 0

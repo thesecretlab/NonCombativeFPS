@@ -89,6 +89,7 @@ GameObject:
   - component: {fileID: 224023618936509988}
   - component: {fileID: 222520358102717012}
   - component: {fileID: 114544278918527622}
+  - component: {fileID: 114934607850354144}
   m_Layer: 5
   m_Name: ReactorUI
   m_TagString: Untagged
@@ -1316,6 +1317,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114934607850354144
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1198359907697772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6220908f07201f848a400bfe2cb62234, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUsage: {fileID: 114766384126803682}
+  controlRod: {fileID: 114872160605418606}
+  tempGage: {fileID: 114236305333018378}
+  status: {fileID: 114354150867541814}
+  shutdown: {fileID: 114541622202327826}
+  tempNum: {fileID: 114843956109282182}
+  cRodNum: {fileID: 114707933554081934}
 --- !u!114 &114951406880278678
 MonoBehaviour:
   m_ObjectHideFlags: 1

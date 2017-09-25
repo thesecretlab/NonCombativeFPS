@@ -12,7 +12,7 @@ public class ReactorUI : MonoBehaviour {
     public Text tempNum;
     public Text cRodNum;
 
-    void Awake() {
+    /*void Awake() {
         status = GameObject.Find("ReacStat").GetComponent<Text>();
         tempGage = GameObject.Find("tempGage").GetComponent<Slider>();
         powerUsage = GameObject.Find("PowerUnitVal").GetComponent<Text>();
@@ -20,7 +20,7 @@ public class ReactorUI : MonoBehaviour {
         shutdown = GameObject.Find("EmerBut").GetComponent<Button>();
         tempNum = GameObject.Find("tempNum").GetComponent<Text>();
         cRodNum = GameObject.Find("cRodNum").GetComponent<Text>();
-    }
+    }*/
 
     public void SetRod(int rod) {
         controlRod.value = rod;
