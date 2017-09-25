@@ -17,9 +17,9 @@ public class ReactorUI : MonoBehaviour {
         tempGage = GameObject.Find("tempGage").GetComponent<Slider>();
         powerUsage = GameObject.Find("PowerUnitVal").GetComponent<Text>();
         controlRod = GameObject.Find("cRod").GetComponent<Slider>();
-        shutdown = GameObject.Find("EmerBut").GetComponent<Button>();
-        tempNum = GameObject.Find("tempNum").GetComponent<Text>();
-        cRodNum = GameObject.Find("cRodNum").GetComponent<Text>();
+        shutdown = GameObject.Find("EmergencyStopBut").GetComponent<Button>();
+        tempNum = GameObject.Find("HeatValue").GetComponent<Text>();
+        cRodNum = GameObject.Find("CRodValue").GetComponent<Text>();
     }*/
 
     public void SetRod(int rod) {
