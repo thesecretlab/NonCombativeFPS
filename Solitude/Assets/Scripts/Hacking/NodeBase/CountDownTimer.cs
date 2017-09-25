@@ -13,9 +13,9 @@ public class CountDownTimer : MonoBehaviour {
 
     public GameObject tutorialwindow;
 
-    AudioClip IDSALERTclip;
+    public AudioClip IDSALERTclip;
     AudioSource IDSALERTsource;
-    AudioClip Firewallclip;
+    public AudioClip Firewallclip;
     AudioSource Firewallsource;
 
     HackingUI UI;
@@ -82,7 +82,6 @@ public class CountDownTimer : MonoBehaviour {
 
     public void Firewallclicked()
     {
-
        Firewallsource.Play();
     }
 }
