@@ -11,7 +11,12 @@ public class HackingUI : MonoBehaviour {
     CountDownTimer timer;
     public void Hacked() {
         ishacked = true;
+        Debug.Log("Hacked");
         timer.Hacked();
+    }
+
+    public HackingTerminal getTerminal() {
+        return t;
     }
     public void IDSclicked()
     {

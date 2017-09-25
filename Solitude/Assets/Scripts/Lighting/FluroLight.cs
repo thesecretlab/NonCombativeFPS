@@ -43,9 +43,9 @@ public class FluroLight : MonoBehaviour, shipLight {
 	}
 
 	//Switches the between the diffrent game objects
-	public void setPower(bool powerState){
-		power = powerState;
-		if (power) {
+	public void setPower(int powerState){
+        Debug.Log(powerState);
+		if (powerState>0) {
 			lightOff.SetActive (false);
 			lightOn.SetActive (true);
 		} else {

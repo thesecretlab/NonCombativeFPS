@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*		Main controller for game functions
  * 		
@@ -11,17 +12,21 @@ using UnityEngine;
  */
 
 public interface shipLight {
-    void setPower(bool powerState);
+    void setPower(int powerState);
 }
 
 public class Ship : MonoBehaviour {
 
     public static Ship ship;
+    public GameObject AccessUIPrefab;
+    GameObject AccessUI;
+
     Light[] lights;
 
 	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
 	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
+    bool access = true;
 
     int breakmod = 0;
 
@@ -34,11 +39,30 @@ public class Ship : MonoBehaviour {
             Destroy(gameObject);
         } else {
             ship = this;
-            Debug.Log("Ship");
+            //Debug.Log("Ship");
         }
     }
 
+    public bool getAccess() {
+        return access;
+    }
+
+    public void setAccess(bool access) {
+        this.access = access;
+    }
+
+    public void showAccess(bool show) {
+        AccessUI.SetActive(show);
+        Player.playerObj.FPSEnable(!show);
+    }
+
     void Start () {
+        AccessUI = Instantiate(AccessUIPrefab);
+        AccessUI.GetComponentInChildren<Button>().onClick.AddListener(delegate { showAccess(false); });
+        //Debug.LogWarning(name + ":" + uiPrefab.name);
+        AccessUI.transform.SetParent(UICanvas.Canvas.transform, false);
+        AccessUI.SetActive(false);
+
         InvokeRepeating("tryBreak", waitSec, repeatSec);
         lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
 
@@ -52,8 +76,8 @@ public class Ship : MonoBehaviour {
 				}
 			}
 		}
-		Debug.Log ("flood lights found: " + floodlights.Count);
-		Debug.Log ("fluro lights found: " + flurolights.Count);
+		//Debug.Log ("flood lights found: " + floodlights.Count);
+		//Debug.Log ("fluro lights found: " + flurolights.Count);
 
 		/* 										KEEP ME JUST IN CASE -ALEX
 		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
@@ -82,7 +106,7 @@ public class Ship : MonoBehaviour {
 
 	}
 
-    public void setPower(bool power) {
+    /*public void setPower(bool power) {
 
 		foreach (GameObject light in floodlights) {						//ForEach FloodLight
 			FloodLight[] script = light.GetComponents<FloodLight>();
@@ -96,7 +120,7 @@ public class Ship : MonoBehaviour {
 				script [0].setPower (power);							//Change power state
 			}
 		}
-    }
+    }*/
 
     void tryBreak() {
         Debug.Log("tryBreak");

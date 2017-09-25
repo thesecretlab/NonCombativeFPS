@@ -10,12 +10,13 @@ public class CountDownTimer : MonoBehaviour {
     float closetime = 3.0f;
     float alertclosetime = 3.0f;
     bool Gameover = false;
-    public AudioClip IDSALERTclip;
-    public AudioSource IDSALERTsource;
-    public AudioClip Firewallclip;
-    public AudioSource Firewallsource;
+
     public GameObject tutorialwindow;
 
+    public AudioClip IDSALERTclip;
+    AudioSource IDSALERTsource;
+    public AudioClip Firewallclip;
+    AudioSource Firewallsource;
 
     HackingUI UI;
 
@@ -30,6 +31,9 @@ public class CountDownTimer : MonoBehaviour {
 
     private void Start()
     {
+        IDSALERTsource = UI.getTerminal().IDSALERTsource;
+        Firewallsource = UI.getTerminal().Firewallsource;
+
         IDSALERTsource.clip = IDSALERTclip;
         Firewallsource.clip = Firewallclip;
         Firewallsource.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 1f);
@@ -78,7 +82,6 @@ public class CountDownTimer : MonoBehaviour {
 
     public void Firewallclicked()
     {
-
        Firewallsource.Play();
     }
 }

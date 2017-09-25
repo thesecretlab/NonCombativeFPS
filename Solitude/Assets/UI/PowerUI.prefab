@@ -156,10 +156,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 45
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 4
     m_MaxSize: 79
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -167,9 +167,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CyroStasis
+  m_Text: 'CRYO_STATUS
 
-    0'
+    0/11'
 --- !u!114 &114222581632481956
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,6 +181,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: DEFENCE
+  minPower: 7
 --- !u!114 &114424647357957402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -192,6 +194,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: CARGOBAY
+  minPower: 6
 --- !u!114 &114525679491624328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -203,6 +207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: ENGINEERING
+  minPower: 13
 --- !u!114 &114529251675486484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,6 +220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: BRIDGE
+  minPower: 9
 --- !u!114 &114534912673554310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -262,7 +270,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 27
+    m_FontSize: 26
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
@@ -273,9 +281,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Engineering
+  m_Text: 'CARGOBAY
 
-    0'
+    0/6'
 --- !u!114 &114676154901776422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -287,6 +295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  displayName: CRYO_STATUS
+  minPower: 11
 --- !u!114 &114678087515773542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -308,10 +318,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 40
+    m_FontSize: 31
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 4
+    m_MinSize: 3
     m_MaxSize: 79
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -319,9 +329,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Defence
+  m_Text: 'DEFENCE
 
-    0'
+    0/7'
 --- !u!114 &114698351064135692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -343,10 +353,10 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 45
+    m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
+    m_MinSize: 3
     m_MaxSize: 79
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -354,9 +364,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Reactor
+  m_Text: 'ENGINEERING
 
-    0'
+    0/13'
 --- !u!114 &114788785629073590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,9 +426,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bridge
+  m_Text: 'BRIDGE
 
-    0'
+    0/9'
 --- !u!222 &222253095204098764
 CanvasRenderer:
   m_ObjectHideFlags: 1

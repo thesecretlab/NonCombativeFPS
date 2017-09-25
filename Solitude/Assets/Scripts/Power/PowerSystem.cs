@@ -57,6 +57,15 @@ public class PowerSystem : MonoBehaviour {
             return -1;
         }
 
+        public int getPower(string room) {
+            for (int i = 0; i < rooms.Length; i++) {
+                if (rooms[i].name.ToLower() == room.ToLower()) {
+                    return levels[i];
+                }
+            }
+            return -1;
+        }
+
         public int total() {
             int s = 0;
             foreach (int i in levels) s += i;
@@ -64,11 +73,30 @@ public class PowerSystem : MonoBehaviour {
         }
     }
 
-    public static PowerSystem powersystem;
+    static PowerSystem powersystem;
+
+    public static int crash() {
+        return powersystem._crash();
+    }
+    public static int restore() {
+        return powersystem._restore();
+    }
+    public static int getRoom(string room) {
+        return powersystem._getRoom(room);
+    }
+    public static int changeRoom(string room, bool up) {
+        return powersystem._changeRoom(room, up);
+    }
+    public static int setRoom(string room, int power) {
+        return powersystem._setRoom(room, power);
+    }
+    public static void setPower(int power) {
+        powersystem._setPower(power);
+    }
 
     void Awake() {
         if (powersystem == null) {
-            Debug.Log("Added Powersystem at: " + gameObject.name);
+            //Debug.Log("Added Powersystem at: " + gameObject.name);
             powersystem = this;
         } else {
             Debug.LogError("Multiple PowerSystems");
@@ -76,35 +104,39 @@ public class PowerSystem : MonoBehaviour {
         }
     }
 
-    public RoomLevels rooms;
+    RoomLevels rooms;
     public int tick=0;
     public int wait=10;
 	// Use this for initialization
 	void Start () {
         rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[]);
         foreach (Room r in rooms.rooms) {
-            Debug.Log(r.name);
+            //Debug.Log(r.name);
         }
     }
 
-    public int restore() {
+    int _restore() {
         rooms.restart();
         return rooms.total();
     }
 
-    public int crash() {
+    int _crash() {
         rooms.crash();
         return 0;
     }
 
-    public int changePower(string room, bool up) {
+    int _changeRoom(string room, bool up) {
         int ret = rooms.changePower(room, up);
-        ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
     }
-    public int setPower(string room, int power) {
+    int _setRoom(string room, int power) {
         int ret = rooms.setPower(room, power);
-        ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
+    }
+    int _getRoom(string room) {
+        return rooms.getPower(room);
+    }
+    void _setPower(int power) {
+
     }
 }

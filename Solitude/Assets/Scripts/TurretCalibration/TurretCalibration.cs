@@ -3,29 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 public class TurretCalibration : MonoBehaviour {
-    Sprite target;
+   
     float accuracy = 0;
-    float fillRate = (float)0.5;
-    float empRate = (float)0.2;
     Text accuracyText;
-    float maxY = 90;
-    float minY = -90;
-    float maxX = 400;
-    float minX = -400;
+    float cWidth;
+    float cHeight;
+    Vector3 scale;
     float randomX;
     float randomY;
     float change;
     float moveSpeed;
-    int OutofBorderX;
-    int OutofBorderY;
-    Vector3 start = new Vector3(0, 0, 0);
-	// Use this for initialization
-	void Awake () {
-        target = GameObject.Find("Target").GetComponent<Sprite>();
+    bool overTarget;
+    Sprite target;
+    private Rigidbody2D rb2d;
+    
+    // Use this for initialization
+    void Awake()
+    {
+       
+        target = GameObject.Find("cirTarget").GetComponent<Sprite>();
+        rb2d = GameObject.Find("cirTarget").GetComponent<Rigidbody2D>();
         accuracyText = GameObject.Find("AccuracyN").GetComponent<Text>();
-        OutofBorderX = 0;
-        OutofBorderY = 0;
+       
+
+        
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("colliding");
+
+
+        BounceTarget();
+
+
+
+    }
+
+    private void OnMouseEnter()
+    {
+        setOverTarget();
+    }
+
+    private void OnMouseExit()
+    {
+
+
+        setLostTarget();
+        
+            
+        
+    }
+    /*
     private void OnMouseOver()
     {
         Debug.Log("enter");
@@ -40,49 +69,65 @@ public class TurretCalibration : MonoBehaviour {
             Debug.Log("Maximum Accuracy Achieved");
         }
     }
+    */
+    
+
+    public void setOverTarget()
+    {
+        overTarget = true;
+    }
+
+    public void setLostTarget()
+    {
+        overTarget = false;
+    }
+
     // Update is called once per frame
     void Update () {
-        moveSpeed = 10 + (accuracy * (float)0.10);
+        moveSpeed = 60 + (accuracy * 0.01f);
         if(Time.time >= change)
         {
-            randomX = Random.Range((float)-2.0, (float)2.0);// Random float is returned and used to update sprite position.
-            randomY = Random.Range((float)-2.0, (float)2.0);
+            randomX = Random.Range((float)-10.0, (float)10.0);// Random float is returned and used to update sprite position.
+            randomY = Random.Range((float)-10.0, (float)10.0);
             //Used to change the direction of the sprite.
             change = Time.time + Random.Range((float)0.5, (float)1.5);
         }
-        transform.Translate((randomX * moveSpeed * Time.deltaTime), (randomY * moveSpeed * Time.deltaTime), 0);
-        //Used if the sprite reaches a left or right border.
-        if(transform.position.x >= maxX || transform.position.x <= minX)
+        //transform.Translate((randomX * moveSpeed), (randomY * moveSpeed), 0);
+        rb2d.AddForce(new Vector2((randomX * moveSpeed), (randomY * moveSpeed)));
+
+    }
+
+    void BounceTarget()
+    {
+        float random = Random.Range(0, 2);
+        if (random < 1)
         {
-            randomX =- randomX;
-            OutofBorderX++;
-            if (OutofBorderX > 10)
-            {
-                transform.position = start;
-            }
+            rb2d.AddForce(new Vector2(20, -15));
         }
-        //Used if the Sprite reaches a upper or lower border.
-        if (transform.position.y >= maxY || transform.position.y <= minY)
+        else
         {
-            randomY = -randomY;
-            OutofBorderY++;
-            if (OutofBorderY > 10)
-            {
-                transform.position = start;
-            }
+            rb2d.AddForce(new Vector2(-20, -15));
         }
     }
-    /*
     private void LateUpdate()
     {
-        if (accuracy < 0)
+        if(overTarget && accuracy != 100 && accuracy <= 100)
         {
-            accuracy = 0;
+
+            //target.rectTransform.sizeDelta -= new Vector2(0.25f, 0.25f);
+            transform.localScale -= new Vector3(0.2F, 0.2F, 0.2F);
+            accuracy += 0.2f;
+            accuracyText.text =  Mathf.Floor(accuracy) + "%";
         }
-        if (accuracy != 0)
+        else if(!overTarget && accuracy != 0 && accuracy > 0)
         {
-            accuracy -= empRate;
+           
+            //target.rectTransform.sizeDelta += new Vector2(0.25f, 0.25f);
+            transform.localScale += new Vector3(0.2F, 0.2F, 0.2F);
+            accuracy -= 0.2f;
+            accuracyText.text = Mathf.Floor(accuracy) + "%";
         }
     }
-    */
+    
+    
 }

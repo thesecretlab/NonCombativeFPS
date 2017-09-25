@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class PowerTerminal : Terminal {
     public override void interact() {
-        showUI(true);
+        if (Ship.ship.getAccess()) {
+            showUI(true);
+        } else {
+            Ship.ship.showAccess(true);
+        }
     }
 
     protected override void doUpdate() {
