@@ -4282,6 +4282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Time: 80
   tutorialwindow: {fileID: 1989168026445034}
+  IDSALERTclip: {fileID: 8300000, guid: 281d67b4904a56a43a94d541e10a5726, type: 3}
+  Firewallclip: {fileID: 8300000, guid: d72341d24f900034da28320b98fdec45, type: 3}
   text: {fileID: 114444428243249486}
   alertText: {fileID: 114863062566776164}
 --- !u!114 &114071344079183314
