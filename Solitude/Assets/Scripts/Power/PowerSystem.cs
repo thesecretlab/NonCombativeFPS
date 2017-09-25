@@ -127,12 +127,10 @@ public class PowerSystem : MonoBehaviour {
 
     int _changeRoom(string room, bool up) {
         int ret = rooms.changePower(room, up);
-        ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
     }
     int _setRoom(string room, int power) {
         int ret = rooms.setPower(room, power);
-        ReactorTerminal.reactorObj.setDraw(rooms.total());
         return ret;
     }
     int _getRoom(string room) {
