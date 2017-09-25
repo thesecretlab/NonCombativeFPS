@@ -5,8 +5,6 @@ using UnityEngine.UI;
 public class TurretCalibration : MonoBehaviour {
    
     float accuracy = 0;
-    float fillRate = (float)0.5;
-    float empRate = (float)0.2;
     Text accuracyText;
     float cWidth;
     float cHeight;
@@ -86,7 +84,7 @@ public class TurretCalibration : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        moveSpeed = 10 + (accuracy * (float)0.10);
+        moveSpeed = 60 + (accuracy * 0.01f);
         if(Time.time >= change)
         {
             randomX = Random.Range((float)-10.0, (float)10.0);// Random float is returned and used to update sprite position.
@@ -113,21 +111,21 @@ public class TurretCalibration : MonoBehaviour {
     }
     private void LateUpdate()
     {
-        if(overTarget && accuracy != 100)
+        if(overTarget && accuracy != 100 && accuracy <= 100)
         {
 
             //target.rectTransform.sizeDelta -= new Vector2(0.25f, 0.25f);
-            transform.localScale -= new Vector3(0.35F, 0.35F, 0.35F);
-            accuracy += fillRate;
-            accuracyText.text = accuracy.ToString();
-
+            transform.localScale -= new Vector3(0.2F, 0.2F, 0.2F);
+            accuracy += 0.2f;
+            accuracyText.text =  Mathf.Floor(accuracy) + "%";
         }
-        else if(!overTarget && accuracy != 0)
+        else if(!overTarget && accuracy != 0 && accuracy > 0)
         {
+           
             //target.rectTransform.sizeDelta += new Vector2(0.25f, 0.25f);
-            transform.localScale += new Vector3(0.35F, 0.35F, 0.35F);
-            accuracy -= fillRate;
-            accuracyText.text = accuracy.ToString();
+            transform.localScale += new Vector3(0.2F, 0.2F, 0.2F);
+            accuracy -= 0.2f;
+            accuracyText.text = Mathf.Floor(accuracy) + "%";
         }
     }
     
