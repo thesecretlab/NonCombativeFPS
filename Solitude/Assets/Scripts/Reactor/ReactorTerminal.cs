@@ -80,23 +80,23 @@ public class ReactorTerminal : Terminal {
         if (online) {
             if (powerUnits <= 3) {
                 RecUI.status.text = "Light Load";
-                lowDraw();
-                SetRod(75);
+                heatingUp();
+                //SetRod(75);
             }
             if (powerUnits > 3 && powerUnits < 7) {
                 RecUI.status.text = "Medium Load";
-                medDraw();
-                SetRod(50);
+                heatingUp();
+                //SetRod(50);
             }
             if (powerUnits > 7 && powerUnits < 10) {
                 RecUI.status.text = "Heavy Load";
-                hiDraw();
-                SetRod(25);
+                heatingUp();
+                //SetRod(25);
             }
             if (powerUnits >= 10) {
                 RecUI.status.text = "Max Load";
-                maxDraw();
-                SetRod(100);
+                heatingUp();
+                //SetRod(100);
             }
         }
         if (!online) {
@@ -107,18 +107,10 @@ public class ReactorTerminal : Terminal {
             }
         }
     }
-    public void lowDraw() {
-        RecUI.tempGage.value += fillRate;
+    public void heatingUp() {
+        RecUI.tempGage.value += (fillRate + (powerUnits *0.01f));
     }
-    public void medDraw() {
-        RecUI.tempGage.value += fillRate * fillRateMult;
-    }
-    public void hiDraw() {
-        RecUI.tempGage.value += fillRate * (fillRateMult + fillRateMult);
-    }
-    public void maxDraw() {
-        RecUI.tempGage.value += fillRate * (fillRateMult + fillRateMult + fillRateMult);
-    }
+
     public void fCool() {
         RecUI.tempGage.value -= DecRate * fillRateMult;
     }
