@@ -13,8 +13,9 @@ using UnityEngine;
  */
 public class GameConditions : MonoBehaviour {
 
+    float shiphealth = 100;
 
-    public float Time = 5.0f;
+    public float GameTime = 600.0f;
     public Text text;							//Text to display on bridge screen to update time
     bool Gameover;					
     public GameObject EndGameWindow;			//Window that displays the end game screen
@@ -37,10 +38,10 @@ public class GameConditions : MonoBehaviour {
         CryoTerminalScript cryotermscript = terminalObject.GetComponent<CryoTerminalScript>();
         Gameover = cryotermscript.allcrewdead;
 
-        Time -= UnityEngine.Time.deltaTime;
-        text.text = "Time \nRemaining:  " + Mathf.Round(Time);
+        GameTime -= UnityEngine.Time.deltaTime;
+        text.text = "Time \nRemaining:  " + Mathf.Round(GameTime);
 
-        if(Time < 0)											//Player Wins
+        if(GameTime < 0)											//Player Wins
         {
 			EndGameWindow.SetActive(true);						//Display EndGame Window
             Player.playerObj.FPSEnable(false);
