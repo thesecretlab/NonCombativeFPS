@@ -37,7 +37,6 @@ GameObject:
   m_Component:
   - component: {fileID: 224456803657129258}
   - component: {fileID: 114236305333018378}
-  - component: {fileID: 114323087799822256}
   m_Layer: 5
   m_Name: tempGage
   m_TagString: Untagged
@@ -622,17 +621,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &114323087799822256
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1043691441587412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114342735192992532
 MonoBehaviour:
   m_ObjectHideFlags: 1
