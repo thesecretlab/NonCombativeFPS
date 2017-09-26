@@ -15,6 +15,7 @@ public class TurretTerminal : Terminal, Breakable {
 
     public void changeAccuracy(float change) {
         accuracy += change;
+        GameConditions.setAccuracy(accuracy);
     }
 
     public override void interact() {
@@ -24,6 +25,7 @@ public class TurretTerminal : Terminal, Breakable {
 
     protected override void doUpdate() {
         accuracy = Mathf.MoveTowards(accuracy, missAcc, decreaseRate * Time.deltaTime);
+        GameConditions.setAccuracy(accuracy);
     }
 
     protected override void initialise() {
