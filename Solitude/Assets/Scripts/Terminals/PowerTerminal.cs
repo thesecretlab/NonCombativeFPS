@@ -17,7 +17,7 @@ public class PowerTerminal : Terminal {
     }
 
     protected override void initialise() {
-        
+        PowerSystem.setUI(ui);
     }
     protected override void onClose() {
 
