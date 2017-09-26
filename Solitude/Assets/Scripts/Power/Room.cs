@@ -15,7 +15,7 @@ public class Room : MonoBehaviour {
     int p=0;
     public int power=0;
     // Use this for initialization
-    void Start () {
+    void Awake () {
         PowerConsumers = GetComponentsInChildren<PowerConsumer>();
         Lights = GetComponentsInChildren<shipLight>();
 
@@ -24,12 +24,14 @@ public class Room : MonoBehaviour {
     }
 
     public int setPower(int power) {
+        Debug.LogWarning(name + " Setpower " + power);
         this.power = power;
         updatePower();
         return power;
     }
 
     public int changePower(bool up) {
+        Debug.LogWarning(name + " ChangePower");
         power += up ? 1 : -1;
         updatePower();
         return power;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PowerSystem : MonoBehaviour {
 
@@ -9,11 +10,12 @@ public class PowerSystem : MonoBehaviour {
         public Room[] rooms;
         public int[] levels;
 
-        public RoomLevels(Room[] r) {
+        public RoomLevels(Room[] r,int start) {
             this.rooms = r;
             List<int> l = new List<int>();
             foreach (Room i in r) {
-                l.Add(0);
+                l.Add(start);
+                i.setPower(start);
             }
             levels = l.ToArray();
         }
@@ -30,11 +32,20 @@ public class PowerSystem : MonoBehaviour {
             }
         }
 
-        public int changePower(string room, bool up) {
+        public void randomReduce(int max) {
+            while (total() > max) {
+                int i = Random.Range(0, levels.Length);
+                levels[i] = rooms[i].changePower(false);
+            }
+        }
+
+        public int changePower(string room, bool up, int max) {
             for (int i = 0; i < rooms.Length; i++) {
                 if (rooms[i].name.ToLower() == room.ToLower()) {
                     if (up) {
-                        levels[i] = rooms[i].changePower(up);
+                        if (total() < max) {
+                            levels[i] = rooms[i].changePower(up);
+                        }
                         return levels[i];
                     } else if (levels[i] != 0) {
                         levels[i] = rooms[i].changePower(up);
@@ -47,11 +58,13 @@ public class PowerSystem : MonoBehaviour {
             return -1;
         }
 
-        public int setPower(string room, int pow) {
+        public int setPower(string room, int pow, int max) {
             for (int i = 0; i < rooms.Length; i++) {
                 if (rooms[i].name.ToLower() == room.ToLower()) {
+                    if (total() - levels[i] + pow < max) {
                         levels[i] = rooms[i].setPower(pow);
-                        return levels[i];
+                    }
+                    return levels[i];
                 }
             }
             return -1;
@@ -74,7 +87,10 @@ public class PowerSystem : MonoBehaviour {
     }
 
     static PowerSystem powersystem;
+    public Text powerText;
+    GameObject ui;
 
+    #region Static
     public static int crash() {
         return powersystem._crash();
     }
@@ -93,6 +109,11 @@ public class PowerSystem : MonoBehaviour {
     public static void setPower(int power) {
         powersystem._setPower(power);
     }
+    public static void setUI(GameObject ui) {
+        powersystem.ui = ui;
+        powersystem.powerText = ui.transform.FindChild("AvailablePowerVariable").GetComponent<Text>();
+    }
+    #endregion
 
     void Awake() {
         if (powersystem == null) {
@@ -107,12 +128,11 @@ public class PowerSystem : MonoBehaviour {
     RoomLevels rooms;
     public int tick=0;
     public int wait=10;
+    int aPower;
+    int uPower;
 	// Use this for initialization
 	void Start () {
-        rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[]);
-        foreach (Room r in rooms.rooms) {
-            //Debug.Log(r.name);
-        }
+        rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[],1);
     }
 
     int _restore() {
@@ -126,17 +146,25 @@ public class PowerSystem : MonoBehaviour {
     }
 
     int _changeRoom(string room, bool up) {
-        int ret = rooms.changePower(room, up);
+        int ret = rooms.changePower(room, up, aPower);
+        updateText();
         return ret;
     }
     int _setRoom(string room, int power) {
-        int ret = rooms.setPower(room, power);
+        int ret = rooms.setPower(room, power, aPower);
+        updateText();
         return ret;
     }
     int _getRoom(string room) {
         return rooms.getPower(room);
     }
+    void updateText() {
+        uPower = rooms.total();
+        powerText.text = uPower + "/" + aPower;
+    }
     void _setPower(int power) {
-
+        aPower = power;
+        rooms.randomReduce(aPower);
+        updateText();
     }
 }

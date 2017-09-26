@@ -13,6 +13,10 @@ public class TerminalButton : MonoBehaviour, IPointerClickHandler {
         tb.text = name.Substring(0, name.IndexOf("_")) + "\n" + PowerSystem.getRoom(name);
     }
 
+    public void update() {
+        tb.text = name.Substring(0, name.IndexOf("_")) + "\n" + PowerSystem.getRoom(name);
+    }
+
     public void OnPointerClick(PointerEventData eventData) {
         int np = PowerSystem.changeRoom(this.name, eventData.button == PointerEventData.InputButton.Left);
         tb.text = string.Format("{0}\n{1}/{2}", displayName, np, minPower);
