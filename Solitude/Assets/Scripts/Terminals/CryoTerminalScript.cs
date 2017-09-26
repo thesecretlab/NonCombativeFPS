@@ -20,7 +20,7 @@ public class CryoTerminalScript : Terminal
 
     public override void interact()
     {
-        showUI(true);
+        show();
         foreach (GameObject c in crew) {
             crew_power = c.transform.Find("POWER").gameObject;
             crew_power_text = crew_power.GetComponent<Text>();
@@ -96,7 +96,6 @@ public class CryoTerminalScript : Terminal
 
     protected override void onClose()
     {
-        showUI(false);
 
     }
 }

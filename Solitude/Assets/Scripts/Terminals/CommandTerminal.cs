@@ -27,7 +27,7 @@ public class CommandTerminal : Terminal, Breakable {
 
     public override void interact() {
         if (Ship.ship.getAccess()) {
-            showUI(true);
+            show();
             navDir = false;
         } else {
             Ship.ship.showAccess(true);
@@ -142,9 +142,9 @@ public class CommandTerminal : Terminal, Breakable {
     public void onFix() {
         this.setActive(false);
         isBroken = false;
-        showUI(false);
+        hide();
     }
     protected override void onClose() {
-        showUI(false);
+
     }
 }

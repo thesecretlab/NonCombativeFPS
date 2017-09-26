@@ -21,7 +21,7 @@ public class ScrewPanel : Terminal, Breakable {
             }
             isFixing = true;
         }
-        this.showUI(true);
+        show();
     }
 
     public void onBreak() {
@@ -42,7 +42,7 @@ public class ScrewPanel : Terminal, Breakable {
     }
 
     public void onFix() {
-        showUI(false);
+        hide();
         isFixing = false;
         this.setActive(false);
     }
@@ -51,6 +51,6 @@ public class ScrewPanel : Terminal, Breakable {
         
     }
     protected override void onClose() {
-        showUI(false);
+
     }
 }

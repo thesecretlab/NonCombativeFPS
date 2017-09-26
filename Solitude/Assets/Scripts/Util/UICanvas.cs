@@ -16,11 +16,11 @@ public class UICanvas : MonoBehaviour {
 	}
 
     public static float getWidth() {
-        Debug.Log(Canvas.GetComponent<RectTransform>().rect.width);
+        //Debug.Log(Canvas.GetComponent<RectTransform>().rect.width);
         return Canvas.GetComponent<RectTransform>().rect.width;
     }
     public static float getHeight() {
-        Debug.Log(Canvas.GetComponent<RectTransform>().rect.height);
+        //Debug.Log(Canvas.GetComponent<RectTransform>().rect.height);
         return Canvas.GetComponent<RectTransform>().rect.height;
     }
 }
