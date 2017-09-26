@@ -49,7 +49,7 @@ public class BatteryManager : MonoBehaviour {
             {
                 Debug.Log("Player battery is flat, rip");
                 torchLight.SetActive(false);
-				gamestate.loseGame("Power Failure\n Your robotic circuitry cools down and ceases to funtion \n without electrcity"); 	//Trigger End Game State
+				gamestate.loseGame("Power Failure\n Your robotic circuitry cools down and ceases to function \n without electricity"); 	//Trigger End Game State
             }
 
             BatteryRemaining = BatteryRemaining - CurrentDrain;

@@ -35,7 +35,7 @@ public class CommandTerminalOld : Terminal, Breakable {
             mat[ScreenElement] = matRedReff;
             rend.materials = mat;
         }
-        showUI(true);
+        show();
         navDir = false;
     }
 
@@ -125,7 +125,6 @@ public class CommandTerminalOld : Terminal, Breakable {
             dashCount -= 2 * dashFrames;
         }
         if (isVis) {
-            
             foreach(char c in Input.inputString) {
                 if(c == "\b"[0]) {
                     if (line.Length > 0) {
@@ -156,10 +155,10 @@ public class CommandTerminalOld : Terminal, Breakable {
         }
         this.setActive(false);
         isBroken = false;
-        showUI(false);
+        show();
     }
 
     protected override void onClose() {
-        showUI(false);
+        show();
     }
 }

@@ -184,13 +184,13 @@ public class ReactorTerminal : Terminal {
 
     public override void interact() {
         if (Ship.ship.getAccess()) {
-            showUI(true);
+            show();
         } else {
             Ship.ship.showAccess(true);
         }
     }
 
     protected override void onClose() {
-        showUI(false);
+
     }
 }

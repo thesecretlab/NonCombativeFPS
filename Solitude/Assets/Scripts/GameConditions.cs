@@ -13,8 +13,11 @@ using UnityEngine;
  */
 public class GameConditions : MonoBehaviour {
 
-    float shiphealth = 100;
-    float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
+    static GameConditions gamecond;
+
+    bool gotspeed = false;
+    public float shiphealth = 100;
+    public float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
     float AsteroidHitChance;
     bool AsteroidOccurance = false;
     public float GameTime = 600.0f;
@@ -26,11 +29,30 @@ public class GameConditions : MonoBehaviour {
     public AudioClip Explosionclip;
     public AudioSource Explosionsource;
 
+    bool traveling = true;
+
     public Text EndGameText;					//Text Object to display at endgame
 
+    public static void setAccuracy(float acc) {
+        gamecond.TurretAccuracy = acc;
+    }
+    public static void setTraveling(bool travel) {
+        gamecond.traveling = travel;
+    }
+    public static void allDead() {
+        gamecond.GameoverCrewdead = true;
+    }
+    void Awake() {
+        if (gamecond == null) {
+            gamecond = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
     // Use this for initialization
     void Start ()
     {
+        Debug.Log(name);
         ShipHealthtext.text = "Hull Integrity " + shiphealth + " %";
         Explosionsource.clip = Explosionclip;
 
@@ -39,8 +61,6 @@ public class GameConditions : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-
         AsteroidHitChance = (100 - TurretAccuracy);
         AsteroidChance();
 
@@ -62,12 +82,17 @@ public class GameConditions : MonoBehaviour {
             }
         }
 
-        GameObject terminalObject = GameObject.Find("TerminalConsole5 (1)");
-        CryoTerminalScript cryotermscript = terminalObject.GetComponent<CryoTerminalScript>();
-        GameoverCrewdead = cryotermscript.allcrewdead;
-
-        GameTime -= UnityEngine.Time.deltaTime;
-        TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+        if (traveling) {
+            if (gotspeed) {
+                GameTime -= Time.deltaTime;
+                TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+            } else {
+                TimeLefttext.text = "Power Failure";
+            }
+        } else {
+            TimeLefttext.text = "Navigation Error";
+        }
+        
 
         if(GameTime < 0)											//Player Wins
         {
@@ -83,8 +108,6 @@ public class GameConditions : MonoBehaviour {
         {
             loseGame("The ship has been destroyed");
         }
-       
-
     }
 
     void AsteroidChance()
@@ -103,8 +126,6 @@ public class GameConditions : MonoBehaviour {
 
     }
 
-
-
 	//Triggers lose game state and displays addtional text if needed
 	public void loseGame(string optional){
 		if (optional == null) {				//If nothing was entred
@@ -116,4 +137,8 @@ public class GameConditions : MonoBehaviour {
 		Player.playerObj.FPSEnable(false);
 
 	}
+
+    public static void setSpeed(bool v) {
+        gamecond.gotspeed = v;
+    }
 }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CryoTerminalScript : Terminal
+public class CryoTerminalScript : Terminal, PowerConsumer
 {
     public GameObject[] crew;
     GameObject crew_power;
@@ -17,10 +17,12 @@ public class CryoTerminalScript : Terminal
     float CrewHealthNum = 100.0f;
     int crewcount = 0;
 
+    int needPower = 11;
+
 
     public override void interact()
     {
-        showUI(true);
+        show();
         foreach (GameObject c in crew) {
             crew_power = c.transform.Find("POWER").gameObject;
             crew_power_text = crew_power.GetComponent<Text>();
@@ -62,7 +64,7 @@ public class CryoTerminalScript : Terminal
 
             if(crewcount == 41) 
             {
-                allcrewdead = true;
+                GameConditions.allDead();
             }
             
 
@@ -96,7 +98,10 @@ public class CryoTerminalScript : Terminal
 
     protected override void onClose()
     {
-        showUI(false);
 
+    }
+
+    public void updatePower(bool powered) {
+        powervalue = powered;
     }
 }
