@@ -35,7 +35,7 @@ public class Reactor : MonoBehaviour, Breakable {
     }
 
     void Start () {
-        new BreakEvent(this, 10);
+        //new BreakEvent(this, 10);
 		levers = GetComponentsInChildren<Lever>();
         int i = 0;
         foreach (Lever lev in levers) {

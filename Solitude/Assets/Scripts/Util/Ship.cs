@@ -26,13 +26,13 @@ public class Ship : MonoBehaviour {
 	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
 	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
-    bool access = true;
+    public bool access = true;
 
     int breakmod = 0;
 
     List<BreakEvent> breakables = new List<BreakEvent>();
     int waitSec = 1;
-    int repeatSec = 1000;
+    int repeatSec = 10;
     // Use this for initialization
     void Awake() {
         if (ship != null) {
@@ -121,6 +121,10 @@ public class Ship : MonoBehaviour {
 			}
 		}
     }*/
+
+    void Update() {
+
+    }
 
     void tryBreak() {
         Debug.Log("tryBreak");

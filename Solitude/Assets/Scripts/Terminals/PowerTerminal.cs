@@ -6,7 +6,7 @@ using UnityEngine;
 public class PowerTerminal : Terminal {
     public override void interact() {
         if (Ship.ship.getAccess()) {
-            showUI(true);
+            show();
         } else {
             Ship.ship.showAccess(true);
         }
@@ -17,9 +17,9 @@ public class PowerTerminal : Terminal {
     }
 
     protected override void initialise() {
-        
+        PowerSystem.setUI(ui);
     }
     protected override void onClose() {
-        showUI(false);
+
     }
 }

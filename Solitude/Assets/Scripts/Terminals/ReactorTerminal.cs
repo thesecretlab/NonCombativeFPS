@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ReactorTerminal : Terminal {
 
@@ -12,20 +13,37 @@ public class ReactorTerminal : Terminal {
     public int powerUnitsAvail;
     bool online;
     bool overload;
-    float fillRate = 0.01f;
+    public float fillRate = 0.001f;
     float DecRate = 0.1f;
     int fillRateMult = 2;
+    
     // Use this for initialization
     void Awake() {
+
+        
         if (reactorObj == null) {
             reactorObj = this;
         } else {
             Destroy(transform.gameObject);
         }
+        
     }
+    public void ValueChangeCheck()
+    {
+        PowerSystem.setPower(powerUnitsAvail);
+        RecUI.cRodNum.text = RecUI.controlRod.value.ToString();
+        powerUnitsAvail = powerUnits = (int)(100 - RecUI.controlRod.value) / 2;
+        RecUI.powerUsage.text = powerUnitsAvail.ToString();
+    }
+
+
+
     protected override void initialise() {
         RecUI = ui.GetComponent<ReactorUI>();
-        online = true;
+        online = false;
+        SetRod(100);
+
+        
     }
     public void SetRod(int rod) {
         RecUI.controlRod.value = rod;
@@ -47,37 +65,56 @@ public class ReactorTerminal : Terminal {
         overload = true;
         SetRod(100);
         powerUnits = PowerSystem.crash(); //removed when set draw is implemented
-        RecUI.powerUsage.text = powerUnits.ToString();
+        RecUI.powerUsage.text = powerUnitsAvail.ToString();
         //code to flip breakers.
+        RecUI.controlRod.interactable = false;
         RecUI.shutdown.interactable = false;
     }
     public void EmergencyPowerDown() {
         RecUI.status.text = "Cooling";
         online = false;
         overload = false;
+        RecUI.controlRod.interactable = false;
         SetRod(100);
         powerUnits = PowerSystem.crash(); //removed when set draw is implemented
-        RecUI.powerUsage.text = powerUnits.ToString();
+        RecUI.powerUsage.text = powerUnitsAvail.ToString();
         RecUI.shutdown.interactable = false;
     }
  
+
     // Update is called once per frame
     protected override void doUpdate() {
         if (Input.GetMouseButtonUp(0)) {
             RecUI.shutdown.onClick.AddListener(() => EmergencyPowerDown());
         }
-        if (RecUI.tempGage.value == 0) {
-            powerUP();
+
+        RecUI.controlRod.interactable = true;
+        RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+
+
+        if (Input.GetMouseButtonUp(0)) {
+            if (!online && RecUI.tempGage.value == 0)
+            {
+                RecUI.restart.onClick.AddListener(() => powerUP());
+            }
         }
         if (RecUI.tempGage.value == 100) {
             ReactorOverload();
         }
     }
     void LateUpdate() {
-
-        powerUnitsAvail = powerUnits = (int)(100 - RecUI.controlRod.value) / 2;
-        RecUI.tempNum.text = RecUI.tempGage.value.ToString();
-        PowerSystem.setPower(powerUnitsAvail);
+        if (online)
+        {
+            RecUI.controlRod.interactable = true;
+            RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+            RecUI.tempNum.text = RecUI.tempGage.value.ToString();
+            RecUI.restart.interactable = false;
+        }
+        if(!online)
+        {
+            RecUI.controlRod.interactable = true;
+            RecUI.restart.interactable = true;
+        }
 
         if (online) {
             if (powerUnits <= 10) {
@@ -114,25 +151,46 @@ public class ReactorTerminal : Terminal {
  
 
     public void heatingUp() {
-        RecUI.tempGage.value += (fillRate + (powerUnitsAvail *0.01f));
+        RecUI.tempGage.value += ((powerUnitsAvail *fillRate));
     }
 
     public void fCool() {
         RecUI.tempGage.value -= DecRate * fillRateMult;
+        RecUI.tempNum.text = RecUI.tempGage.value.ToString();
+        RecUI.rTimer.text = RecUI.tempGage.value.ToString();
+        fTimer(RecUI.tempGage.value);
     }
     public void sCool() {
         RecUI.tempGage.value -= DecRate;
+        RecUI.tempNum.text = RecUI.tempGage.value.ToString();
+        sTimer(RecUI.tempGage.value);
+    }
+
+    void sTimer(float time)
+    {
+        
+        
+            RecUI.rTimer.text = time.ToString();
+            
+        
+    }
+    void fTimer(float time)
+    {
+       
+            RecUI.rTimer.text = time.ToString();
+            
+        
     }
 
     public override void interact() {
         if (Ship.ship.getAccess()) {
-            showUI(true);
+            show();
         } else {
             Ship.ship.showAccess(true);
         }
     }
 
     protected override void onClose() {
-        showUI(false);
+
     }
 }

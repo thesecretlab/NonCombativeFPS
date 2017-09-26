@@ -26,7 +26,7 @@ public class Calibration : Terminal, Breakable{
             mat[ScreenElement] = matRedReff;
             rend.materials = mat;
         }
-        showUI(true);
+        show();
     }
 
     public void onBreak()
@@ -97,10 +97,9 @@ public class Calibration : Terminal, Breakable{
         }
         this.setActive(false);
         isBroken = false;
-        showUI(false);
+        show();
     }
 
     protected override void onClose() {
-        showUI(false);
     }
 }

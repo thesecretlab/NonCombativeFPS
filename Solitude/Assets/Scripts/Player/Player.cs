@@ -4,9 +4,16 @@ using UnityEngine;
 using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.CrossPlatformInput;
 
+public interface Window {
+    void close();
+}
 
 
 public class Player : MonoBehaviour {
+
+    public Stack<Window> windows;
+
+    public int iii;
 
     public static bool pausable;
     public static Player playerObj;
@@ -17,7 +24,33 @@ public class Player : MonoBehaviour {
     private RigidbodyFirstPersonController _FPSController;
     public GameObject interactableText; //
 
+    #region Static
+    public static void closeWindow() {
+        playerObj._closeWindow();
+    }
+    public static void openWindow(Window win) {
+        Debug.Log("Window");
+        playerObj._openwindow(win);
+    }
+    #endregion
 
+    public void onEsc() {
+       if (windows.Count > 0) {
+            _closeWindow();
+        } else {
+            PauseScript.Pause();
+        }
+    }
+    public void _closeWindow() {
+        if (windows.Count > 0) {
+            windows.Pop().close();
+        }
+        iii = windows.Count;
+    }
+    public void _openwindow(Window win) {
+        windows.Push(win);
+        iii = windows.Count;
+    }
     private RigidbodyFirstPersonController getFPSControler() {
         if (_FPSController == null) {
             _FPSController = GetComponent<RigidbodyFirstPersonController>();
@@ -33,6 +66,7 @@ public class Player : MonoBehaviour {
     }
     // Use this for initialization
     void Start() {
+        windows = new Stack<Window>();
         pausable = true;
         interactableText.SetActive(false); //hides the ui text on starting the game
     }
@@ -51,6 +85,9 @@ public class Player : MonoBehaviour {
         checkInteractables();
         if (CrossPlatformInputManager.GetButtonDown("Interact")) {
             doInteract();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            onEsc();
         }
     }
     void checkInteractables() {

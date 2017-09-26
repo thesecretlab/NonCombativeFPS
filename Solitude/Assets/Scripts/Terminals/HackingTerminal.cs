@@ -9,10 +9,10 @@ public class HackingTerminal : Terminal, Breakable {
     public AudioSource Firewallsource;
 
     public override void interact() {
-        showUI(true);
+        show();
     }
     public void hackFail() {
-        showUI(false);
+        hide();
         hackUI.reset();
     }
     public void onBreak() {
@@ -22,17 +22,17 @@ public class HackingTerminal : Terminal, Breakable {
         Debug.Log("Fix");
         Ship.ship.setAccess(true);
         hackUI.reset();
-        showUI(false);
+        hide();
     }
     protected override void doUpdate() {
     }
     protected override void initialise() {
+        new BreakEvent(this, 10);
         hackUI = ui.GetComponent<HackingUI>();
         hackUI.setTerminal(this);
     }
 
     protected override void onClose() {
         hackUI.reset();
-        showUI(false);
     }
 }
