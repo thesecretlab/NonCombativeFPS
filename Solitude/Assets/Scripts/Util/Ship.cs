@@ -32,7 +32,7 @@ public class Ship : MonoBehaviour {
 
     List<BreakEvent> breakables = new List<BreakEvent>();
     int waitSec = 1;
-    int repeatSec = 1000;
+    int repeatSec = 10;
     // Use this for initialization
     void Awake() {
         if (ship != null) {
@@ -121,6 +121,10 @@ public class Ship : MonoBehaviour {
 			}
 		}
     }*/
+
+    void Update() {
+
+    }
 
     void tryBreak() {
         Debug.Log("tryBreak");

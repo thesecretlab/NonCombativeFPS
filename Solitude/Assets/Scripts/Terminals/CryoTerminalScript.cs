@@ -64,7 +64,7 @@ public class CryoTerminalScript : Terminal, PowerConsumer
 
             if(crewcount == 41) 
             {
-                allcrewdead = true;
+                GameConditions.allDead();
             }
             
 

@@ -27,6 +27,7 @@ public class HackingTerminal : Terminal, Breakable {
     protected override void doUpdate() {
     }
     protected override void initialise() {
+        new BreakEvent(this, 10);
         hackUI = ui.GetComponent<HackingUI>();
         hackUI.setTerminal(this);
     }

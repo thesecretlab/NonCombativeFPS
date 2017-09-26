@@ -28,10 +28,18 @@ public class GameConditions : MonoBehaviour {
     public AudioClip Explosionclip;
     public AudioSource Explosionsource;
 
+    bool traveling = true;
+
     public Text EndGameText;					//Text Object to display at endgame
 
     public static void setAccuracy(float acc) {
         gamecond.TurretAccuracy = acc;
+    }
+    public static void setTraveling(bool travel) {
+        gamecond.traveling = travel;
+    }
+    public static void allDead() {
+        gamecond.GameoverCrewdead = true;
     }
     void Awake() {
         if (gamecond == null) {
@@ -52,8 +60,6 @@ public class GameConditions : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
-
         AsteroidHitChance = (100 - TurretAccuracy);
         AsteroidChance();
 
@@ -75,12 +81,13 @@ public class GameConditions : MonoBehaviour {
             }
         }
 
-        GameObject terminalObject = GameObject.Find("TerminalConsole5 (1)");
-        CryoTerminalScript cryotermscript = terminalObject.GetComponent<CryoTerminalScript>();
-        GameoverCrewdead = cryotermscript.allcrewdead;
-
-        GameTime -= UnityEngine.Time.deltaTime;
-        TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+        if (traveling) {
+            GameTime -= Time.deltaTime;
+            TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+        } else {
+            TimeLefttext.text = "Navigation Error";
+        }
+        
 
         if(GameTime < 0)											//Player Wins
         {
@@ -96,8 +103,6 @@ public class GameConditions : MonoBehaviour {
         {
             loseGame("The ship has been destroyed");
         }
-       
-
     }
 
     void AsteroidChance()
@@ -115,8 +120,6 @@ public class GameConditions : MonoBehaviour {
         }
 
     }
-
-
 
 	//Triggers lose game state and displays addtional text if needed
 	public void loseGame(string optional){
