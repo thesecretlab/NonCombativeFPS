@@ -66,14 +66,14 @@ public class GameConditions : MonoBehaviour {
 
         if(AsteroidOccurance == true && shiphealth >= 0)
         {
-            float random1 = Random.Range(0, 100);
+            float random1 = Random.Range(0, 1000);
             {
                 if(random1 >= 0 && random1 <= AsteroidHitChance)
                 {
                     float random2 = Random.Range(1, 7);
                     {
                         shiphealth = shiphealth - random2;
-                        ShipHealthtext.text = "Hull Integrity " + shiphealth + " %";
+                        
                         Explosionsource.Play();
                         
                     }
@@ -81,6 +81,11 @@ public class GameConditions : MonoBehaviour {
                 }
             }
         }
+        ShipHealthtext.text = "";
+        if (TurretAccuracy < 50) {
+            ShipHealthtext.text = "Defence Accuracy Low\nRecalibration Necessary\n";
+        }
+        ShipHealthtext.text += "Hull Integrity " + shiphealth + " %";
 
         if (traveling) {
             if (gotspeed) {

@@ -24,9 +24,11 @@ public class CountDownTimer : MonoBehaviour {
     public Text alertText;
 
     public void reset() {
+        Debug.Log("Timer reset");
         Time = 50.0f;
         closetime = 3.0f;
         alertclosetime = 3.0f;
+        Gameover = false;
     }
 
     private void Start()

@@ -31,6 +31,13 @@ public class HackingUI : MonoBehaviour {
         else t.hackFail();
     }
     public void reset() {
+        timer.reset();
+        foreach (Node n in nodes) {
+            n.setUI(this);
+            n.close();
+        }
+        nodes[0].open();
+        ishacked = false;
     }
     void Start() {
         nodes = gameObject.GetComponentsInChildren<Node>();
