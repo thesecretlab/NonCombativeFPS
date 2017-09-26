@@ -16,7 +16,7 @@ public class TerminalButton : MonoBehaviour, IPointerClickHandler {
     public void OnPointerClick(PointerEventData eventData) {
         int np = PowerSystem.changeRoom(this.name, eventData.button == PointerEventData.InputButton.Left);
         tb.text = string.Format("{0}\n{1}/{2}", displayName, np, minPower);
-        tb.color = np < minPower ? Color.red : Color.blue;
+        tb.color = np < minPower ? Color.red : new Color(120,255,6);
         if (np == -1) {
             Debug.LogError("Error in PowerChange at " + name);
         }
