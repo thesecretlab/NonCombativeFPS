@@ -35,7 +35,8 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     public void onBreak() {
-
+        isBroken = false;
+        GameConditions.setTraveling(false);
     }
 
     protected override void initialise() {
@@ -140,6 +141,7 @@ public class CommandTerminal : Terminal, Breakable {
     }
     
     public void onFix() {
+        GameConditions.setTraveling(true);
         this.setActive(false);
         isBroken = false;
         hide();
