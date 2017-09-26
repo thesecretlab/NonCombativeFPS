@@ -112,7 +112,7 @@ public class GameConditions : MonoBehaviour {
 
     void AsteroidChance()
     {
-        float random = Random.Range(0, 5000);
+        float random = Random.Range(0, 10000);
         {
             if (random < 65 && random > 50)
             {
