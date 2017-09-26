@@ -19,7 +19,7 @@ public class TurretTerminal : Terminal, Breakable {
 
     public override void interact() {
         missAcc = accuracy;
-        showUI(true);
+        show();
     }
 
     protected override void doUpdate() {
@@ -34,7 +34,7 @@ public class TurretTerminal : Terminal, Breakable {
     }
 
     protected override void onClose() {
-        showUI(false);
+
     }
 
     public void onBreak() {

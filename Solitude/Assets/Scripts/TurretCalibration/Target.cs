@@ -30,7 +30,7 @@ public class Target : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     void Update() {
         Vector3 newVel = rb2d.velocity;
         if (!bound.Contains(new Vector3(transform.position.x,bound.center.y))) {
-            Debug.LogWarning("X Bounce");
+            //Debug.LogWarning("X Bounce");
             if (!bouncedx) {
                 newVel.x *= -1;
                 bouncedx = true;
@@ -39,7 +39,7 @@ public class Target : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
             bouncedx = false;
         }
         if (!bound.Contains(new Vector3(bound.center.x, transform.position.y))) {
-            Debug.LogWarning("Y Bounce");
+            //Debug.LogWarning("Y Bounce");
             if (!bouncedy) {
                 newVel.y *= -1;
                 bouncedy = true;
@@ -68,12 +68,12 @@ public class Target : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
-        Debug.Log("mouse");
+        //Debug.Log("mouse");
         UI.setOverTarget();
     }
 
     public void OnPointerExit(PointerEventData eventData) {
-        Debug.Log("noMouse");
+        //Debug.Log("noMouse");
         UI.setLostTarget();
     }
 }

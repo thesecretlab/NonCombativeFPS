@@ -1,12 +1,13 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
-public abstract class Terminal : Interactable {
+public abstract class Terminal : Interactable, Window {
     public GameObject uiPrefab;
     protected GameObject ui;
     protected abstract void initialise();
     protected abstract void doUpdate();
-    protected bool isVis;
     public override abstract void interact();
+    protected bool isVis;
     protected abstract void onClose();
 
     protected override void setup() {
@@ -18,15 +19,24 @@ public abstract class Terminal : Interactable {
         isVis = false;
     }
     void Update() {
-        if (isVis & CrossPlatformInputManager.GetButtonDown("Esc")) {
-            onClose();
-        }
         doUpdate();
     }
-    protected void showUI(bool show) {
-        ui.SetActive(show);
-        isVis = show;
-        Player.playerObj.FPSEnable(!show);
-        Player.allowPause(!show);
+    protected void show() {
+        Debug.Log("Open " + name);
+        ui.SetActive(true);
+        Player.openWindow(this);
+        Player.playerObj.FPSEnable(false);
+        isVis = true;
+    }
+    public void hide() {
+        Player.closeWindow();
+    }
+
+    public void close() {
+        onClose();
+        Player.playerObj.FPSEnable(true);
+        ui.SetActive(false);
+        Player.playerObj.FPSEnable(true);
+        isVis = false;
     }
 }
