@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface PowerConsumer {
-    void updatePower(int power);
+    void updatePower(bool powered);
 }
 
 public class Room : MonoBehaviour {
@@ -11,6 +11,8 @@ public class Room : MonoBehaviour {
     public PowerConsumer[] PowerConsumers;
 
     public shipLight[] Lights;
+
+    public int minPower;
 
     int p=0;
     public int power=0;
@@ -42,7 +44,11 @@ public class Room : MonoBehaviour {
             l.setPower(power);
         }
         foreach(PowerConsumer p in PowerConsumers) {
-            p.updatePower(power);
+            p.updatePower(!(power<minPower));
         }
+    }
+
+    public int getMinPower() {
+        return minPower;
     }
 }

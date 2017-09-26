@@ -101,11 +101,7 @@ public class CryoTerminalScript : Terminal, PowerConsumer
 
     }
 
-    public void updatePower(int power) {
-        if (power > needPower) {
-            powervalue = true;
-        } else {
-            powervalue = false;
-        }
+    public void updatePower(bool powered) {
+        powervalue = powered;
     }
 }

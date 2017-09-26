@@ -39,6 +39,15 @@ public class PowerSystem : MonoBehaviour {
             }
         }
 
+        public int getMin(string room) {
+            for (int i = 0; i < rooms.Length; i++) {
+                if (rooms[i].name.ToLower() == room.ToLower()) {
+                    return rooms[i].getMinPower();
+                }
+            }
+            return -1;
+        }
+
         public int changePower(string room, bool up, int max) {
             for (int i = 0; i < rooms.Length; i++) {
                 if (rooms[i].name.ToLower() == room.ToLower()) {
@@ -113,6 +122,9 @@ public class PowerSystem : MonoBehaviour {
         powersystem.ui = ui;
         powersystem.powerText = ui.transform.FindChild("AvailablePowerVariable").GetComponent<Text>();
     }
+    public static int getMin(string room) {
+        return powersystem._getMin(room);
+    }
     #endregion
 
     void Awake() {
@@ -132,7 +144,7 @@ public class PowerSystem : MonoBehaviour {
     int uPower;
 	// Use this for initialization
 	void Start () {
-        rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[],1);
+        rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[],0);
     }
 
     int _restore() {
@@ -166,5 +178,8 @@ public class PowerSystem : MonoBehaviour {
         aPower = power;
         rooms.randomReduce(aPower);
         updateText();
+    }
+    int _getMin(string room) {
+        return rooms.getMin(room);
     }
 }

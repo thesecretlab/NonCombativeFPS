@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 224167206973279954}
   - component: {fileID: 222503392280239946}
   - component: {fileID: 114788785629073590}
+  - component: {fileID: 114723611279123726}
   m_Layer: 5
   m_Name: PowerUI
   m_TagString: Untagged
@@ -283,6 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: DEFENCE
   minPower: 7
+  powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114424647357957402
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -296,6 +298,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: CARGOBAY
   minPower: 6
+  powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114525679491624328
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,8 +310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: ENGINEERING
+  displayName: FTL DRIVE
   minPower: 13
+  powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114529251675486484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -322,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: BRIDGE
   minPower: 9
+  powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114534912673554310
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,6 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayName: CRYO_STATUS
   minPower: 11
+  powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114678087515773542
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -453,20 +459,33 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 79
     m_Alignment: 4
     m_AlignByGeometry: 0
-    m_RichText: 1
+    m_RichText: 0
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ENGINEERING
+  m_Text: 'FTL DRIVE
 
     0/13'
+--- !u!114 &114723611279123726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1360912255572406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53456399ebad7274397e352f8ca3ab6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powered: {r: 0.47058824, g: 1, b: 0.023529412, a: 1}
+  unpowered: {r: 1, g: 0, b: 0, a: 1}
 --- !u!114 &114788785629073590
 MonoBehaviour:
   m_ObjectHideFlags: 1
