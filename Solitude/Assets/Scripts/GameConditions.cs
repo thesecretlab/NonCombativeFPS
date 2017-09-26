@@ -15,7 +15,8 @@ public class GameConditions : MonoBehaviour {
 
     static GameConditions gamecond;
 
-    float shiphealth = 100;
+    bool gotspeed = false;
+    public float shiphealth = 100;
     public float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
     float AsteroidHitChance;
     bool AsteroidOccurance = false;
@@ -82,8 +83,12 @@ public class GameConditions : MonoBehaviour {
         }
 
         if (traveling) {
-            GameTime -= Time.deltaTime;
-            TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+            if (gotspeed) {
+                GameTime -= Time.deltaTime;
+                TimeLefttext.text = "Time Remaining:  " + Mathf.Round(GameTime);
+            } else {
+                TimeLefttext.text = "Power Failure";
+            }
         } else {
             TimeLefttext.text = "Navigation Error";
         }
@@ -132,4 +137,8 @@ public class GameConditions : MonoBehaviour {
 		Player.playerObj.FPSEnable(false);
 
 	}
+
+    public static void setSpeed(bool v) {
+        gamecond.gotspeed = v;
+    }
 }

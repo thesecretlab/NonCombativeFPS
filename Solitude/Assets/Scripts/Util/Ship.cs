@@ -26,7 +26,7 @@ public class Ship : MonoBehaviour {
 	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
 	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
-    bool access = true;
+    public bool access = true;
 
     int breakmod = 0;
 

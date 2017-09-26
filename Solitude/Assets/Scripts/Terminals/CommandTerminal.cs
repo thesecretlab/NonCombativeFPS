@@ -23,7 +23,7 @@ public class CommandTerminal : Terminal, Breakable {
 
     List<string> commands = new List<string>();
 
-    int LINES = 6;
+    int LINES = 19;
 
     public override void interact() {
         if (Ship.ship.getAccess()) {
@@ -49,11 +49,12 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("Start Navigation");
         commands.Add("Help");
         addline("Available Commands");
-        foreach (string command in commands) {
-            addline(command);
-        }
+        
         for (int i = commands.Count; i < LINES; i++) {
             addline("");
+        }
+        foreach (string command in commands) {
+            addline(command);
         }
         onBreak();
     }
