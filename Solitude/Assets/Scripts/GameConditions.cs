@@ -13,8 +13,10 @@ using UnityEngine;
  */
 public class GameConditions : MonoBehaviour {
 
+    static GameConditions gamecond;
+
     float shiphealth = 100;
-    float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
+    public float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
     float AsteroidHitChance;
     bool AsteroidOccurance = false;
     public float GameTime = 600.0f;
@@ -28,6 +30,16 @@ public class GameConditions : MonoBehaviour {
 
     public Text EndGameText;					//Text Object to display at endgame
 
+    public static void setAccuracy(float acc) {
+        gamecond.TurretAccuracy = acc;
+    }
+    void Awake() {
+        if (gamecond == null) {
+            gamecond = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
     // Use this for initialization
     void Start ()
     {
