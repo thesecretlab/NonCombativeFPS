@@ -40,7 +40,7 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     protected override void initialise() {
-        broken = new BreakEvent(this, 50);
+        broken = new BreakEvent(this, 20);
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
         commands.Add("Go to Navigation");
