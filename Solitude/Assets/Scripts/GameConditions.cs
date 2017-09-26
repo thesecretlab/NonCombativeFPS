@@ -31,6 +31,7 @@ public class GameConditions : MonoBehaviour {
     // Use this for initialization
     void Start ()
     {
+        Debug.Log(name);
         ShipHealthtext.text = "Hull Integrity " + shiphealth + " %";
         Explosionsource.clip = Explosionclip;
 
