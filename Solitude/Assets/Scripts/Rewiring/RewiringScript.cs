@@ -22,15 +22,14 @@ public class RewiringScript : MonoBehaviour {
     GameObject redBtn2;
     GameObject greenBtn1;
     GameObject greenBtn2;
-
-    public GameObject AlertWindowWiring;
+    public Text Gamewinalert;
 
     // Use this for initialization
     void Start () {
         lastColourPressed = "null";
         colourPressed = "null";
         InvokeRepeating("resetWires", 3.0f, 3.0f);
-        AlertWindowWiring.SetActive(false);
+      
     }
 
     
@@ -125,7 +124,7 @@ public class RewiringScript : MonoBehaviour {
 
      if(blue1 + blue2 + red1 + red2 + green1 + green2 == 12)
         {
-            AlertWindowWiring.SetActive(true);
+            Gamewinalert.text = "=== POWER CONDUIT RESTORED ===";
         }
     
 
