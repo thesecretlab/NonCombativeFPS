@@ -14,18 +14,34 @@ public class CargoRoomAnim : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
+        //source.enabled = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        source.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.7f);
+        source.volume = (PlayerPrefs.GetFloat("SFXSound"));
+
+        /*
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Default State") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 1 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 2 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 3 Resting") ||
+            anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 4 Resting")
+            )
+        {
+            source.enabled = false;
+        }
+        */
     }
+
 
     public void playAnim()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Default State"))
         {
+            //source.enabled = true;
+            //source.Play();
             nextCrate = Random.Range(1, 4);
             switch (nextCrate)
             {
@@ -54,6 +70,8 @@ public class CargoRoomAnim : MonoBehaviour
             anim.GetCurrentAnimatorStateInfo(0).IsName("Crate 4 Resting")
             )
         {
+            //source.enabled = true;
+           // source.Play();
             switch (nextCrate)
             {
                 case 1:
