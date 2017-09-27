@@ -24,7 +24,7 @@ public struct item{
  * By Brendan
  * Modified for inventory storage by Alexander Tilley 21/09/2017
 */
-public class ItemSwitching : MonoBehaviour {
+public class Inventory : MonoBehaviour {
 
 	public int selectedItem = 0;					//
 

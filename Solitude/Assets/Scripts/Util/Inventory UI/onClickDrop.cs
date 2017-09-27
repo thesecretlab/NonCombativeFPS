@@ -6,7 +6,7 @@ using UnityEngine;
 public class onClickDrop : MonoBehaviour {
 
 	private Button self;
-	public ItemSwitching parent;
+	public Inventory parent;
 
 	// Use this for initialization
 	void Start () {
