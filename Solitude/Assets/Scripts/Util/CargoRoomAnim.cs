@@ -9,6 +9,11 @@ public class CargoRoomAnim : MonoBehaviour
     int nextCrate;
     AudioSource source;
 
+    public CrateGiveItem crate1;
+    public CrateGiveItem crate2;
+    public CrateGiveItem crate3;
+    public CrateGiveItem crate4;
+
     // Use this for initialization
     void Start()
     {
@@ -19,30 +24,35 @@ public class CargoRoomAnim : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        source.volume = ((PlayerPrefs.GetFloat("SFXSound")) * 0.7f);
+        source.volume = (PlayerPrefs.GetFloat("SFXSound"));
     }
 
+    //used to determine the correct crate to act on, and the correct action to perform
     public void playAnim()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Default State"))
         {
-            nextCrate = Random.Range(1, 4);
+            nextCrate = Random.Range(1,1);
             switch (nextCrate)
             {
                 case 1:
                     anim.SetTrigger("Crate1Fetch");
+                    crate1.canGiveItem = true;
                     Debug.Log("crate1");
                     break;
                 case 2:
                     anim.SetTrigger("Crate2Fetch");
+                    crate2.canGiveItem = true;
                     Debug.Log("crate2");
                     break;
                 case 3:
                     anim.SetTrigger("Crate3Fetch");
+                    crate3.canGiveItem = true;
                     Debug.Log("crate3");
                     break;
                 case 4:
                     anim.SetTrigger("Crate4Fetch");
+                    crate4.canGiveItem = true;
                     Debug.Log("crate4");
                     break;
             }
