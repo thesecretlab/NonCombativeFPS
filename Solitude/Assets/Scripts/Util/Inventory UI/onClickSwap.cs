@@ -6,7 +6,7 @@ using UnityEngine;
 public class onClickSwap : MonoBehaviour {
 
 	private Button self;
-	public ItemSwitching parent;
+	public Inventory parent;
 	public bool swap = false;
 
 	// Use this for initialization

@@ -8,7 +8,7 @@ public class onClickItem : MonoBehaviour {
 	private Button self; 
 	public int row;
 	public int col;
-	public ItemSwitching parent;
+	public Inventory parent;
 
 	// Use this for initialization
 	void Start () {
