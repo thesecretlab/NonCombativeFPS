@@ -2,10 +2,11 @@
 using UnityEngine.UI;
 
 public class ScrewPanel : Terminal, Breakable {
+	
     public int screws = 4;
     public int breakPercent = 100;
-    private int canvasWid = 1124;
-    private int canvasHig = 552;
+    private int canvasWid = 1124; 		//TODO Replace me with Camera.pixelwidth -10% where camera = maincamera
+	private int canvasHig = 552;		//TODO Replace me with Camera.pixelheight-10% where camera = maincamera
 
     private int screwed = 0;
     private bool isFixing = false;

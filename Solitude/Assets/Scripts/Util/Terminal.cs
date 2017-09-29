@@ -1,7 +1,10 @@
 ﻿using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+
+
 public abstract class Terminal : Interactable, Window {
+	
     public GameObject uiPrefab;
     protected GameObject ui;
     protected abstract void initialise();
