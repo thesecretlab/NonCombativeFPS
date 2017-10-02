@@ -22,7 +22,7 @@ public struct item{
  * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
  * 
  * By Brendan
- * Modified for inventory storage by Alexander Tilley 21/09/2017
+ * Modified for inventory storage by Alexander Tilley (Last edit 02/10/2017)
 */
 public class Inventory : MonoBehaviour {
 
@@ -314,6 +314,36 @@ public class Inventory : MonoBehaviour {
 		updateText(row,col);
 	}
 
+	//Consumes the AMMOUNT of type ITEMID and returns true and only consume if it did. 
+	//(startRow and StartCol is for recusive calls should be 0 for normal calls )
+	public bool consume(int ItemID,int ammount,int startRow,int StartCol){
+		int rRow = -1;
+		int rCol = -1;
+		if (findNextItem (startRow, StartCol, ItemID, out rRow, out rCol)) {									//Does ITEMID exists
+			if (inventory [rRow, rCol].ammount >= ammount) {											//Is there enough
+				if (ammount - inventory [rRow, rCol].ammount == 0) {									//Ist it exactly enough
+					inventory [rRow, rCol].id = EMPTY_ID;
+					inventory [rRow, rCol].ammount = 0;
+					inventory [rRow, rCol].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
+					updateText (rRow, rCol);
+					return true;
+				} else {
+					inventory [rRow, rCol].ammount = inventory [rRow, rCol].ammount-ammount;			//Left Overs
+					updateText (rRow, rCol);
+					return true;	
+				}
+			} else {
+				if (consume (ItemID, ammount - inventory [rRow, rCol].ammount, rRow + 1, rCol + 1)) {	//If there isnt enough is there another stack I can consume from
+					inventory [rRow, rCol].id = EMPTY_ID;
+					inventory [rRow, rCol].ammount = 0;
+					inventory [rRow, rCol].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
+					updateText (rRow, rCol);
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 	/*returns true/false if item is found and puts the lococation of the item in row and col
 	 Starts from row, col, ensure intialisation and allows it to find multiple of the same object*/

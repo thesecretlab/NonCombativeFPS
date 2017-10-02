@@ -22,12 +22,13 @@ GameObject:
   - component: {fileID: 33751176051689634}
   - component: {fileID: 65012433235857132}
   - component: {fileID: 23919167470076178}
+  - component: {fileID: 114851812504408336}
   m_Layer: 0
   m_Name: Pannel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 1
   m_IsActive: 1
 --- !u!4 &4919448504388282
 Transform:
@@ -35,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1676222309373100}
-  m_LocalRotation: {x: 0, y: 0, z: -0.13052624, w: 0.9914449}
-  m_LocalPosition: {x: -214.64, y: 0.673, z: 44.69}
-  m_LocalScale: {x: -0.1240264, y: 0.50371087, z: 0.98942673}
+  m_LocalRotation: {x: -0.09229599, y: 0.7010574, z: 0.09229599, w: -0.7010574}
+  m_LocalPosition: {x: -186.61044, y: -1.146472, z: 8.834694}
+  m_LocalScale: {x: -0.12402643, y: 0.50371087, z: 0.98942673}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -15}
+  m_LocalEulerAnglesHint: {x: 0, y: 270, z: -15}
 --- !u!23 &23919167470076178
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -92,3 +93,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114851812504408336
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1676222309373100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a252ced3f8d7248419f3c842fda8a801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  uiPrefab: {fileID: 1514871793367152, guid: 6af2e104d8838f04fa027c1c412d24af, type: 2}
+  breakPercent: 10
+  playerInv: {fileID: 0}
