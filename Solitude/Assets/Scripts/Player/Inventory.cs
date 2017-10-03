@@ -248,7 +248,7 @@ public class Inventory : MonoBehaviour {
 	}
 
 	//Gives any random possible item in ammounts between min and max
-	public void giveRandomItem(int min,int max){
+	public bool giveRandomItem(int min,int max){
 		if (max > MAXSTACK || max <= 0) {			//If max is valid
 			max = MAXSTACK;
 		}
@@ -257,7 +257,7 @@ public class Inventory : MonoBehaviour {
 		} else if (min > MAXSTACK) {
 			min = MAXSTACK;
 		}
-		insertAtTop (Random.Range (4, 7), Random.Range (min, max));	//Insert random item of random ammount
+		return insertAtTop (Random.Range (4, 7), Random.Range (min, max));	//Insert random item of random ammount
 	}
 
 	//Displays Options when an inventory item is selected and executes Swap() if needed
@@ -311,7 +311,24 @@ public class Inventory : MonoBehaviour {
 			inventory [row, col].ammount = 0;
 			inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
 		}
+		//TODO Drop physical object
 		updateText(row,col);
+	}
+
+	//Drops one item
+	public bool use(int row, int col){
+		if (row <= -1 || col <= -1 || row > INV_ROWS || col > INV_COLUMNS) { //If Invalid range return false
+			return false;
+		}
+		if (inventory [row, col].ammount > 1) {				//Drop one of item
+			inventory [row, col].ammount--;
+		}else if(inventory [row, col].ammount <= 1){		//If it will be empty change to empty
+			inventory [row, col].id = EMPTY_ID;
+			inventory [row, col].ammount = 0;
+			inventory [row, col].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
+		}
+		updateText(row,col);
+		return true;
 	}
 
 
