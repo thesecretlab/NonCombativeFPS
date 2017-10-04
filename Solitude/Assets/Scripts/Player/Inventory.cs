@@ -22,7 +22,7 @@ public struct item{
  * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
  * 
  * By Brendan
- * Modified for inventory storage by Alexander Tilley (Last edit 02/10/2017)
+ * Modified for inventory storage by Alexander Tilley (Last edit 04/10/2017)
 */
 public class Inventory : MonoBehaviour {
 
@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour {
 
 	public Camera mainCam;							//Main Camera to make sure inventory fits screen (pre-Set Unity)
 	public GameObject options;						//Item Options to perform opertions (pre-set Unity)
+	public Toast toaster;							//Toaster for giving player feedback (Pre-Set Unity)
 
 	public int sel_row_1;							//Selected Items rows and cols (To Hold)
 	public int sel_col_1;
@@ -61,11 +62,13 @@ public class Inventory : MonoBehaviour {
 
 	public Sprite[] pictures = new Sprite[8];			//Array of sprites corisponding to item ids (pics pre-set in Unity)
 	public GameObject[] heldItem = new GameObject[8];	//Array of Gameobjects corisponding to item ids for hand held objects
+	public string[] itemNames = new string[8];			//Array of Strings corrisoinding to item ids for item names
 
 	public float HEIGHT =  Screen.height;		//Window Height
 	public float WIDTH = Screen.width;			//Window Width
 
 	//public Vector3 NextPos = new Vector3(0.0f+(0.01f*WIDTH),0.0f+(HEIGHT-10.0f),1.0f);
+
 
 
 
@@ -123,6 +126,15 @@ public class Inventory : MonoBehaviour {
 		options.transform.localPosition = Vector3.one;			//Centre Postion
 		//Debug.Log ("Mouse Pos "+Input.mousePosition);
 		options.transform.localPosition = newVector((((INV_COLUMNS-1)/2.0f)*150)+0.0f-(WIDTH*0.45f),(hotBarOffSet+INV_ROWS*150-50)+0.0f-(HEIGHT*0.40f),5.0f);
+
+		itemNames [0] = "Empty";
+		itemNames [1] = "Screw Driver";
+		itemNames [2] = "Plasma Cutter";
+		itemNames [3] = "Welder";
+		itemNames [4] = "Power Cable";
+		itemNames [5] = "Circuit Board";
+		itemNames [6] = "Scrap Metal";
+		itemNames [7] = "Screws";
 
 		//TODO Set Up GameObject Like in video in discrption for hand held items setActive false for all
 
@@ -343,10 +355,12 @@ public class Inventory : MonoBehaviour {
 					inventory [rRow, rCol].ammount = 0;
 					inventory [rRow, rCol].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
 					updateText (rRow, rCol);
+					toaster.addText ("Used" + ammount + " " + itemNames [ItemID],3.0f);
 					return true;
 				} else {
 					inventory [rRow, rCol].ammount = inventory [rRow, rCol].ammount-ammount;			//Left Overs
 					updateText (rRow, rCol);
+					toaster.addText ("Used" + ammount + " " + itemNames [ItemID],3.0f);
 					return true;	
 				}
 			} else {
@@ -359,6 +373,7 @@ public class Inventory : MonoBehaviour {
 				}
 			}
 		}
+		toaster.addText ("You Need "+ammount+" "+ itemNames [ItemID]+" to complete this task",3.0f);
 		return false;
 	}
 
