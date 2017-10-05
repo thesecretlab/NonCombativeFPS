@@ -9,6 +9,7 @@ public interface Breakable {
 
 public class BreakEvent {
     Breakable parent;
+    
     public int breakPercent;
 
     public BreakEvent(Breakable parent,int breakPercent) {
