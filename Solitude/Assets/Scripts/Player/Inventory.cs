@@ -355,12 +355,12 @@ public class Inventory : MonoBehaviour {
 					inventory [rRow, rCol].ammount = 0;
 					inventory [rRow, rCol].obj.GetComponent<Image> ().sprite = pictures [EMPTY_ID];
 					updateText (rRow, rCol);
-					toaster.addText ("Used" + ammount + " " + itemNames [ItemID],3.0f);
+					toaster.addText ("Used  " + ammount + " " + itemNames [ItemID],3.0f);
 					return true;
 				} else {
 					inventory [rRow, rCol].ammount = inventory [rRow, rCol].ammount-ammount;			//Left Overs
 					updateText (rRow, rCol);
-					toaster.addText ("Used" + ammount + " " + itemNames [ItemID],3.0f);
+					toaster.addText ("Used  " + ammount + " " + itemNames [ItemID],3.0f);
 					return true;	
 				}
 			} else {
@@ -373,7 +373,7 @@ public class Inventory : MonoBehaviour {
 				}
 			}
 		}
-		toaster.addText ("You Need "+ammount+" "+ itemNames [ItemID]+" to complete this task",3.0f);
+		toaster.addText ("You Need  "+ammount+" "+ itemNames [ItemID]+" to complete this task",3.0f);
 		return false;
 	}
 
@@ -433,6 +433,7 @@ public class Inventory : MonoBehaviour {
 		int col = -1;
 		if (findNextItem (0, 0, id,out row, out col)) {										//If Object Exists
 			inventory [row, col].ammount = inventory [row, col].ammount + ammount;		//Add to stack
+			toaster.addText ("You Picked Up  " + ammount + " " + itemNames [id],3.0f);
 			updateText(row,col);
 			if (inventory [row, col].ammount > MAXSTACK) {								//If Larger Than Max Stack
 				ammount = inventory [row, col].ammount - MAXSTACK;						//Ammount = diffrence
@@ -447,6 +448,7 @@ public class Inventory : MonoBehaviour {
 						inventory[r,c].id = id;											//Insert
 						inventory[r,c].ammount = ammount;
 						inventory [r, c].obj.GetComponent<Image> ().sprite = pictures [id];
+						toaster.addText ("You Picked Up  " + ammount + " " + itemNames [id],3.0f);
 						updateText(r,c);
 						return true;
 					}
