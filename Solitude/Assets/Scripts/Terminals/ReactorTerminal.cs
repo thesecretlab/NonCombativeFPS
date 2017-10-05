@@ -60,6 +60,7 @@ public class ReactorTerminal : Terminal {
         }
     }
     public void ReactorOverload() {
+        Toast.addToast("Reactor overload\n Powering Down", 3);
         RecUI.status.text = "Cooling";
         online = false;
         overload = true;

@@ -15,6 +15,8 @@ public struct Spread{
  */
 public class Toast : MonoBehaviour {
 
+    static Toast toast;
+
 	private const int queueLength = 3;						//Ammount of Text to display at one time
 	public GameObject textobj;								//Text Object that displays Text
 	private Spread[] toaster = new Spread[queueLength];		//Queue in order of expirey
@@ -32,6 +34,18 @@ public class Toast : MonoBehaviour {
 			toaster [i].seconds = -1.0f;
 		}
 	}
+
+    void Awake() {
+        if (toast == null) {
+            toast = this;
+        } else {
+            Destroy(gameObject);
+        }
+    }
+
+    public static bool addToast(string text, float seconds) {
+        return Toast.toast.addText(text, seconds);
+    }
 
 	// Update is called once per frame
 	void Update () {
