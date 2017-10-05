@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CommandTerminal : Terminal, Breakable {
-
+    public bool doBreak;
     Text t;
     string line = "";
     Boolean service = true;
@@ -112,6 +112,10 @@ public class CommandTerminal : Terminal, Breakable {
         }
     }
     protected override void doUpdate() {
+        if (doBreak) {
+            doBreak = false;
+            onBreak();
+        }
         dashCount++;
         if (dashCount > 2 * dashFrames) {
             dashCount -= 2 * dashFrames;

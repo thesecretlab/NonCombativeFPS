@@ -20,7 +20,11 @@ public class TurretTerminal : Terminal, Breakable {
 
     public override void interact() {
         missAcc = accuracy;
-        show();
+        if (Ship.ship.getAccess()) {
+            show();
+        } else {
+            Ship.ship.showAccess(true);
+        }
     }
 
     protected override void doUpdate() {

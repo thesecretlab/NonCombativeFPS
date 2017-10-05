@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ReactorTerminal : Terminal {
 
+    public bool doBreak;
+
     ReactorUI RecUI;
     
     public static ReactorTerminal reactorObj;
@@ -19,8 +21,6 @@ public class ReactorTerminal : Terminal {
     
     // Use this for initialization
     void Awake() {
-
-        
         if (reactorObj == null) {
             reactorObj = this;
         } else {
@@ -84,6 +84,10 @@ public class ReactorTerminal : Terminal {
 
     // Update is called once per frame
     protected override void doUpdate() {
+        if (doBreak) {
+            doBreak = false;
+            ReactorOverload();
+        }
         if (Input.GetMouseButtonUp(0)) {
             RecUI.shutdown.onClick.AddListener(() => EmergencyPowerDown());
         }
