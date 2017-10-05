@@ -35,6 +35,7 @@ public class CommandTerminal : Terminal, Breakable {
     }
 
     public void onBreak() {
+        Toast.addToast("Navigation Corrupted. Please reset", 3);
         isBroken = false;
         GameConditions.setTraveling(false);
     }

@@ -55,6 +55,7 @@ public class CryoTerminalScript : Terminal, PowerConsumer
                 }
                 else
                 {
+                    Toast.addToast("Crew member died", 3);
                     crew_health_text.text = "DECEASED";
                     crewdead = true;
                     crewcount++;
@@ -102,6 +103,8 @@ public class CryoTerminalScript : Terminal, PowerConsumer
     }
 
     public void updatePower(bool powered) {
+        String toast = powered ? "Cryo Power Restored" : "WARNING! Cryo Power Failure";
+        Toast.addToast(toast, 3);
         powervalue = powered;
     }
 }
