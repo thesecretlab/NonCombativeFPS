@@ -39,7 +39,6 @@ public abstract class Terminal : Interactable, Window {
         onClose();
         Player.playerObj.FPSEnable(true);
         ui.SetActive(false);
-        Player.playerObj.FPSEnable(true);
         isVis = false;
     }
 }
