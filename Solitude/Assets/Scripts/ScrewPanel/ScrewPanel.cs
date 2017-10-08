@@ -15,9 +15,8 @@ public class ScrewPanel : Terminal, Breakable {
     public const int screws = 4;			//Maxium Number of Screws
     public int breakPercent = 100;			//Percentage chance this has to break.
 	public Inventory playerInv;				//Player Inventory (Set In Unity)
-
 	private int canvasWid = 1920; 			//TODO Replace me with Camera.pixelwidth -10% where camera = maincamera
-	private int canvasHig = 1080;			//TODO Replace me with Camera.pixelheight-10% where camera = maincamera
+	private int canvasHig = 1080;			//TODO Replace me with Camera.pixelheight-10% were camera = maincamera
 	public const int iconPixelSize = 295;	//Size of the Screw Icon (pressumably symetrical)
 
 	private int[,] buttonCoords = new int[screws, 2];	//Position for screws
@@ -36,10 +35,12 @@ public class ScrewPanel : Terminal, Breakable {
 				for (int s = 0; s < i; s++) {
 					if (buttonCoords [i, 0] == buttonCoords [s, 0] && buttonCoords [i, 1] == buttonCoords [s, 1]) {//If Collsion
 						if (OneLessScrew == 0) {		//If have already tried OneLessScrew times.
+                            Debug.Log("screwed is equal to" + screwed);
 							buttonCoords [i,0] = -1;
 							buttonCoords [i,1]= -1;
-							screwed++;	
-						} else {
+							screwed++;
+                            Debug.Log("screwed is now equal to" + screwed);
+                        } else {
 							buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));		//Try and replace.
 							buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));
 							s = 0;

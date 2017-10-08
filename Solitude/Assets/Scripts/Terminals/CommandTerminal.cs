@@ -148,7 +148,7 @@ public class CommandTerminal : Terminal, Breakable {
     
     public void onFix() {
         GameConditions.setTraveling(true);
-        this.setActive(false);
+       // this.setActive(false);
         isBroken = false;
         hide();
     }
