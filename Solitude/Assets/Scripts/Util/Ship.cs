@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,9 +18,29 @@ public interface shipLight {
 
 public class Ship : MonoBehaviour {
 
+    class AccessWindow : Window {
+        GameObject ui;
+        private GameObject accessUI;
+
+        public AccessWindow(GameObject accessUI) {
+            this.ui = accessUI;
+        }
+
+        public void open() {
+            Player.openWindow(this);
+            ui.SetActive(true);
+            Player.playerObj.FPSEnable(false);
+        }
+        public void close() {
+            Player.playerObj.FPSEnable(true);
+            ui.SetActive(false);
+        }
+    }
+
     public static Ship ship;
     public GameObject AccessUIPrefab;
     GameObject AccessUI;
+    AccessWindow AWin;
 
     Light[] lights;
 
@@ -52,12 +73,17 @@ public class Ship : MonoBehaviour {
     }
 
     public void showAccess(bool show) {
-        AccessUI.SetActive(show);
-        Player.playerObj.FPSEnable(!show);
+        if (show) {
+            AWin.open();
+        } else {
+            Player.closeWindow();
+        }
+        
     }
 
     void Start () {
         AccessUI = Instantiate(AccessUIPrefab);
+        AWin = new AccessWindow(AccessUI);
         AccessUI.GetComponentInChildren<Button>().onClick.AddListener(delegate { showAccess(false); });
         //Debug.LogWarning(name + ":" + uiPrefab.name);
         AccessUI.transform.SetParent(UICanvas.Canvas.transform, false);
