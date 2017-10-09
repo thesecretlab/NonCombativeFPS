@@ -53,7 +53,7 @@ public class Ship : MonoBehaviour {
 
     List<BreakEvent> breakables = new List<BreakEvent>();
     int waitSec = 1;
-    int repeatSec = 10;
+    int repeatSec = 20;
     // Use this for initialization
     void Awake() {
         if (ship != null) {
