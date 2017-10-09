@@ -9,7 +9,7 @@ public class CountDownTimer : MonoBehaviour {
     public float Time = 50.0f;
     float closetime = 3.0f;
     float alertclosetime = 3.0f;
-    bool Gameover = false;
+    public bool Gameover = false;
 
     public GameObject tutorialwindow;
 
@@ -33,6 +33,7 @@ public class CountDownTimer : MonoBehaviour {
 
     private void Start()
     {
+        Gameover = false; //testing
         IDSALERTsource = UI.getTerminal().IDSALERTsource;
         Firewallsource = UI.getTerminal().Firewallsource;
 

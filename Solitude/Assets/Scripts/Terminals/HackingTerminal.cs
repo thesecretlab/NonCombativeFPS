@@ -16,6 +16,7 @@ public class HackingTerminal : Terminal, Breakable {
         hackUI.reset();
     }
     public void onBreak() {
+        Debug.Log("Locked out");
         Ship.ship.setAccess(false);
     }
     public void onFix() {
@@ -27,7 +28,7 @@ public class HackingTerminal : Terminal, Breakable {
     protected override void doUpdate() {
     }
     protected override void initialise() {
-        new BreakEvent(this, 10);
+        new BreakEvent(this, 10); //set back to 10 post testing
         hackUI = ui.GetComponent<HackingUI>();
         hackUI.setTerminal(this);
     }
