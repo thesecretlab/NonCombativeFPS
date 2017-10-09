@@ -15,7 +15,7 @@ public class ReactorTerminal : Terminal {
     public int powerUnitsAvail;
     bool online;
     bool overload;
-    public float fillRate = 0.001f;
+    public float fillRate = 0.00001f;
     float DecRate = 0.1f;
     int fillRateMult = 2;
     
@@ -156,7 +156,7 @@ public class ReactorTerminal : Terminal {
  
 
     public void heatingUp() {
-        RecUI.tempGage.value += ((powerUnitsAvail *fillRate));
+        RecUI.tempGage.value += (((Time.deltaTime + powerUnitsAvail / 4) *fillRate));
     }
 
     public void fCool() {
