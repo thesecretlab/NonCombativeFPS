@@ -34,13 +34,29 @@ public class ReactorUI : MonoBehaviour {
     }
 
     void Start() {
-        shutdown.onClick.AddListener(() => recTerm.EmergencyPowerDown());
-        controlRod.onValueChanged.AddListener(delegate { recTerm.ValueChangeCheck(); });
-        restart.onClick.AddListener(() => recTerm.powerUP());
+        shutdown.onClick.AddListener(delegate { EmergencyPowerDown(); });
+        controlRod.onValueChanged.AddListener(delegate { SetRod(controlRod.value); });
+        restart.onClick.AddListener(delegate { powerUP(); });
     }
 
-    public void SetRod(int rod) {
-        controlRod.value = rod;
-        cRodNum.text = controlRod.value.ToString();
+    void EmergencyPowerDown() {
+        recTerm.powerDown(false);
+    }
+
+    void SetRod(float rod) {
+        recTerm.SetRod(rod);
+    }
+
+    void powerUP() {
+        recTerm.powerUP();
+    }
+
+    void Update() {
+        controlRod.value = recTerm.getRod();
+        tempNum.text = recTerm.getTemp().ToString();
+        cRodNum.text = recTerm.getRod().ToString();
+        powerUsage.text = recTerm.getPow().ToString();
+        rTimer.text = recTerm.getTime().ToString();
+        status.text = recTerm.getStatus();
     }
 }
