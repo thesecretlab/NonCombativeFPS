@@ -18,10 +18,12 @@ public class GameConditions : MonoBehaviour {
     public bool gotspeed = false;
     public bool traveling = true;
 
+    float astroidseconds;
+
     public float shiphealth = 100;
     public float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
     float AsteroidHitChance;
-    bool AsteroidOccurance = false;
+    //bool AsteroidOccurance = false;
     public float GameTime = 600.0f;
     public Text TimeLefttext;
     public Text ShipHealthtext;                 //Text to display on bridge screen to update time
@@ -59,30 +61,24 @@ public class GameConditions : MonoBehaviour {
         Explosionsource.clip = Explosionclip;
 
     }
+
+    void doAsteroid() {
+        AsteroidHitChance = (75 - TurretAccuracy);
+        if (Random.Range(0, 75) < (100 - TurretAccuracy)) {
+            shiphealth -= Random.Range(2, 7);
+            Explosionsource.Play();
+        }
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
-        AsteroidHitChance = (100 - TurretAccuracy);
-        AsteroidChance();
-
-        if(AsteroidOccurance == true && shiphealth >= 0)
-        {
-            float random1 = Random.Range(0, 1000);
-            {
-                if(random1 >= 0 && random1 <= AsteroidHitChance)
-                {
-                    float random2 = Random.Range(1, 7);
-                    {
-                        shiphealth = shiphealth - random2;
-                        
-                        Explosionsource.Play();
-                        
-                    }
-                    
-                }
-            }
+        astroidseconds -= Time.deltaTime;
+        while (astroidseconds < 0) {
+            astroidseconds += 15;
+            doAsteroid();
         }
+
         ShipHealthtext.text = "";
         if (TurretAccuracy < 50) {
             ShipHealthtext.text = "Defence Accuracy Low\nRecalibration Necessary\n";
@@ -117,7 +113,7 @@ public class GameConditions : MonoBehaviour {
         }
     }
 
-    void AsteroidChance()
+    /*void AsteroidChance()
     {
         float random = Random.Range(0, 10000);
         {
@@ -131,7 +127,7 @@ public class GameConditions : MonoBehaviour {
             }
         }
 
-    }
+    }*/
 
 	//Triggers lose game state and displays addtional text if needed
 	public void loseGame(string optional){
