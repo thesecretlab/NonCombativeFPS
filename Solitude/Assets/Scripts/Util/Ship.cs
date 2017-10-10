@@ -17,6 +17,7 @@ public interface shipLight {
 }
 
 public class Ship : MonoBehaviour {
+    public bool doBreak;
 
     class AccessWindow : Window {
         GameObject ui;
@@ -153,13 +154,15 @@ public class Ship : MonoBehaviour {
     }
 
     void tryBreak() {
-        Debug.Log("tryBreak");
-        foreach(BreakEvent e in breakables) {
-            if (Random.Range(1, breakmod) < e.breakPercent) {
-                e.dobreak();
+        if (doBreak) {
+            Debug.Log("tryBreak");
+            foreach (BreakEvent e in breakables) {
+                if (Random.Range(1, breakmod) < e.breakPercent) {
+                    e.dobreak();
+                }
             }
+            breakmod = 100;
         }
-        breakmod = 100;
     }
 
     public void addBreakEvent(BreakEvent e) {
