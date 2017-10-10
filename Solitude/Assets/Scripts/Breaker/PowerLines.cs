@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class PowerLines : MonoBehaviour, Breakable {
     private Lever[] levers;
-    private bool @fixed;
+    private bool @fixed = true;
 
     public bool getFixed() {
         return @fixed;
     }
 
     public void onBreak() {
-        @fixed = true;
+        @fixed = false;
         foreach(Lever lev in levers) {
             //Debug.Log(lev.getName());
             lev.blow();
@@ -21,7 +21,7 @@ public class PowerLines : MonoBehaviour, Breakable {
 
     public void onFix() {
         Debug.Log("Breakers Fixed");
-        @fixed = false;
+        @fixed = true;
     }
 
     public void throwLever(int lever) {

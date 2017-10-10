@@ -42,7 +42,20 @@ public class ReactorTerminal : Terminal {
         return online ? 0 : temp;
     }
     public string getStatus() {
-        if (!online || powerUnits == 0) {
+        if (!online) {
+            if (getTime() != 0) {
+                if (overload) {
+                    return "Overloaded";
+                } else {
+                    return "Flushing";
+                }
+            }
+            if (!PowerLines.getFixed()) {
+                return "Power Lines Disconnected";
+            }
+            return "Ready";
+        }
+        if (powerUnits == 0) {
             return "Cooling";
         }
         if (powerUnits <= 15) {
