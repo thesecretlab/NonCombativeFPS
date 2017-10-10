@@ -26,7 +26,6 @@ public class ReactorTerminal : Terminal {
         } else {
             Destroy(transform.gameObject);
         }
-        
     }
     public void ValueChangeCheck()
     {
@@ -36,19 +35,17 @@ public class ReactorTerminal : Terminal {
         RecUI.powerUsage.text = powerUnitsAvail.ToString();
     }
 
-
-
     protected override void initialise() {
         RecUI = ui.GetComponent<ReactorUI>();
         online = false;
         SetRod(100);
-
-        
     }
+
     public void SetRod(int rod) {
         RecUI.controlRod.value = rod;
         RecUI.cRodNum.text = RecUI.controlRod.value.ToString();
     }
+
     public void powerUP() {
         if (RecUI.tempGage.value == 0) {
             powerUnits = PowerSystem.restore();
@@ -59,6 +56,7 @@ public class ReactorTerminal : Terminal {
 
         }
     }
+
     public void ReactorOverload() {
         Toast.addToast("Reactor overload\n Powering Down", 3);
         RecUI.status.text = "Cooling";
@@ -71,6 +69,7 @@ public class ReactorTerminal : Terminal {
         RecUI.controlRod.interactable = false;
         RecUI.shutdown.interactable = false;
     }
+
     public void EmergencyPowerDown() {
         RecUI.status.text = "Cooling";
         online = false;
@@ -82,41 +81,26 @@ public class ReactorTerminal : Terminal {
         RecUI.shutdown.interactable = false;
     }
  
-
-    // Update is called once per frame
+    // doUpdate is called once per frame
     protected override void doUpdate() {
         if (doBreak) {
             doBreak = false;
             ReactorOverload();
         }
-        if (Input.GetMouseButtonUp(0)) {
-            RecUI.shutdown.onClick.AddListener(() => EmergencyPowerDown());
-        }
 
         RecUI.controlRod.interactable = true;
-        RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
 
-
-        if (Input.GetMouseButtonUp(0)) {
-            if (!online && RecUI.tempGage.value == 0)
-            {
-                RecUI.restart.onClick.AddListener(() => powerUP());
-            }
-        }
         if (RecUI.tempGage.value == 100) {
             ReactorOverload();
         }
-    }
-    void LateUpdate() {
-        if (online)
-        {
+
+        if (online) {
             RecUI.controlRod.interactable = true;
-            RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
+
             RecUI.tempNum.text = RecUI.tempGage.value.ToString();
             RecUI.restart.interactable = false;
         }
-        if(!online)
-        {
+        if (!online) {
             RecUI.controlRod.interactable = true;
             RecUI.restart.interactable = true;
         }
@@ -144,7 +128,7 @@ public class ReactorTerminal : Terminal {
             }
         }
 
-        if (!online){
+        if (!online) {
             if (overload) {
                 sCool();
             } else if (!overload) {
@@ -152,8 +136,6 @@ public class ReactorTerminal : Terminal {
             }
         }
     }
-
- 
 
     public void heatingUp() {
         RecUI.tempGage.value += (((Time.deltaTime + powerUnitsAvail / 4) *fillRate));
