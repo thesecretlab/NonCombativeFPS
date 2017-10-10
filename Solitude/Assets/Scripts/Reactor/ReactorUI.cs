@@ -54,6 +54,7 @@ public class ReactorUI : MonoBehaviour {
     void Update() {
         controlRod.value = recTerm.getRod();
         tempNum.text = recTerm.getTemp().ToString();
+        tempGage.value = recTerm.getTemp();
         cRodNum.text = recTerm.getRod().ToString();
         powerUsage.text = recTerm.getPow().ToString();
         rTimer.text = recTerm.getTime().ToString();
