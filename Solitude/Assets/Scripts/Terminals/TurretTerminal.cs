@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class TurretTerminal : Terminal, Breakable {
 
+    public bool doBreak;
     public float accuracy;
     public float decreaseRate;
-    float missAcc;
+    public float missAcc;
     TurretUI UI;
 
     public float getAccuracy() {
@@ -28,13 +29,16 @@ public class TurretTerminal : Terminal, Breakable {
     }
 
     protected override void doUpdate() {
+        if (doBreak) {
+            doBreak = false;
+            onBreak();
+        }
         accuracy = Mathf.MoveTowards(accuracy, missAcc, decreaseRate * Time.deltaTime);
         GameConditions.setAccuracy(accuracy);
     }
 
     protected override void initialise() {
         new BreakEvent(this,10);
-        accuracy = 0;
         UI = ui.GetComponent<TurretUI>();
         UI.setTerminal(this);
     }
@@ -44,7 +48,7 @@ public class TurretTerminal : Terminal, Breakable {
     }
 
     public void onBreak() {
-        missAcc = accuracy - Random.Range(0,-20);
+        missAcc = accuracy - Random.Range(0,20);
     }
 
     public void onFix() {
