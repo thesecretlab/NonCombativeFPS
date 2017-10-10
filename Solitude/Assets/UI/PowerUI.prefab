@@ -268,7 +268,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'CRYO_STATUS
+  m_Text: 'CRYO_STASIS
 
     0/11'
 --- !u!114 &114222581632481956
