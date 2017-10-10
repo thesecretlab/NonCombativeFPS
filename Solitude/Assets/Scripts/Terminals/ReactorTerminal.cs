@@ -122,22 +122,22 @@ public class ReactorTerminal : Terminal {
         }
 
         if (online) {
-            if (powerUnits <= 10) {
+            if (powerUnits <= 15) {
                 RecUI.status.text = "Light Load";
                 heatingUp();
                 //SetRod(75);
             }
-            if (powerUnits >= 11 && powerUnits < 19) {
+            if (powerUnits >= 16 && powerUnits < 34) {
                 RecUI.status.text = "Medium Load";
                 heatingUp();
                 //SetRod(50);
             }
-            if (powerUnits >= 19 && powerUnits < 29) {
+            if (powerUnits >= 35 && powerUnits < 49) {
                 RecUI.status.text = "Heavy Load";
                 heatingUp();
                 //SetRod(25);
             }
-            if (powerUnits >= 29) {
+            if (powerUnits == 50) {
                 RecUI.status.text = "Max Load";
                 heatingUp();
                 //SetRod(100);
