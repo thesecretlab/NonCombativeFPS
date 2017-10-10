@@ -12,11 +12,11 @@ public class BreakEvent {
     
     public int breakPercent;
 
-    public BreakEvent(Breakable parent,int breakPercent) {
+    public BreakEvent(Breakable parent,int breakPercent, bool startBroke = false) {
         this.parent = parent;
         this.breakPercent = breakPercent;
         try {
-            Ship.ship.addBreakEvent(this);
+            Ship.ship.addBreakEvent(this,startBroke);
         } catch (System.NullReferenceException e) {
             Debug.Log("Ship not found");
             Debug.Log(e.ToString());
