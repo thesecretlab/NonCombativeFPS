@@ -97,9 +97,12 @@ public class CommandTerminal : Terminal, Breakable {
                 break;
             case "start navigation":
                 addline("starting service");
-                service = true;
                 if (!isBroken) {
+                    service = true;
                     onFix();
+                } else {
+                    addline("Navigation Data Corrupted");
+                    addline("Service Stopping");
                 }
                 break;
             case "help":
@@ -149,7 +152,7 @@ public class CommandTerminal : Terminal, Breakable {
     
     public void onFix() {
         GameConditions.setTraveling(true);
-       this.setActive(false);
+        this.setActive(false);
         isBroken = false;
         hide();
     }
