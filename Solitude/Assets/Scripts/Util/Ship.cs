@@ -43,10 +43,10 @@ public class Ship : MonoBehaviour {
     GameObject AccessUI;
     AccessWindow AWin;
 
-    Light[] lights;
+    //Light[] lights;
 
-	public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
-	public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
+	//public List<GameObject> floodlights = new List<GameObject>();		//All child floodlights		
+	//public List<GameObject> flurolights = new List<GameObject>();		//All child flurolights
 
     public bool access = true;
 
@@ -91,9 +91,9 @@ public class Ship : MonoBehaviour {
         AccessUI.SetActive(false);
 
         InvokeRepeating("tryBreak", waitSec, repeatSec);
-        lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
+        //lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
 
-		foreach(GameObject obj in GameObject.FindObjectsOfType<GameObject>()){		//For each obj
+		/*foreach(GameObject obj in GameObject.FindObjectsOfType<GameObject>()){		//For each obj
 			if (obj.name.Length >= 10) {
 				if(obj.name.Substring(0,10).CompareTo("FloodLight") == 0){			//named FloodLight*****
 					floodlights.Add(obj);											//add to floodlights
@@ -102,7 +102,7 @@ public class Ship : MonoBehaviour {
 					flurolights.Add(obj);											//add to FluroLight
 				}
 			}
-		}
+		}*/
 		//Debug.Log ("flood lights found: " + floodlights.Count);
 		//Debug.Log ("fluro lights found: " + flurolights.Count);
 

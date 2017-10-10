@@ -27,7 +27,9 @@ public class TerminalButton : MonoBehaviour, IPointerClickHandler {
     }
 
     public void update() {
-        tb.text = name.Substring(0, name.IndexOf("_")) + "\n" + PowerSystem.getRoom(name);
+        int np = PowerSystem.getRoom(name);
+        tb.text = string.Format("{0}\n{1}/{2}", displayName, np, minPower);
+        tb.color = np < minPower ? Color.red : powered;
     }
 
     public void OnPointerClick(PointerEventData eventData) {

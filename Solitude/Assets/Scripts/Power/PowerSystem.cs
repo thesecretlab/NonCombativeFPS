@@ -100,6 +100,7 @@ public class PowerSystem : MonoBehaviour {
     static PowerSystem powersystem;
     public Text powerText;
     GameObject ui;
+    private TerminalButton[] buttons;
 
     #region Static
     public static int crash() {
@@ -123,6 +124,7 @@ public class PowerSystem : MonoBehaviour {
     public static void setUI(GameObject ui) {
         powersystem.ui = ui;
         powersystem.powerText = ui.transform.FindChild("AvailablePowerVariable").GetComponent<Text>();
+        powersystem.buttons = ui.GetComponentsInChildren<TerminalButton>();
     }
     public static int getMin(string room) {
         return powersystem._getMin(room);
@@ -138,6 +140,7 @@ public class PowerSystem : MonoBehaviour {
             Destroy(transform.gameObject);
         }
     }
+
 
     public RoomLevels rooms;
     public Room corridors;
@@ -165,6 +168,9 @@ public class PowerSystem : MonoBehaviour {
 
     int _crash() {
         rooms.crash();
+        foreach (TerminalButton button in buttons) {
+            button.update();
+        }
         return 0;
     }
 
