@@ -21,8 +21,10 @@ public class PowerSystem : MonoBehaviour {
         }
 
         public void crash() {
+            int i = 0;
             foreach (Room r in rooms) {
-                r.setPower(0);
+                levels[i] = r.setPower(0);
+                i++;
             }
         }
 
@@ -32,12 +34,12 @@ public class PowerSystem : MonoBehaviour {
             }
         }
 
-        public void randomReduce(int max) {
+        /*public void randomReduce(int max) {
             while (total() > max) {
                 int i = Random.Range(0, levels.Length);
                 levels[i] = rooms[i].changePower(false);
             }
-        }
+        }*/
 
         public int getMin(string room) {
             for (int i = 0; i < rooms.Length; i++) {
@@ -98,6 +100,7 @@ public class PowerSystem : MonoBehaviour {
     static PowerSystem powersystem;
     public Text powerText;
     GameObject ui;
+    private TerminalButton[] buttons;
 
     #region Static
     public static int crash() {
@@ -121,6 +124,7 @@ public class PowerSystem : MonoBehaviour {
     public static void setUI(GameObject ui) {
         powersystem.ui = ui;
         powersystem.powerText = ui.transform.FindChild("AvailablePowerVariable").GetComponent<Text>();
+        powersystem.buttons = ui.GetComponentsInChildren<TerminalButton>();
     }
     public static int getMin(string room) {
         return powersystem._getMin(room);
@@ -137,14 +141,24 @@ public class PowerSystem : MonoBehaviour {
         }
     }
 
-    RoomLevels rooms;
+
+    public RoomLevels rooms;
+    public Room corridors;
     public int tick=0;
     public int wait=10;
     int aPower;
     int uPower;
 	// Use this for initialization
 	void Start () {
-        rooms = new RoomLevels(FindObjectsOfType(typeof(Room)) as Room[],0);
+        List<Room> rooms = new List<Room>();
+        foreach (Room room in FindObjectsOfType(typeof(Room))) {
+            if (!room.name.ToLower().Equals("corridors")) {
+                rooms.Add(room);
+            } else {
+                corridors = room;
+            }
+        }
+        this.rooms = new RoomLevels(rooms.ToArray(),0);
     }
 
     int _restore() {
@@ -154,6 +168,9 @@ public class PowerSystem : MonoBehaviour {
 
     int _crash() {
         rooms.crash();
+        foreach (TerminalButton button in buttons) {
+            button.update();
+        }
         return 0;
     }
 
@@ -176,7 +193,7 @@ public class PowerSystem : MonoBehaviour {
     }
     void _setPower(int power) {
         aPower = power;
-        rooms.randomReduce(aPower);
+        corridors.setPower(power);
         updateText();
     }
     int _getMin(string room) {

@@ -26,14 +26,14 @@ public class Room : MonoBehaviour {
     }
 
     public int setPower(int power) {
-        Debug.LogWarning(name + " Setpower " + power);
+        //Debug.LogWarning(name + " Setpower " + power);
         this.power = power;
         updatePower();
         return power;
     }
 
     public int changePower(bool up) {
-        Debug.LogWarning(name + " ChangePower");
+        //Debug.LogWarning(name + " ChangePower");
         power += up ? 1 : -1;
         updatePower();
         return power;
