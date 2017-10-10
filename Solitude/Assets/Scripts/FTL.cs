@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class FTL : MonoBehaviour, PowerConsumer {
     public void updatePower(bool powered) {
-            GameConditions.setSpeed(!powered);
+        GameConditions.setSpeed(powered);
     }
 
     // Use this for initialization

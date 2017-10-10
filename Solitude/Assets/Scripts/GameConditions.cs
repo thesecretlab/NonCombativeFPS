@@ -15,7 +15,9 @@ public class GameConditions : MonoBehaviour {
 
     static GameConditions gamecond;
 
-    bool gotspeed = false;
+    public bool gotspeed = false;
+    public bool traveling = true;
+
     public float shiphealth = 100;
     public float TurretAccuracy = 60f;   //THE ACCURACY FROM TURRET CALIBRATION VARIABLE NEEDS TO GO HERE
     float AsteroidHitChance;
@@ -29,7 +31,7 @@ public class GameConditions : MonoBehaviour {
     public AudioClip Explosionclip;
     public AudioSource Explosionsource;
 
-    bool traveling = true;
+    
 
     public Text EndGameText;					//Text Object to display at endgame
 
