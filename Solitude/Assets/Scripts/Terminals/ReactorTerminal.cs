@@ -4,11 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ReactorTerminal : Terminal {
+    public PowerLines PowerLines;
 
     public bool doBreak;
-
     ReactorUI RecUI;
-    
     public static ReactorTerminal reactorObj;
 
     public int powerUnits;
@@ -74,7 +73,7 @@ public class ReactorTerminal : Terminal {
 
 
     public void powerUP() {
-        if (temp <= 0) {
+        if (temp <= 0 && PowerLines.getFixed()) {
             powerUnits = PowerSystem.restore();
             online = true;
             RecUI.restart.interactable = false;
@@ -86,8 +85,7 @@ public class ReactorTerminal : Terminal {
     public void powerDown(bool crash) {
         if (crash) {
             Toast.addToast("Reactor overload\n Powering Down", 3);
-            //TODO
-            //code to flip breakers
+            PowerLines.onBreak();
         }
         overload = crash;
 
