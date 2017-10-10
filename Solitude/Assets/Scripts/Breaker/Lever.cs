@@ -6,7 +6,7 @@ using UnityEngine;
 public class Lever : Interactable {
     Animator anim;
 
-    Reactor rec;
+    PowerLines rec;
     public int num;
 
     public ParticleSystem particle;
@@ -47,13 +47,14 @@ public class Lever : Interactable {
         }
     }
 
-    public void setReactor(Reactor rec,int num) {
+    public void setReactor(PowerLines rec,int num) {
         this.rec = rec;
         this.num = num;
     }
 
     protected override void setup() {
         active = false;
+        particle.Stop();
         anim = GetComponent<Animator>();
         sparkSound = GetComponent<AudioSource>();
         blown = false;

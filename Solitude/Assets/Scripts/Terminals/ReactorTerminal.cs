@@ -4,20 +4,21 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ReactorTerminal : Terminal {
+    public PowerLines PowerLines;
 
     public bool doBreak;
-
     ReactorUI RecUI;
-    
     public static ReactorTerminal reactorObj;
 
     public int powerUnits;
-    public int powerUnitsAvail;
     bool online;
     bool overload;
     public float fillRate = 0.00001f;
     float DecRate = 0.1f;
     int fillRateMult = 2;
+
+    private float temp;
+    private float rod;
     
     // Use this for initialization
     void Awake() {
@@ -26,165 +27,118 @@ public class ReactorTerminal : Terminal {
         } else {
             Destroy(transform.gameObject);
         }
-        
-    }
-    public void ValueChangeCheck()
-    {
-        PowerSystem.setPower(powerUnitsAvail);
-        RecUI.cRodNum.text = RecUI.controlRod.value.ToString();
-        powerUnitsAvail = powerUnits = (int)(100 - RecUI.controlRod.value) / 2;
-        RecUI.powerUsage.text = powerUnitsAvail.ToString();
     }
 
-
+    public float getTemp() {
+        return temp < 0 ? 0 : temp;
+    }
+    public float getRod() {
+        return rod;
+    }
+    public int getPow() {
+        return powerUnits;
+    }
+    public float getTime() {
+        return online ? 0 : temp;
+    }
+    public string getStatus() {
+        if (!online) {
+            if (getTime() != 0) {
+                if (overload) {
+                    return "Overloaded";
+                } else {
+                    return "Flushing";
+                }
+            }
+            if (!PowerLines.getFixed()) {
+                return "Power Lines Disconnected";
+            }
+            return "Ready";
+        }
+        if (powerUnits == 0) {
+            return "Cooling";
+        }
+        if (powerUnits <= 15) {
+            return "Light Load";
+        }
+        if (powerUnits < 34) {
+            return "Medium Load";
+        }
+        if (powerUnits < 49) {
+            return "Heavy Load";
+        }
+        return "Max Load";
+    }
 
     protected override void initialise() {
         RecUI = ui.GetComponent<ReactorUI>();
-        online = false;
+        RecUI.setTerminal(this);
+        online = true;
         SetRod(100);
+        temp = 0;
+    }
 
-        
+    public void SetRod(float rod) {
+        this.rod = rod;
+        powerUnits = (int)(100 - rod) / 2;
+        PowerSystem.setPower(powerUnits);
     }
-    public void SetRod(int rod) {
-        RecUI.controlRod.value = rod;
-        RecUI.cRodNum.text = RecUI.controlRod.value.ToString();
-    }
+
+
     public void powerUP() {
-        if (RecUI.tempGage.value == 0) {
+        if (temp <= 0 && PowerLines.getFixed()) {
             powerUnits = PowerSystem.restore();
             online = true;
-            RecUI.powerUsage.text = powerUnitsAvail.ToString();
-            RecUI.status.text = "Light Load";
+            RecUI.restart.interactable = false;
             RecUI.shutdown.interactable = true;
-
+            RecUI.controlRod.interactable = true;
         }
     }
-    public void ReactorOverload() {
-        Toast.addToast("Reactor overload\n Powering Down", 3);
-        RecUI.status.text = "Cooling";
+
+    public void powerDown(bool crash) {
+        if (crash) {
+            Toast.addToast("Reactor overload\n Powering Down", 3);
+            PowerLines.onBreak();
+        }
+        overload = crash;
+
         online = false;
-        overload = true;
         SetRod(100);
-        powerUnits = PowerSystem.crash(); //removed when set draw is implemented
-        RecUI.powerUsage.text = powerUnitsAvail.ToString();
-        //code to flip breakers.
+        powerUnits = PowerSystem.crash();
+
+        RecUI.restart.interactable = true;
         RecUI.controlRod.interactable = false;
-        RecUI.shutdown.interactable = false;
-    }
-    public void EmergencyPowerDown() {
-        RecUI.status.text = "Cooling";
-        online = false;
-        overload = false;
-        RecUI.controlRod.interactable = false;
-        SetRod(100);
-        powerUnits = PowerSystem.crash(); //removed when set draw is implemented
-        RecUI.powerUsage.text = powerUnitsAvail.ToString();
         RecUI.shutdown.interactable = false;
     }
  
-
-    // Update is called once per frame
+    // doUpdate is called once per frame
     protected override void doUpdate() {
         if (doBreak) {
             doBreak = false;
-            ReactorOverload();
-        }
-        if (Input.GetMouseButtonUp(0)) {
-            RecUI.shutdown.onClick.AddListener(() => EmergencyPowerDown());
+            temp = 100;
         }
 
-        RecUI.controlRod.interactable = true;
-        RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
-
-
-        if (Input.GetMouseButtonUp(0)) {
-            if (!online && RecUI.tempGage.value == 0)
-            {
-                RecUI.restart.onClick.AddListener(() => powerUP());
-            }
+        if (temp >= 100) {
+            powerDown(true);
         }
-        if (RecUI.tempGage.value == 100) {
-            ReactorOverload();
+
+        if (online && powerUnits != 0) {
+            heatingUp();
+        } else {
+            coolingDown();
         }
     }
-    void LateUpdate() {
-        if (online)
-        {
-            RecUI.controlRod.interactable = true;
-            RecUI.controlRod.onValueChanged.AddListener(delegate { ValueChangeCheck(); });
-            RecUI.tempNum.text = RecUI.tempGage.value.ToString();
-            RecUI.restart.interactable = false;
-        }
-        if(!online)
-        {
-            RecUI.controlRod.interactable = true;
-            RecUI.restart.interactable = true;
-        }
-
-        if (online) {
-            if (powerUnits <= 15) {
-                RecUI.status.text = "Light Load";
-                heatingUp();
-                //SetRod(75);
-            }
-            if (powerUnits >= 16 && powerUnits < 34) {
-                RecUI.status.text = "Medium Load";
-                heatingUp();
-                //SetRod(50);
-            }
-            if (powerUnits >= 35 && powerUnits < 49) {
-                RecUI.status.text = "Heavy Load";
-                heatingUp();
-                //SetRod(25);
-            }
-            if (powerUnits == 50) {
-                RecUI.status.text = "Max Load";
-                heatingUp();
-                //SetRod(100);
-            }
-        }
-
-        if (!online){
-            if (overload) {
-                sCool();
-            } else if (!overload) {
-                fCool();
-            }
-        }
-    }
-
- 
 
     public void heatingUp() {
-        RecUI.tempGage.value += (((Time.deltaTime + powerUnitsAvail / 4) *fillRate));
+        temp += (((Time.deltaTime + powerUnits / 4) *fillRate));
     }
 
-    public void fCool() {
-        RecUI.tempGage.value -= DecRate * fillRateMult;
-        RecUI.tempNum.text = RecUI.tempGage.value.ToString();
-        RecUI.rTimer.text = RecUI.tempGage.value.ToString();
-        fTimer(RecUI.tempGage.value);
-    }
-    public void sCool() {
-        RecUI.tempGage.value -= DecRate;
-        RecUI.tempNum.text = RecUI.tempGage.value.ToString();
-        sTimer(RecUI.tempGage.value);
-    }
-
-    void sTimer(float time)
-    {
-        
-        
-            RecUI.rTimer.text = time.ToString();
-            
-        
-    }
-    void fTimer(float time)
-    {
-       
-            RecUI.rTimer.text = time.ToString();
-            
-        
+    public void coolingDown() {
+        int mod = 1;
+        if (!overload) {
+            mod = fillRateMult;
+        }
+        temp = temp <= 0 ? 0 : temp - DecRate * mod;
     }
 
     public override void interact() {
@@ -195,7 +149,5 @@ public class ReactorTerminal : Terminal {
         }
     }
 
-    protected override void onClose() {
-
-    }
+    protected override void onClose() {}
 }

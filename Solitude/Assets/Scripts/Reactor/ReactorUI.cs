@@ -15,6 +15,8 @@ public class ReactorUI : MonoBehaviour {
     public ReactorTerminal RT;
     public Text rTimer;
 
+    private ReactorTerminal recTerm;
+
     void Awake() {
         status = GameObject.Find("ReacStat").GetComponent<Text>();
         tempGage = GameObject.Find("tempGage").GetComponent<Slider>();
@@ -25,13 +27,36 @@ public class ReactorUI : MonoBehaviour {
         cRodNum = GameObject.Find("CRodValue").GetComponent<Text>();
         restart = GameObject.Find("ReactorRestartBut").GetComponent<Button>();
         rTimer = GameObject.Find("RebootTimeUnityVal").GetComponent<Text>();
-
     }
 
-    
+    public void setTerminal(ReactorTerminal rt) {
+        recTerm = rt;
+    }
 
-    public void SetRod(int rod) {
-        controlRod.value = rod;
-        cRodNum.text = controlRod.value.ToString();
+    void Start() {
+        shutdown.onClick.AddListener(delegate { EmergencyPowerDown(); });
+        controlRod.onValueChanged.AddListener(delegate { SetRod(controlRod.value); });
+        restart.onClick.AddListener(delegate { powerUP(); });
+    }
+
+    void EmergencyPowerDown() {
+        recTerm.powerDown(false);
+    }
+
+    void SetRod(float rod) {
+        recTerm.SetRod(rod);
+    }
+
+    void powerUP() {
+        recTerm.powerUP();
+    }
+
+    void Update() {
+        controlRod.value = recTerm.getRod();
+        tempNum.text = recTerm.getTemp().ToString();
+        cRodNum.text = recTerm.getRod().ToString();
+        powerUsage.text = recTerm.getPow().ToString();
+        rTimer.text = recTerm.getTime().ToString();
+        status.text = recTerm.getStatus();
     }
 }
