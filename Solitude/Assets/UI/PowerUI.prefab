@@ -400,7 +400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 090b4d675a89b60478e48e25905b6797, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayName: CRYO_STATUS
+  displayName: CRYO_STASIS
   minPower: 11
   powered: {r: 120, g: 255, b: 6, a: 255}
 --- !u!114 &114678087515773542
