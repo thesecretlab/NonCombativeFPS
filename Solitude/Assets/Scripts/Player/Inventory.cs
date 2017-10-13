@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Item contains the type of item and how many are stacked.
+/// It Also includes the GameObjects displaying the sprite and ammount that are stacked.
+/// </summary>
 public struct item{
-	public int id { get; set; }			//Object Type
-	public int ammount { get; set; }	//Ammount of object or left uses of obbject;
-	public GameObject obj {get; set;}	//Sprite Image
-	public GameObject text {get; set;}	//Text to display ammount
+	///integear ID corrisponding to the item type
+	public int id { get; set; }
+	///Number of the item stacked
+	public int ammount { get; set; }
+	///The GameObject displaying the sprite for the specific item type.
+	public GameObject obj {get; set;}
+	///The GameObject displaying the text indicating how many are stacked.
+	public GameObject text {get; set;}
 }
 
 
@@ -15,64 +23,96 @@ public struct item{
 //code for item switching adapted from https://www.youtube.com/watch?v=Dn_BUIVdAPg&ab_channel=Brackeys
 //items should be made a child of the itemholder object on the player for this to work
 
-/*
- * Inventory Script handles player item storage and selection. Items are stored as a struct in a 2D array matching rows and cols
- * as they are displayed in game. The item sturct contains "id" representing the object type, "ammount" the ammount of the object
- * and "obj" the object used to display the image of the icon. 
- * The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
- * 
- * By Brendan
- * Modified for inventory storage by Alexander Tilley (Last edit 04/10/2017)
-*/
+/// <summary>
+/// Inventory Script handles player item storage and selection. Items are stored as a struct in a 2D array matching rows and cols
+/// as they are displayed in game. The item sturct contains "id" representing the object type, "ammount" the ammount of the object 
+/// and "obj" the object used to display the image of the icon. 
+/// The icons (sprites) are stored in "pictures" array with position corrisponding to "id". 
+/// </summary>
+/// <remarks> 
+/// By Brendan
+/// Modified for inventory storage by Alexander Tilley (Last edit 04/10/2017)
+/// </remarks>
 public class Inventory : MonoBehaviour {
 
-	public int selectedItem = 0;					//
+	///Current selected position in hotbar.
+	public int selectedItem = 0;
+	///Main Camera to get resolution (pre-Set in Unity).
+	public Camera mainCam;
+	///Item Options to perform opertions (Pre-set in Unity).
+	public GameObject options;
+	///Toaster for giving player feedback (Pre-Set in Unity).
+	public Toast toaster;
 
-	public Camera mainCam;							//Main Camera to make sure inventory fits screen (pre-Set Unity)
-	public GameObject options;						//Item Options to perform opertions (pre-set Unity)
-	public Toast toaster;							//Toaster for giving player feedback (Pre-Set Unity)
-
-	public int sel_row_1;							//Selected Items rows and cols (To Hold)
+	///First Selected Item row position for operations.
+	public int sel_row_1;
+	///First Selected Item column position for operations.
 	public int sel_col_1;
+	///Second Selected Item row position for operations.
 	public int sel_row_2;
+	///Second Selected Item column position for operations.
 	public int sel_col_2;
 
 
+	///The maximum number all items can stack to.
+	private const int MAXSTACK = 20;
+	///Total number of rows in the inventory.
+	private const int INV_ROWS = 5;
+	///Total number of columns in the inventory.
+	private const int INV_COLUMNS = 4;
 
-	private const int MAXSTACK = 20;				//Max number of stackable items
-	private const int INV_ROWS = 5;					//Inventory Rows
-	private const int INV_COLUMNS = 4;				//Inventory columns
+	///The Prefabricated Object for displaying the item picture (pre-set in Unity).
+	public GameObject emptyImage;
+	///The Prefabricated Object for displaying the ammount of stacked items (pre-set in Unity).
+	public GameObject emptyText;
 
-	public GameObject emptyImage;					//Base Object Spirte (pre-set in Unity)
-	public GameObject emptyText;					//Base Object text (pre-set in Unity)
 
-	public item [,] inventory = new item[INV_ROWS,INV_COLUMNS];	//2D array of items
+	///Inventory used to store items for the player.
+	public item [,] inventory = new item[INV_ROWS,INV_COLUMNS];
 
-	public const int EMPTY_ID = 			0;			//Empty Inventory Slot ID
+	///Unqiue identifier for an empty inventory slot.
+	public const int EMPTY_ID = 			0;
+	///Unqiue identifier for a Screw driver.
+	public const int SCREWDRIVER_ID = 		1;
+	///Unqiue identifier for a Plasma cutter..
+	public const int PLASMACUTTER_ID = 		2;
+	///Unqiue identifier for a Welder.
+	public const int WELDER_ID = 			3;
+	///Unqiue identifier for a  Power cable.
+	public const int POWERCABLE_ID = 		4;
+	///Unqiue identifier for a Circuit board.
+	public const int CIRCUITBOARD_ID = 		5;
+	///Unqiue identifier for Scrap metal.
+	public const int SCRAPMETAL_ID = 		6;
+	///Unqiue identifier for Screws.
+	public const int SCREWS_ID = 			7;
 
-	public const int SCREWDRIVER_ID = 		1;			//ScrewDriver ID
-	public const int PLASMACUTTER_ID = 		2;			//PlasmaCutter ID
-	public const int WELDER_ID = 			3;			//Welder ID
-	public const int POWERCABLE_ID = 		4;			//PowerCable ID
-	public const int CIRCUITBOARD_ID = 		5;			//Circuit Board ID
-	public const int SCRAPMETAL_ID = 		6;			//Scrap Metal ID
-	public const int SCREWS_ID = 			7;			//Screws ID
 
-	public bool displayed = false;						//Current display status of the main inventory (does not update)
+	///The status of whether or not the main inventory is displayed.
+	public bool displayed = false;
 
-	public Sprite[] pictures = new Sprite[8];			//Array of sprites corisponding to item ids (pics pre-set in Unity)
-	public GameObject[] heldItem = new GameObject[8];	//Array of Gameobjects corisponding to item ids for hand held objects
-	public string[] itemNames = new string[8];			//Array of Strings corrisoinding to item ids for item names
+	///Array of sprites corisponding to item ids (pictures pre-set in Unity).
+	public Sprite[] pictures = new Sprite[8];
+	///Array of Gameobjects corisponding to item ids for hand held objects.
+	public GameObject[] heldItem = new GameObject[8];
+	///Array of Strings corrisoinding to item ids for item names.
+	public string[] itemNames = new string[8];
 
-	public float HEIGHT =  Screen.height;		//Window Height
-	public float WIDTH = Screen.width;			//Window Width
+	///The height of the screen in pixels
+	public float HEIGHT = 0;
+	///The height of the screen in pixels
+	public float WIDTH = 0;
 
 	//public Vector3 NextPos = new Vector3(0.0f+(0.01f*WIDTH),0.0f+(HEIGHT-10.0f),1.0f);
 
 
 
 
-	// Use this for initialization
+	/// <summary>
+	/// Initialises the Inventory by positioning each Item using the screen size. As well as positioning the Options GameObject.
+	/// It also adds the item name's to itemNames and calls giveRandomItem(1,3) six times.
+	/// It also sets the values for each inventory item's onClickItem.cs to match the row and column it is for operation calls.
+	/// </summary>
 	void Start () {
 		try{//Allows button click comminication to this script
 			options.GetComponentsInChildren<onClickSwap> () [0].parent = this;	//Link Swap Button		
@@ -145,16 +185,15 @@ public class Inventory : MonoBehaviour {
 		giveRandomItem (1, 3);
 		giveRandomItem (1, 3);
 		giveRandomItem (1, 3);
-		giveRandomItem (1, 3);
-		giveRandomItem (1, 3);
-		giveRandomItem (1, 3);
-		giveRandomItem (1, 3);
 	}
 
 
 
 
-	// Update is called once per frame
+	/// <summary>
+	/// Update is called once per frame to check for input to change the selected hotbar item as well as
+	/// open the main inventory if 'Q' is pressed.
+	/// </summary>
 	void Update() {
 
 		int prevSelectedItem = selectedItem;
@@ -222,7 +261,10 @@ public class Inventory : MonoBehaviour {
 
 	}
 
-	//Displays Held Item on Game Screen
+	/// <summary>
+	/// Changes the player's held item.
+	/// </summary>
+	/// <param name="prevItem"> prevItem is the previous held item which SelectItem() will hide</param>
 	void SelectItem(int prevItem)
 	{
 		//Debug.Log ("Selected Item: "+selectedItem + "Prev Item: "+prevItem);
@@ -249,7 +291,9 @@ public class Inventory : MonoBehaviour {
 
 	}
 
-	//changes if the main inventory is displayed or not
+	/// <summary>
+	/// Toggles wherther the main inventory is displayed or not.
+	/// </summary>
 	public void toggleInventory(){
 		for (int r = 1; r < INV_ROWS; r++) {
 			for (int c = 0; c < INV_COLUMNS; c++) {		//For Everything but the hotbar
@@ -259,7 +303,12 @@ public class Inventory : MonoBehaviour {
 		}
 	}
 
-	//Gives any random possible item in ammounts between min and max
+	/// <summary>
+	/// Gives a random item to the player and calls insertAtTop() to add it to the inventory
+	/// </summary>
+	/// <returns><c>true</c>, if the random item was given, <c>false</c> otherwise.</returns>
+	/// <param name="min">The Minimum ammount of the item to give the player</param>
+	/// <param name="max">The Maximum ammount of the item to give the player</param>
 	public bool giveRandomItem(int min,int max){
 		if (max > MAXSTACK || max <= 0) {			//If max is valid
 			max = MAXSTACK;
@@ -271,8 +320,13 @@ public class Inventory : MonoBehaviour {
 		}
 		return insertAtTop (Random.Range (4, 7), Random.Range (min, max));	//Insert random item of random ammount
 	}
-
-	//Displays Options when an inventory item is selected and executes Swap() if needed
+		
+	/// <summary>
+	/// Typicalled called from onClickItem.cs to set the selection varible positions (e.g. sel_row_1) for operations to be applied.
+	/// Also calls swap() if operation has been pressed by the user by checking options.OnClickSwap().swap.
+	/// </summary>
+	/// <param name="row">The Row position of the item.</param>
+	/// <param name="col">The Column position of the item.</param>
 	public void itemClicked(int row,int col){
 		//Debug.Log ("Activated  row:" + row + " col: " + col);
 
@@ -292,8 +346,14 @@ public class Inventory : MonoBehaviour {
 		}
 
 	}
-
-	//Swaps an items postion in the array with anothers
+		
+	/// <summary>
+	/// Swaps the specified item at inventory[row, col] with the item at inventory[r,c].
+	/// </summary>
+	/// <param name="row">Row of the specified item.</param>
+	/// <param name="col">Column of the specified item.</param>
+	/// <param name="r">Row of the specified item to swap to</param>
+	/// <param name="c">Column of the specified item to swap to.</param>
 	public void swap(int row,int col,int r, int c){
 		int holdAmmount = inventory[r,c].ammount;		//Holds item ammount
 		int holdId = inventory [r, c].id;				//Holdes item id
@@ -310,7 +370,11 @@ public class Inventory : MonoBehaviour {
 
 	}
 
-	//Drops one item
+	/// <summary>
+	/// Discards the specified item at inventory[row,col] to drop in the gameworld.
+	/// </summary>
+	/// <param name="row">Row of the specified item.</param>
+	/// <param name="col">Column of the specified item.</param>
 	public void drop(int row, int col){
 		if (row <= -1 || col <= -1) {						//If No value default to selected postion
 			row = sel_row_1;
@@ -327,7 +391,12 @@ public class Inventory : MonoBehaviour {
 		updateText(row,col);
 	}
 
-	//Drops one item
+	/// <summary>
+	/// Uses one of the specified item at inventory[row,col].
+	/// </summary>
+	/// /// <returns><c>true</c>, if the item was used, <c>false</c> otherwise.</returns>
+	/// <param name="row">Row of the specified item.</param>
+	/// <param name="col">Column of the specified item..</param>
 	public bool use(int row, int col){
 		if (row <= -1 || col <= -1 || row > INV_ROWS || col > INV_COLUMNS) { //If Invalid range return false
 			return false;
@@ -345,6 +414,14 @@ public class Inventory : MonoBehaviour {
 
 	//Consumes the AMMOUNT of type ITEMID and returns true and only consume if it did. 
 	//(startRow and StartCol is for recusive calls should be 0 for normal calls )
+	/// <summary>
+	/// Consumes the ammount of items of type ItemID, Searches bottom to top for the items.
+	/// </summary>
+	/// /// <returns><c>true</c>, if the ammount of items exactly were consumsed, <c>false</c> otherwise.</returns>
+	/// <param name="ItemID">Type of item (e.g Inventory.POWERCABLE_ID)</param>
+	/// <param name="ammount">Ammount to consume</param>
+	/// <param name="startRow">Start row used for recursive calls otherwise should be 0.</param>
+	/// <param name="StartCol">Start columns used for recursive calls otherwise should be 0.</param>
 	public bool consume(int ItemID,int ammount,int startRow,int StartCol){
 		int rRow = -1;
 		int rCol = -1;
@@ -376,9 +453,16 @@ public class Inventory : MonoBehaviour {
 		toaster.addText ("You Need  "+ammount+" "+ itemNames [ItemID]+" to complete this task",3.0f);
 		return false;
 	}
-
-	/*returns true/false if item is found and puts the lococation of the item in row and col
-	 Starts from row, col, ensure intialisation and allows it to find multiple of the same object*/
+		
+	/// <summary>
+	/// Finds the next item inventory from bottom to top that matches item_id.
+	/// </summary>
+	/// <returns><c>true</c>, if next item was found, <c>false</c> otherwise.</returns>
+	/// <param name="row">Start row used for recursive calls otherwise should be 0.</param>
+	/// <param name="col">Start columns used for recursive calls otherwise should be 0.</param>
+	/// <param name="item_id">Item identifier (e.g Inventory.POWERCABLE_ID).</param>
+	/// <param name="fRow">The varible to output the Row position of an item of type item_id</param>
+	/// <param name="fCol">The varible to output the Colunm position of an item of type item_id</param>
 	bool findNextItem(int row,int col,int item_id, out int fRow,out int fCol){
 		for (int r = row; r < INV_ROWS; r++) {					//For all rows in inventory from row
 			for (int c = col; c < INV_COLUMNS; c++) {			//For all cols in inventory from col
@@ -394,7 +478,9 @@ public class Inventory : MonoBehaviour {
 		return false;
 	}
 
-	//Pushes all items to top of inventory but those in hotbar
+	/// <summary>
+	/// Moves all items in the inventory exluding the hotbar to the top of the inventory.
+	/// </summary>
 	void floatItems(){
 		int row = 1;		//Skip Hotbar to look for objects
 		int col = 0;		//Records Objects bottom up
@@ -428,6 +514,12 @@ public class Inventory : MonoBehaviour {
 	}
 
 	//Insert an item to the top most empty slot
+	/// <summary>
+	/// Inserts a number of a specifc item into the highest avalible inventory slot.
+	/// </summary>
+	/// <returns><c>true</c>, if the item was inserted, <c>false</c> otherwise.</returns>
+	/// <param name="id">Item Identifier (e.g Inventory.POWERCABLE_ID).</param>
+	/// <param name="ammount">Ammount of the item to insert.</param>
 	bool insertAtTop(int id, int ammount){
 		int row = -1;
 		int col = -1;
@@ -459,7 +551,11 @@ public class Inventory : MonoBehaviour {
 		Debug.Log ("Inventory Full Or Max Stack Achieved");	//TODO display message to player
 	}
 
-	//Updates the displayed text of a specific item //TODO Could also update item image in this function
+	/// <summary>
+	/// Updates the ammount displayed of an item typically called after an inventory operation.
+	/// </summary>
+	/// <param name="row">Row of the specified item.</param>
+	/// <param name="col">Column of the specified item.</param>
 	public void updateText(int row,int col){
 		if (inventory [row, col].id == 0) {
 			inventory [row, col].text.GetComponent<Text> ().text = "";										//If there is no ammount
@@ -468,10 +564,17 @@ public class Inventory : MonoBehaviour {
 		} else {
 			inventory [row, col].text.GetComponent<Text> ().text = "x" + inventory [row, col].ammount;		//If there is more than 9
 		}
+		//TODO Could also update item image in this function
 	}
-
-	//Returns a vector as a var to satsify Unity
-	Vector3 newVector(float x, float y,float z){
+		
+	/// <summary>
+	/// Creates a newVector
+	/// </summary>
+	/// <returns>The vector.</returns>
+	/// <param name="x">The x coordinate.</param>
+	/// <param name="y">The y coordinate.</param>
+	/// <param name="z">The z coordinate.</param>
+	private Vector3 newVector(float x, float y,float z){
 		Vector3 toReturn = new Vector3 (x, y, z);
 		return toReturn;
 	}
