@@ -7,6 +7,9 @@ using UnityEngine;
 /// Used by the Inventory script to check if the player has clicked the button this script is attached to.
 /// Attached to Swap button in the Options prefab within Unity.
 /// </summary>
+///<remarks> 
+/// By Alexander Tilley (Last edit 13/10/2017)
+/// </remarks>
 public class onClickSwap : MonoBehaviour {
 
 	///The Buttton component of the GameObject

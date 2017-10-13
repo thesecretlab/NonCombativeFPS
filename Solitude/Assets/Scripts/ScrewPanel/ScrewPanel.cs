@@ -1,14 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-/*
- * 
- * Screw Pannel Minigame, randomly palces screws onto a canvas for the place to click them all to complete
- * the acitvity.
- * 
- *  Created By
- * 	Modified by Alexander Tilley (Last Modefied 2/10/2017)
- */
+/// <summary>
+/// Screw Pannel Minigame, randomly places screws onto a canvas for the player to click them all to complete the acitvity.
+/// </summary>
+/// <remarks> 
+/// Created By Jeffery Albion
+/// Modified By Alexander Tilley to prevent screw overlaps (Last edit 13/10/2017)
+/// </remarks>
 public class ScrewPanel : Terminal, Breakable {
 
 

@@ -3,25 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// A spread of text to display to the player for a given ammount of time
+/// Used in Toast script
+/// </summary>
 public struct Spread{
-	public string text { get; set; }			//Text
-	public float seconds {get; set;}			//Time to Display In seconds
+	/// Text to display
+	public string text { get; set; }
+	/// Ammount of time in seconds for the text to display
+	public float seconds {get; set;}
 }
 
-/*
- * Displays Text in lower centre of screen for player information for a given ammount of time
- * 
- * Created By Alexander Tilley (Last Edit: 5/10/2017)
- */
+/// <summary>
+/// Displays popup text on the screen for player information for a length of specified time.
+/// </summary>
+/// <remarks> 
+/// By Alexander Tilley (Last edit 13/10/2017)
+/// Modified by INSERTNAME HERE for ????
+/// </remarks>
 public class Toast : MonoBehaviour {
 
+	///
     static Toast toast;
 
-	private const int queueLength = 3;						//Ammount of Text to display at one time
-	public GameObject textobj;								//Text Object that displays Text
+	///The Maximum number of lines of text at one time.
+	private const int queueLength = 3;
+	///GameObject that displays the text.
+	public GameObject textobj;
+	///A queue of text to display in order of expirery.
 	private Spread[] toaster = new Spread[queueLength];		//Queue in order of expirey
 
-	// Use this for initialization
+	/// <summary>
+	/// Initialises Toast by setting up Spread[] to be empty.
+	/// </summary>
 	void Start () {
 		//textobj.SetActive (false);
 		//textobj = gameObject;						//Get Object its attached to
@@ -35,6 +49,9 @@ public class Toast : MonoBehaviour {
 		}
 	}
 
+	/// <summary>
+	/// 
+	/// </summary>
     void Awake() {
         if (toast == null) {
             toast = this;
@@ -43,11 +60,19 @@ public class Toast : MonoBehaviour {
         }
     }
 
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <returns><c>true</c>, if toast was added, <c>false</c> otherwise.</returns>
+	/// <param name="text">Text.</param>
+	/// <param name="seconds">Seconds.</param>
     public static bool addToast(string text, float seconds) {
         return Toast.toast.addText(text, seconds);
     }
 
-	// Update is called once per frame
+	/// <summary>
+	/// Update is called once per frame to reduce each Spread time and remove expired spreads.
+	/// </summary>
 	void Update () {
 		for (int i = 0; i < queueLength; i++) {									//Remove time
 			if (toaster[i].text != null && toaster [i].seconds <= 0.0f) {					//If Item needs to be cleared
@@ -64,8 +89,13 @@ public class Toast : MonoBehaviour {
 		}
 
 	}
-
-	//Adds Text to display for an ammount of time and displays in order of how quickly it should be removed
+		
+	/// <summary>
+	/// Adds Text to display for an ammount of time and displays in order of how quickly it should be removed.
+	/// </summary>
+	/// <returns><c>true</c>, if text was added, <c>false</c> otherwise.</returns>
+	/// <param name="text">Text to display.</param>
+	/// <param name="seconds">Seconds to display for.</param>
 	public bool addText(string text, float seconds){
 		Spread jam;
 		jam.text = text;
@@ -97,8 +127,10 @@ public class Toast : MonoBehaviour {
 		Debug.Log("Toaster IS FULL");
 		return false;
 	}
-
-	//Updates the text to display on the HUD
+		
+	/// <summary>
+	/// Updates the text to display on the HUD
+	/// </summary>
 	void updateText(){
 		textobj.GetComponent<Text> ().text = "";
 		for (int i = 0; i < queueLength; i++) {								//Update Text

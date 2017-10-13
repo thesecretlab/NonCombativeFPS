@@ -6,6 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Item contains the type of item and how many are stacked.
 /// It Also includes the GameObjects displaying the sprite and ammount that are stacked.
+/// Used in the Inventory script
 /// </summary>
 public struct item{
 	///integear ID corrisponding to the item type
@@ -31,7 +32,7 @@ public struct item{
 /// </summary>
 /// <remarks> 
 /// By Brendan
-/// Modified for inventory storage by Alexander Tilley (Last edit 04/10/2017)
+/// Modified for inventory storage by Alexander Tilley (Last edit 13/10/2017)
 /// </remarks>
 public class Inventory : MonoBehaviour {
 

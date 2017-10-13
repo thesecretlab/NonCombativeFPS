@@ -7,6 +7,9 @@ using UnityEngine;
 /// Used to call the Inventory.drop() function when the player clicks the button this script is attached to.
 /// Attached to Drop button in the Options prefab within Unity.
 /// </summary>
+///<remarks> 
+/// By Alexander Tilley (Last edit 13/10/2017)
+/// </remarks>
 public class onClickDrop : MonoBehaviour {
 
 	///The Buttton component of the GameObject

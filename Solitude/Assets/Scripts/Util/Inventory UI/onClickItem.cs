@@ -9,6 +9,9 @@ using UnityEngine;
 /// so that when the player clicks an item; this script sends the row and column information to the Inventory so it can perform 
 /// opperations.
 /// </summary>
+///<remarks> 
+/// By Alexander Tilley (Last edit 13/10/2017)
+/// </remarks>
 public class onClickItem : MonoBehaviour {
 
 	///The button the script will add a listner to.
