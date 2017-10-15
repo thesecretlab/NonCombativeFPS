@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Provides functionality to the pause menu by adjusting playerprefs
+/// </summary>
+
 public class Settings : MonoBehaviour
 {
 

@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// BackgroundAudioManager updates the volume of the game's background after each update
+/// </summary>
+
+
 public class BackgroundAudioManager : MonoBehaviour {
 
     public AudioSource BGSound;

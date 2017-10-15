@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Checks if an item can be given from a crate, and if so, gives a random to the player
+/// </summary>
+
 public class CrateGiveItem : Interactable {
 
     public Inventory inv;
