@@ -10,16 +10,16 @@ using UnityEngine.UI;
 public class CryoTerminalScript : Terminal, PowerConsumer
 {
 
-    public GameObject[] crew; // array of gameobjects handling all crew objects
-    GameObject crew_power; //Game object handling the crew power
-    GameObject crew_health;//Game object handling the crew health
-    Text crew_power_text; //text that displays power offline or online status for each crew member
-    Text crew_health_text;//text that displays the health from 0 to 100 for the crew members
-    bool powervalue = false; //bool to handle power on or off status
-    bool crewdead = false; //bool to handle crew dead or alive status
-    public bool allcrewdead = false; //bool to handle if all crew are dead or not. 
-    float CrewHealthNum = 100.0f; //variable that holds the health value of the crew member
-    int crewcount = 0; //counter used in counting crew members
+    public GameObject[] crew;           // array of gameobjects handling all crew objects
+    GameObject crew_power;              //Game object handling the crew power
+    GameObject crew_health;             //Game object handling the crew health
+    Text crew_power_text;               //text that displays power offline or online status for each crew member
+    Text crew_health_text;              //text that displays the health from 0 to 100 for the crew members
+    bool powervalue = false;            //bool to handle power on or off status
+    bool crewdead = false;              //bool to handle crew dead or alive status
+    public bool allcrewdead = false;    //bool to handle if all crew are dead or not. 
+    float CrewHealthNum = 100.0f;       //variable that holds the health value of the crew member
+    int crewcount = 0;                  //counter used in counting crew members
 
     int needPower = 11; //value represents the Power required to power the cryoroom
 
@@ -101,6 +101,7 @@ public class CryoTerminalScript : Terminal, PowerConsumer
         }
     }
 
+    //initialization function 
     protected override void initialise()
     {
 
