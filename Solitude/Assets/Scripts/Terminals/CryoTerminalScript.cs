@@ -121,7 +121,9 @@ public class CryoTerminalScript : Terminal, PowerConsumer
     {
 
     }
-    //Update power function.
+
+    //the function is called when the power system changes the amount of power delivered to that object. 
+    //Inherited from the power consumer interface
     public void updatePower(bool powered) {
         String toast = powered ? "Cryo Power Restored" : "WARNING! Cryo Power Failure";
         Toast.addToast(toast, 3);
