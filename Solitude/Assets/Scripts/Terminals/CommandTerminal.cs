@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CommandTerminal : Terminal, Breakable {
-    public bool doBreak;
+    
+	
+	///Variable Declration
+	public bool doBreak;
     Text t;
     string line = "";
     Boolean service = true;
@@ -14,17 +17,20 @@ public class CommandTerminal : Terminal, Breakable {
     BreakEvent broken;
 
     int dashCount = 0;
-    //the number of frames the dash is shown and not shown on
+   
+   ///The number of frames the dash is shown and not shown on
     int dashFrames = 20;
 
-    //bool backspacepressed = false;
 
-    List<string> console = new List<string>();
-
+    ///List declarations to store all strings to be display on the screen.
+	List<string> console = new List<string>();
+	///List of commands the user can execute.
     List<string> commands = new List<string>();
 
+	///Amount of lines to be printed to the screen.
     int LINES = 19;
 
+	///This function will execute when the terminal is interacted with.
     public override void interact() {
         if (Ship.ship.getAccess()) {
             show();
@@ -33,18 +39,19 @@ public class CommandTerminal : Terminal, Breakable {
             Ship.ship.showAccess(true);
         }
     }
-
+	///This function is called when the command terminal breaks.
     public void onBreak() {
         Toast.addToast("Navigation Corrupted. Please reset", 3);
         isBroken = false; //idk it was like this when I found it
         this.setActive(true);
         GameConditions.setTraveling(false);
     }
-
+	///Initializes all variables.
     protected override void initialise() {
         broken = new BreakEvent(this, 20);
         t = ui.GetComponentInChildren<Text>();
         t.text = "";
+		///Adds the following strings as commands to the command list.
         commands.Add("Go to Navigation");
         commands.Add("Stop Navigation");
         commands.Add("Load Navigation Backups");
@@ -52,16 +59,18 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("Help");
         addline("Available Commands");
         
+		///Adds enough lines to display all commands
         for (int i = commands.Count; i < LINES; i++) {
             addline("");
         }
+		///Adds each command to the screen for the user to view.
         foreach (string command in commands) {
             addline(command);
         }
         onBreak();
     }
 
-    //used to add a line to the console;
+    ///used to add a line to the console;
     private void addline(string line) {
         console.Add(line);
         while (console.Count > LINES) {
@@ -69,11 +78,17 @@ public class CommandTerminal : Terminal, Breakable {
         }
     }
 
-    //called when the Return key is pressed
+    ///called when the Return key is pressed
     private void onSubmit(string line) {
-        addline(line);
+        
+		///Adds the line that the user typed to the screen
+		addline(line);
+		///Makes the string the user entered all lower case for comparison.
         String entry = line.ToLower();
+		///Trims whitespace of the string to get more accurate comparison results.
         entry = entry.Trim();
+		
+		///executes the following switch statement with the entry as the case and updates the command terminal if valid command is entered.
         switch (entry) {
             case "go to navigation":
                 addline("moving to navigation directory");
@@ -117,10 +132,13 @@ public class CommandTerminal : Terminal, Breakable {
         }
     }
     protected override void doUpdate() {
-        if (doBreak) {
+        ///executes if the terminal is broken
+		if (doBreak) {
             doBreak = false;
             onBreak();
         }
+		
+		///allows the entry of dyanamic characters onto the command screen.
         dashCount++;
         if (dashCount > 2 * dashFrames) {
             dashCount -= 2 * dashFrames;
@@ -150,6 +168,7 @@ public class CommandTerminal : Terminal, Breakable {
         }
     }
     
+	///This function executes when the command terminal is fixed.
     public void onFix() {
         GameConditions.setTraveling(true);
         this.setActive(false);

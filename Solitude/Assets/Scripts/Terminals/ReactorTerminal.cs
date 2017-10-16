@@ -4,23 +4,30 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class ReactorTerminal : Terminal {
-    public PowerLines PowerLines;
+   
+    
+    
+	///Powerlines object declaration
+	public PowerLines PowerLines;
 
-    public bool doBreak;
-    ReactorUI RecUI;
+    
+	/// Reactor UI object declaration.
+	ReactorUI RecUI;
+	///Reactor Terminal object declaration.
     public static ReactorTerminal reactorObj;
 
+	///Variable Declarations
     public int powerUnits;
     bool online;
     bool overload;
     public float fillRate = 0.00001f;
     float DecRate = 0.1f;
     int fillRateMult = 2;
-
+	public bool doBreak;
     private float temp;
     private float rod;
     
-    // Use this for initialization
+    /// Use this for initialization when the script is first accessed
     void Awake() {
         if (reactorObj == null) {
             reactorObj = this;
@@ -29,6 +36,7 @@ public class ReactorTerminal : Terminal {
         }
     }
 
+	///Getters for all reactor functions.
     public float getTemp() {
         return temp < 0 ? 0 : temp;
     }
@@ -41,6 +49,7 @@ public class ReactorTerminal : Terminal {
     public float getTime() {
         return online ? 0 : temp;
     }
+	/// This function monitors and updates the reactor status as things change through out the play.
     public string getStatus() {
         if (!online) {
             if (getTime() != 0) {
@@ -70,6 +79,7 @@ public class ReactorTerminal : Terminal {
         return "Max Load";
     }
 
+	///Use startup initialization of UI elements.
     protected override void initialise() {
         RecUI = ui.GetComponent<ReactorUI>();
         RecUI.setTerminal(this);
@@ -77,15 +87,16 @@ public class ReactorTerminal : Terminal {
         SetRod(100);
         temp = 0;
     }
-
+	///Sets the rod value and the rod text
     public void SetRod(float rod) {
         this.rod = rod;
         powerUnits = (int)(100 - rod) / 2;
         PowerSystem.setPower(powerUnits);
     }
 
-
-    public void powerUP() {
+	/// This function executes when the reactor needs to power up. settings all the ui elements and calls restore on the power system, so the power units can be allocated again.
+    /// updates the boolean online to true to let the script know to heat things up again.
+	public void powerUP() {
         if (temp <= 0 && PowerLines.getFixed()) {
             powerUnits = PowerSystem.restore();
             online = true;
@@ -95,6 +106,7 @@ public class ReactorTerminal : Terminal {
         }
     }
 
+	/// this funtion executes when the reactor powers down for any reason, through a restart or a overload.
     public void powerDown(bool crash) {
         if (crash) {
             Toast.addToast("Reactor overload\n Powering Down", 3);
@@ -111,8 +123,10 @@ public class ReactorTerminal : Terminal {
         RecUI.shutdown.interactable = false;
     }
  
-    // doUpdate is called once per frame
+    /// doUpdate is called once per frame
+	/// This controls when the reactor will overload, the heating up and cooling down.
     protected override void doUpdate() {
+		
         if (doBreak) {
             doBreak = false;
             temp = 100;
@@ -128,11 +142,12 @@ public class ReactorTerminal : Terminal {
             coolingDown();
         }
     }
-
+	/// Heating up functions used to increase the reactor temperature based on current power draw.
     public void heatingUp() {
         temp += (((Time.deltaTime + powerUnits / 4) *fillRate));
     }
 
+	/// Cooling down variable controls how fast the reactor will cooldown after overload or powerdown.
     public void coolingDown() {
         int mod = 1;
         if (!overload) {
@@ -141,6 +156,7 @@ public class ReactorTerminal : Terminal {
         temp = temp <= 0 ? 0 : temp - DecRate * mod;
     }
 
+	///function that is called when the reactor terminal is interacted with.
     public override void interact() {
         if (Ship.ship.getAccess()) {
             show();
