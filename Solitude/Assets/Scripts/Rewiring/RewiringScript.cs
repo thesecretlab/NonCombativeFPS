@@ -16,6 +16,8 @@ public class RewiringScript : MonoBehaviour {
     short green2 = 0;
     string lastColourPressed;
     string colourPressed;
+	
+	///Declaration for all the button objects
     GameObject blueBtn1;
     GameObject blueBtn2;
     GameObject redBtn1;
@@ -24,7 +26,8 @@ public class RewiringScript : MonoBehaviour {
     GameObject greenBtn2;
     public Text Gamewinalert;
 
-    // Use this for initialization
+    /// Use this for initialization
+	///invoke repeating will reset the wires every 3 seconds. simply change the f value for longer times.
     void Start () {
         lastColourPressed = "null";
         colourPressed = "null";
@@ -35,14 +38,14 @@ public class RewiringScript : MonoBehaviour {
     
 
 
-    // Update is called once per frame
+    /// Update is called once per frame
     void Update () {
 
         
-
+		///if the both blue buttons are pending then deactivate those buttons and reset the wires.
         if(blue1 == 1 && blue2 == 1)
         {
-            //Disable blue1 and blue2 buttons
+            ///Disable blue1 and blue2 buttons
             GameObject blueBtn1 = GameObject.Find("BlueButton1");
             GameObject blueBtn2 = GameObject.Find("BlueButton2");
 
@@ -57,10 +60,10 @@ public class RewiringScript : MonoBehaviour {
 
 
         }
-
+		///if both red buttons are pending then deactivate those buttons and reset the wires.
         if(red1 == 1 && red2 == 1)
         {
-            //Disable red1 and red2 buttons
+            ///Disable red1 and red2 buttons
             GameObject redBtn1 = GameObject.Find("RedButton1");
             GameObject redBtn2 = GameObject.Find("RedButton2");
 
@@ -73,9 +76,10 @@ public class RewiringScript : MonoBehaviour {
             resetWires();
         }
 
+		///if the both green buttons are pending then deactivate those buttons and reset the wires.
         if(green1 == 1 && green2 == 1)
         {
-            //Disable green1 and green2
+            ///Disable green1 and green2
             GameObject greenBtn1 = GameObject.Find("GreenButton1");
             GameObject greenBtn2 = GameObject.Find("GreenButton2");
 
@@ -89,8 +93,8 @@ public class RewiringScript : MonoBehaviour {
 
             resetWires();
         }
-        //If statements to run when a incorrect sequence is added, the first 1 to check if the colours dont match and the second to make sure
-        //that both strings have been assigned a colour, meaning a second button has been pressed.
+     ///If statements to run when a incorrect sequence is added, the first 1 to check if the colours dont match and the second to make sure
+     ///that both strings have been assigned a colour, meaning a second button has been pressed.
      if(lastColourPressed != colourPressed)
         {
             if (colourPressed != "null")
@@ -122,6 +126,7 @@ public class RewiringScript : MonoBehaviour {
             }
         }
 
+	///Minigame completion condition.
      if(blue1 + blue2 + red1 + red2 + green1 + green2 == 12)
         {
             Gamewinalert.text = "=== POWER CONDUIT RESTORED ===";
@@ -135,6 +140,8 @@ public class RewiringScript : MonoBehaviour {
 
     }
 
+	
+	///Resets all wires to base values.
     public void resetWires()
     {
         if (red1 + red2 != 4)
@@ -154,7 +161,7 @@ public class RewiringScript : MonoBehaviour {
         }
     }
     
-
+	///Functions for each button that will adjust the value when the button is pressed.
     public void redbutton1()
     {
         red1 = 1;
