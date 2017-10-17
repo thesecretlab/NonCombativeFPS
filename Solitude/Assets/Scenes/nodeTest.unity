@@ -401,6 +401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b01f093c290ea84b82534cca644a1a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  iii: 0
   FPSActive: 1
   interactableText: {fileID: 2134471928}
 --- !u!4 &788235476
@@ -523,6 +524,17 @@ Prefab:
       propertyPath: Firewallsource
       value: 
       objectReference: {fileID: 1327937396}
+    - target: {fileID: 114990839200400964, guid: f4ae0747318c3b742ba31dceda78f6a7,
+        type: 2}
+      propertyPath: m_Text
+      value: "Your objective is to find the system core before the timer runs out.
+        \n\nYour beachhead into the system (starting point) will be to click on the
+        only node that is open to you (light grey).\n\nAs you progress through the
+        network, you may uncover firewalls which will block access to other connected
+        nodes. \n\nIn addition, you may also run into Intrusion Detection Systems
+        (IDS), that will reduce the amount of time you have left to find the system
+        core. \n"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f4ae0747318c3b742ba31dceda78f6a7, type: 2}
   m_IsPrefabParent: 0
