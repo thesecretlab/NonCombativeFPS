@@ -91,83 +91,29 @@ public class Ship : MonoBehaviour {
         AccessUI.SetActive(false);
 
         InvokeRepeating("tryBreak", waitSec, repeatSec);
-        //lights = GetComponentsInChildren<Light>();			//TODO NOT NEEDED?
-
-		/*foreach(GameObject obj in GameObject.FindObjectsOfType<GameObject>()){		//For each obj
-			if (obj.name.Length >= 10) {
-				if(obj.name.Substring(0,10).CompareTo("FloodLight") == 0){			//named FloodLight*****
-					floodlights.Add(obj);											//add to floodlights
-				}
-				if(obj.name.Substring(0,10).CompareTo("FluroLight") == 0){			//named FluroLight*****
-					flurolights.Add(obj);											//add to FluroLight
-				}
-			}
-		}*/
-		//Debug.Log ("flood lights found: " + floodlights.Count);
-		//Debug.Log ("fluro lights found: " + flurolights.Count);
-
-		/* 										KEEP ME JUST IN CASE -ALEX
-		AllRenderers = GetComponentsInChildren<Renderer>();						//Get all of the children's renderrs
-		//foreach( Material me in mats){ This wont work
-		foreach (Renderer re in AllRenderers) {									//For Each Renderer
-			//Debug.Log("Test");
-			//Tried "_EmissionMap"
-			//test = re.material.GetTexture("_EmissionMap");					//Get Emission Map of Renderer
-			if (re.material.globalIlluminationFlags.CompareTo(flags) == 0 && i < 1000) {	//If has map (test != null)
-				Debug.Log("Height not equal to null || flag true");
-				Temp [i] = re.material;											//Add material to Temp
-				i++;
-				if (i >= 90) {	
-					Debug.Log ("Test"+i+" ");
-				}
-			}
-			test = null;											
-		}
-		Debug.Log("New Emmission Array of size:"+i);
-		Emmision = new Material[i];									//Create Emission Array to exact size
-		while(i-1 >= 0){
-			Emmision [i-1] = Temp [i-1];								//Copy from Temp to Emission
-			i--;
-		}
-		 */
-
 	}
 
-    /*public void setPower(bool power) {
-
-		foreach (GameObject light in floodlights) {						//ForEach FloodLight
-			FloodLight[] script = light.GetComponents<FloodLight>();
-			if (script.Length >= 0) {
-				script [0].setPower (power);							//Change Power State
-			}
+    void breakAll() {
+        Debug.LogWarning("All breaking");
+        foreach (BreakEvent e in breakables) {
+            e.dobreak();
         }
-		foreach (GameObject light in flurolights) {						//ForEach FluroLight
-			FluroLight[] script = light.GetComponents<FluroLight>();
-			if (script.Length >= 0) {
-				script [0].setPower (power);							//Change power state
-			}
-		}
-    }*/
-
-    void Update() {
-
     }
 
     void tryBreak() {
         if (doBreak) {
             Debug.Log("tryBreak");
             foreach (BreakEvent e in breakables) {
-                if (Random.Range(1, breakmod) < e.breakPercent) {
+                if (Random.Range(1, 100) < e.breakPercent) {
                     e.dobreak();
                 }
             }
-            breakmod = 100;
         }
     }
 
-    public void addBreakEvent(BreakEvent e) {
-        //Debug.Log(e.breakPercent);
+    public void addBreakEvent(BreakEvent e, bool b) {
         breakables.Add(e);
+        if (b) e.dobreak();
     }
 
 	/*											KEEP ME JUST IN CASE -ALEX

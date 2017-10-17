@@ -2,6 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+/// <summary>
+/// Manages pausing and unpausing by manipulating the timescale used
+/// </summary>
+
 public class PauseScript :MonoBehaviour, Window {
     //track if game is paused
     //public bool paused;

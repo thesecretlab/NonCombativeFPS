@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Torch.cs is used to toggle the player's flashlight
+/// </summary>
+
 public class Torch : MonoBehaviour {
 
     public bool lightOn = true;

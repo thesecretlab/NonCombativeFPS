@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The Chargepad class is used to run the RechargeBattery() function of the BatterymManager script when the player stands on a chargepad.
+/// </summary>
+
 public class Chargepad : MonoBehaviour {
 
     GameObject player;

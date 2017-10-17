@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// CargoRoomAnim checks the state of the crane animation currently, and plays the appropriate animation based on this.
+/// </summary>
+
 public class CargoRoomAnim : MonoBehaviour
 {
 
@@ -14,25 +18,29 @@ public class CargoRoomAnim : MonoBehaviour
     public CrateGiveItem crate3;
     public CrateGiveItem crate4;
 
-    // Use this for initialization
     void Start()
     {
         anim = GetComponent<Animator>();
         source = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
         source.volume = (PlayerPrefs.GetFloat("SFXSound"));
     }
 
-    //used to determine the correct crate to act on, and the correct action to perform
+  
+    /// <summary>
+    /// playAnim will check if there is an animation playing, and if there is not, it will either:
+    /// - Return the crate currently accessible by the player
+    /// - Grab a crate and make it accessible by the player
+    /// </summary>
     public void playAnim()
     {
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Default State"))
         {
-            nextCrate = Random.Range(1,1);
+            nextCrate = Random.Range(1,4);
             switch (nextCrate)
             {
                 case 1:

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Plays the open and close animation/sound for the doors around the ship based on the player's position relative to the doors
+/// </summary>
+
 public class DoorController : MonoBehaviour {
 
     Animator anim;

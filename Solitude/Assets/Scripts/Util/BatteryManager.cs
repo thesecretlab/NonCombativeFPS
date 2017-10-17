@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-/*
- *  Manages player battery.
- * Drains the battery over time
- * 
- * Created by Brendan
- * Modified by Alexander Tilley 23/09/2017
- */
+/// <summary>
+/// BatteryManager updates the player's battery over time.
+/// It also contains the variables that control this behaviour
+/// </summary>
+///<remarks>
+///Created by Brendan
+/// Modified by Alexander Tilley 23/09/2017
+/// </remarks>
+
 public class BatteryManager : MonoBehaviour {
 
     //these had to be floats due to waitforsecondsrealtime being used
@@ -21,6 +23,11 @@ public class BatteryManager : MonoBehaviour {
     public GameObject torchLight;
     public Slider batterySlider; 			//ui object to send info to, currently a slider
 	public GameConditions gamestate;		//Controls win and lose states
+
+
+    /// <summary>
+    /// RechargeBattery sets the player's battery to full. This is used on initialisation and is called by chargepads.
+    /// </summary>
 
     public void RechargeBattery() //enables charging by other objects, namely charging stations
     {
@@ -59,7 +66,6 @@ public class BatteryManager : MonoBehaviour {
         }
     }
 
-	// Use this for initialization
 	void Start () {
         RechargeBattery();
         StartCoroutine(StartDraining());

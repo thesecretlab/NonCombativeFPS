@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// The CargoButton class runs the crane animation and plays the button's sound on interacting
+/// </summary>
+
 public class CargoButton : Interactable
 {
 

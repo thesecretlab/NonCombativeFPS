@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Provides scene management functionality to eventsystems in various parts of the software
+/// </summary>
+
 public class SceneLoader : MonoBehaviour {
 
 	// Use this for initialization
