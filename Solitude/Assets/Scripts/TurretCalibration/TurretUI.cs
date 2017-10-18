@@ -11,16 +11,10 @@ public class TurretUI : MonoBehaviour {
 	
 	///Variable Declaration
 	public Text accuracyNumber;
-    float width;
-    float height;
-	float cWidth;
-    float cHeight;
-    Vector3 scale;
-    float randomX;
-    float randomY;
-    float change;
-    float moveSpeed;
-    bool overTarget;
+    float width; ///stores the current width of the canvas.
+    float height; ///stores the current heaight of the canvas.
+	Vector3 scale; ///for use in scaling the target up and down.
+    bool overTarget; ///Tracks if the mouse is over the target or not.
 
 	///Declaring a rigid body for use on the target, so it will stay in borders.
     private Rigidbody2D rb2d;

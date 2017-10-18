@@ -8,12 +8,12 @@ public class CommandTerminal : Terminal, Breakable {
     
 	
 	///Variable Declration
-	public bool doBreak;
-    Text t;
-    string line = "";
-    Boolean service = true;
-    Boolean navDir = true;
-    Boolean isBroken = true;
+	public bool doBreak; ///stores if the current terminal is broken
+    Text t; ///Stores a text object.
+    string line = "";///a blank line to add to the console
+    Boolean service = true; /// Tracks if the service is current active.
+    Boolean navDir = true; /// Tracks if the user is currently in the naigation directory.
+    Boolean isBroken = true; /// stores if the navigation is broken
     BreakEvent broken;
 
     int dashCount = 0;
@@ -41,16 +41,17 @@ public class CommandTerminal : Terminal, Breakable {
     }
 	///This function is called when the command terminal breaks.
     public void onBreak() {
-        Toast.addToast("Navigation Corrupted. Please reset", 3);
+        Toast.addToast("Navigation Corrupted. Please reset", 3); ///when the navigation is corrupted add it to the top of the screen
         isBroken = false; //idk it was like this when I found it
         this.setActive(true);
-        GameConditions.setTraveling(false);
+        GameConditions.setTraveling(false);///sets traveling to false in the game conditions script.
     }
 	///Initializes all variables.
     protected override void initialise() {
-        broken = new BreakEvent(this, 20);
-        t = ui.GetComponentInChildren<Text>();
-        t.text = "";
+        broken = new BreakEvent(this, 20); ///creates a new break event
+        t = ui.GetComponentInChildren<Text>(); ///gets the text component and all children and stores it in t.
+        t.text = ""; /// sets the text field t to be blank.
+		
 		///Adds the following strings as commands to the command list.
         commands.Add("Go to Navigation");
         commands.Add("Stop Navigation");
@@ -59,11 +60,11 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("Help");
         addline("Available Commands");
         
-		///Adds enough lines to display all commands
+		///Adds enough lines to terminal to display all commands
         for (int i = commands.Count; i < LINES; i++) {
             addline("");
         }
-		///Adds each command to the screen for the user to view.
+		///Adds each command to the terminal for the user to view.
         foreach (string command in commands) {
             addline(command);
         }
@@ -90,15 +91,15 @@ public class CommandTerminal : Terminal, Breakable {
 		
 		///executes the following switch statement with the entry as the case and updates the command terminal if valid command is entered.
         switch (entry) {
-            case "go to navigation":
+            case "go to navigation": ///Goes to the navigation directory by setting the value to true and telling the user what has happened.
                 addline("moving to navigation directory");
                 navDir = true;
                 break;
-            case "stop navigation":
+            case "stop navigation":/// addlines the line to tell the user what is happening and setting the service to false, stopping it.
                 addline("service stopping");
                 service = false;
                 break;
-            case "load navigation backups":
+            case "load navigation backups":///Loads the navigation route from the current back ups, this can only be done if the user is in the nav directory and the service is stopped.
                 if (!navDir) {
                     addline("Unable to locate Navigation back-ups");
                     break;
@@ -110,7 +111,7 @@ public class CommandTerminal : Terminal, Breakable {
                 addline("Restoring back up files");
                 isBroken = false;
                 break;
-            case "start navigation":
+            case "start navigation": ///starts the service again, has to be done after back ups are loaded.
                 addline("starting service");
                 if (!isBroken) {
                     service = true;
@@ -121,13 +122,13 @@ public class CommandTerminal : Terminal, Breakable {
                 }
                 break;
             case "help":
-                addline("Available Commands");
+                addline("Available Commands"); ///Displays all commands the user can use.
                 foreach (string command in commands) {
                     addline(command);
                 }
                 break;
             default:
-                addline("Invalid Command, Please try again.");
+                addline("Invalid Command, Please try again."); ///this will be shown when a invalid command is inputted.
                 break;
         }
     }
