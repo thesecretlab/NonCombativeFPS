@@ -7,18 +7,24 @@ using UnityEngine.UI;
 public class CommandTerminal : Terminal, Breakable {
     
 	
-	///Variable Declration
-	public bool doBreak; ///stores if the current terminal is broken
-    Text t; ///Stores a text object.
-    string line = "";///a blank line to add to the console
-    Boolean service = true; /// Tracks if the service is current active.
-    Boolean navDir = true; /// Tracks if the user is currently in the naigation directory.
-    Boolean isBroken = true; /// stores if the navigation is broken
+	///stores if the current terminal is broken
+	public bool doBreak;
+    ///Stores a text object.
+	Text t; 
+	///a blank line to add to the console
+    string line = "";
+	/// Tracks if the service is current active.
+    Boolean service = true; 
+	/// Tracks if the user is currently in the naigation directory.
+    Boolean navDir = true; 
+	/// stores if the navigation is broken
+    Boolean isBroken = true; 
+	///Variable to store the breakevent
     BreakEvent broken;
-
+	///Stores the amount of dashes
     int dashCount = 0;
    
-   ///The number of frames the dash is shown and not shown on
+	///The number of frames the dash is shown and not shown on
     int dashFrames = 20;
 
 
@@ -91,15 +97,18 @@ public class CommandTerminal : Terminal, Breakable {
 		
 		///executes the following switch statement with the entry as the case and updates the command terminal if valid command is entered.
         switch (entry) {
-            case "go to navigation": ///Goes to the navigation directory by setting the value to true and telling the user what has happened.
+            case "go to navigation":
+				///Goes to the navigation directory by setting the value to true and telling the user what has happened.
                 addline("moving to navigation directory");
                 navDir = true;
                 break;
-            case "stop navigation":/// addlines the line to tell the user what is happening and setting the service to false, stopping it.
+            case "stop navigation":
+				/// addlines the line to tell the user what is happening and setting the service to false, stopping it.
                 addline("service stopping");
                 service = false;
                 break;
-            case "load navigation backups":///Loads the navigation route from the current back ups, this can only be done if the user is in the nav directory and the service is stopped.
+            case "load navigation backups":
+				///Loads the navigation route from the current back ups, this can only be done if the user is in the nav directory and the service is stopped.
                 if (!navDir) {
                     addline("Unable to locate Navigation back-ups");
                     break;
@@ -111,7 +120,8 @@ public class CommandTerminal : Terminal, Breakable {
                 addline("Restoring back up files");
                 isBroken = false;
                 break;
-            case "start navigation": ///starts the service again, has to be done after back ups are loaded.
+            case "start navigation": 
+				///starts the service again, has to be done after back ups are loaded.
                 addline("starting service");
                 if (!isBroken) {
                     service = true;
@@ -122,13 +132,15 @@ public class CommandTerminal : Terminal, Breakable {
                 }
                 break;
             case "help":
-                addline("Available Commands"); ///Displays all commands the user can use.
+				///Displays all commands the user can use.		
+                addline("Available Commands");
                 foreach (string command in commands) {
                     addline(command);
                 }
                 break;
             default:
-                addline("Invalid Command, Please try again."); ///this will be shown when a invalid command is inputted.
+				///this will be shown when a invalid command is inputted.	
+                addline("Invalid Command, Please try again.");
                 break;
         }
     }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class TurretTerminal : Terminal, Breakable {
 
-	///Variable declaractions
-    public bool doBreak;///tracks if the system is broken or not.
-    public float accuracy; ///Stores the current accuracy.
-    public float decreaseRate; ///The rate at which the accuracy will decrease.
-    public float missAcc; ///stores the chance the turrent will miss.
+	///tracks if the system is broken or not.
+    public bool doBreak;
+	///Stores the current accuracy.
+    public float accuracy; 
+	///The rate at which the accuracy will decrease.
+    public float decreaseRate; 
+	///stores the chance the turrent will miss.
+    public float missAcc; 
 	
 	///Turret UI object declaration.
     TurretUI UI;
@@ -25,7 +28,8 @@ public class TurretTerminal : Terminal, Breakable {
 	///function that triggers when the player interacts with the terminal
 	///Shows the calibration UI.
     public override void interact() {
-        missAcc = accuracy; ///sets the missAcc to the current accuracy.
+		 ///sets the missAcc to the current accuracy.
+        missAcc = accuracy;
         
 		///if get access returns false show error message, if true show minigame.
 		if (Ship.ship.getAccess()) {
@@ -46,11 +50,14 @@ public class TurretTerminal : Terminal, Breakable {
         accuracy = Mathf.MoveTowards(accuracy, missAcc, decreaseRate * Time.deltaTime); ///set the accuracy value based of delta time, so its unaffected by framerates.
         GameConditions.setAccuracy(accuracy); ///Sets the accuracy in the gameconditions object.
     }
-	///Function for initialization.
-    protected override void initialise() {
-        new BreakEvent(this,10); ///createss a new break event
-        UI = ui.GetComponent<TurretUI>(); ///gets the current turret UI and stores it in UI
-        UI.setTerminal(this); ///Sets the Terminal to be the current object.
+		///Function for initialization.
+		protected override void initialise() {
+		 ///createss a new break event
+        new BreakEvent(this,10);
+		///gets the current turret UI and stores it in UI
+        UI = ui.GetComponent<TurretUI>(); 
+		///Sets the Terminal to be the current object.
+        UI.setTerminal(this); 
     }
 
     protected override void onClose() {
@@ -58,7 +65,8 @@ public class TurretTerminal : Terminal, Breakable {
     }
 
     public void onBreak() {
-        missAcc = accuracy - Random.Range(0,20); ///when it breaks lower the accuracy by a random amount.
+		 ///when it breaks lower the accuracy by a random amount.
+        missAcc = accuracy - Random.Range(0,20);
     }
 
     public void onFix() {

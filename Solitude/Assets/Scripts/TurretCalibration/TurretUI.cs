@@ -9,12 +9,16 @@ public class TurretUI : MonoBehaviour {
     ///Declaration of the Turret Terminal object.
     TurretTerminal TT;
 	
-	///Variable Declaration
+	///Text variable to staore the accuracy number
 	public Text accuracyNumber;
-    float width; ///stores the current width of the canvas.
-    float height; ///stores the current heaight of the canvas.
-	Vector3 scale; ///for use in scaling the target up and down.
-    bool overTarget; ///Tracks if the mouse is over the target or not.
+	///stores the current width of the canvas.
+	float width;
+	///stores the current heaight of the canvas.
+    float height;
+	///for use in scaling the target up and down.
+	Vector3 scale; 
+	///Tracks if the mouse is over the target or not.
+    bool overTarget; 
 
 	///Declaring a rigid body for use on the target, so it will stay in borders.
     private Rigidbody2D rb2d;

@@ -16,16 +16,24 @@ public class ReactorTerminal : Terminal {
 	///Reactor Terminal object declaration, used to reference the Reactorterminal objects.
     public static ReactorTerminal reactorObj;
 
-	
-    public int powerUnits; ///Current Power units available.
-    bool online; ///if the true the reactor is functioning and online, if false it is offline.
-    bool overload; /// This is triggered when the reactor overloads.
-    public float fillRate = 0.00001f; ///The heating up fill rate, can be adjusted for faster or slower times.
-    float DecRate = 0.1f; ///The decrease rate of the temperature when the reactor is cooling.
-    int fillRateMult = 2; ///Fill rate multiplier is used when the reactor overloads.
-	public bool doBreak; ///do break is called when the the ship is trying to break the system.
-    private float temp; ///Stores the current reactor temperature.
-    private float rod; ///stores the current insertion value of the control rod.
+	///Current Power units available.
+    public int powerUnits; 
+    ///if the true the reactor is functioning and online, if false it is offline.
+	bool online; 
+	/// This is triggered when the reactor overloads.
+    bool overload; 
+	///The heating up fill rate, can be adjusted for faster or slower times.
+    public float fillRate = 0.00001f; 
+	///The decrease rate of the temperature when the reactor is cooling.
+    float DecRate = 0.1f; 
+	///Fill rate multiplier is used when the reactor overloads
+    int fillRateMult = 2;
+	///do break is called when the the ship is trying to break the system.
+	public bool doBreak; 
+	///Stores the current reactor temperature.
+    private float temp; 
+	 ///stores the current insertion value of the control rod.
+    private float rod;
     
     /// Use this for initialization when the script is first accessed
     void Awake() {
@@ -89,18 +97,25 @@ public class ReactorTerminal : Terminal {
 
 	///Use startup initialization of UI elements.
     protected override void initialise() {
-        
-		RecUI = ui.GetComponent<ReactorUI>();///Gets the current ReactorUI component, User interface.
-        RecUI.setTerminal(this);//Sets the terminal to the RecUi that was just got.
-        online = true; ///Sets the reactor to online.
-        SetRod(100); /// sets the rod value to 100 and changes all UI elements linked to it.
-        temp = 0; //Sets temp to 0.
+        ///Gets the current ReactorUI component, User interface.
+		RecUI = ui.GetComponent<ReactorUI>();
+        ///Sets the terminal to the RecUi that was just got.
+		RecUI.setTerminal(this);
+		///Sets the reactor to online.
+        online = true;
+		/// sets the rod value to 100 and changes all UI elements linked to it.		
+        SetRod(100); 
+		///Sets temp to 0.
+        temp = 0;
     }
 	///Sets the rod value and the rod text
     public void SetRod(float rod) {
-        this.rod = rod;///sets the rod value to be the current instances of rod.
-        powerUnits = (int)(100 - rod) / 2; /// sets the power units to 100 - rod.
-        PowerSystem.setPower(powerUnits); ///Sets the current draw in the power system to be the power units.
+        ///sets the rod value to be the current instances of rod.
+		this.rod = rod;
+		/// sets the power units to 100 - rod.
+        powerUnits = (int)(100 - rod) / 2; 
+		///Sets the current draw in the power system to be the power units.
+        PowerSystem.setPower(powerUnits);
     }
 
 	/// This function executes when the reactor needs to power up. settings all the ui elements and calls restore on the power system, so the power units can be allocated again.
@@ -108,11 +123,17 @@ public class ReactorTerminal : Terminal {
 	public void powerUP() {
         ///when the power lines are fixed and the temp is 0.
 		if (temp <= 0 && PowerLines.getFixed()) {
-            powerUnits = PowerSystem.restore();///restores the power system and sets the power units avaiable to be what they were.
-            online = true;/// sets the reactor to online
-            RecUI.restart.interactable = false; ///Sets the restart button to not be interactable
-            RecUI.shutdown.interactable = true; ///Sets the shutdown button to be interactable.
-            RecUI.controlRod.interactable = true; ///Sets the controlRod to be interactable,
+			///restores the power system and sets the power units avaiable to be what they were.
+            powerUnits = PowerSystem.restore();
+            /// sets the reactor to online
+			online = true;
+			///Sets the restart button to not be interactable
+            RecUI.restart.interactable = false; 
+			
+            ///Sets the shutdown button to be interactable.
+			RecUI.shutdown.interactable = true; 
+			///Sets the controlRod to be interactable,
+            RecUI.controlRod.interactable = true; 
         }
     }
 
@@ -121,18 +142,24 @@ public class ReactorTerminal : Terminal {
         
 		///when the reactor crashes send a message of what it has done.
 		if (crash) {
-            Toast.addToast("Reactor overload\n Powering Down", 3); ///sends the message to the top of the players screen
+			///sends the message to the top of the players screen
+            Toast.addToast("Reactor overload\n Powering Down", 3);
             PowerLines.onBreak(); ///breaks the powerlines.
         }
-        overload = crash; ///sets the overload to crash, being true.
-
-        online = false; ///Sets reactor to offline
-        SetRod(100); ///calls set rod with the value 100
-        powerUnits = PowerSystem.crash();///sets the powerunits to what the should be when crashes.
-
-        RecUI.restart.interactable = true;/// Sets the reatart to be interactable
-        RecUI.controlRod.interactable = false;///sets the controlRod to not be interactable.
-        RecUI.shutdown.interactable = false;///sets the shutdown to not be interactable.
+		///sets the overload to crash, being true.
+        overload = crash;
+		///Sets reactor to offline
+        online = false;
+		///calls set rod with the value 100
+        SetRod(100); 
+		///sets the powerunits to what the should be when crashes.
+        powerUnits = PowerSystem.crash();
+		/// Sets the reatart to be interactable
+        RecUI.restart.interactable = true;
+		///sets the controlRod to not be interactable.
+        RecUI.controlRod.interactable = false;
+		///sets the shutdown to not be interactable.
+        RecUI.shutdown.interactable = false;
     }
  
     /// doUpdate is called once per frame
