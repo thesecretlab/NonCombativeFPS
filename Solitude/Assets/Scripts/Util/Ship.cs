@@ -202,14 +202,14 @@ public class Ship : MonoBehaviour {
     /// \brief Adds a breakevent object to the list
     /// 
     /// \param [in] e The break event
-    /// \param [in] break If it should start broken
+    /// \param [in] doBreak If it should start broken
     /// \return No return value
     /// 
     /// \details 
     /// 
-    public void addBreakEvent(BreakEvent e, bool break) {
+    public void addBreakEvent(BreakEvent e, bool doBreak) {
         breakables.Add(e);
-        if (break) e.dobreak();
+        if (doBreak) e.dobreak();
     }
 
 	/*											KEEP ME JUST IN CASE -ALEX
