@@ -5,10 +5,14 @@ using UnityEngine.UI;
 
 /// 
 /// \file PowerSystem.cs
-/// \brief PowerSystem is used to receive and route power to different classes that require it.
 /// 
+
+/// \brief PowerSystem is used to receive and route power to different classes that require it.
 public class PowerSystem : MonoBehaviour {
 
+/// 
+/// \brief RoomLevels is used to store rooms and their power levels
+/// 
     [System.Serializable]
     public struct RoomLevels {
         public Room[] rooms;
@@ -273,15 +277,22 @@ public class PowerSystem : MonoBehaviour {
             Destroy(transform.gameObject);
         }
     }
-
-
+	/// Stores the rooms and power levels
     public RoomLevels rooms;
+	/// A room object for the corridors
     public Room corridors;
-    public int tick=0;
-    public int wait=10;
+	/// The current available power
     int aPower;
+	/// The current used power
     int uPower;
-	// Use this for initialization
+	
+	/// 
+	/// \brief Initialization
+	/// 
+	/// \return No return value
+	/// 
+	/// \details Finds all rooms and stores them in a RoomLevels, stores corridors separately
+	/// 
 	void Start () {
         List<Room> rooms = new List<Room>();
         foreach (Room room in FindObjectsOfType(typeof(Room))) {
@@ -293,12 +304,24 @@ public class PowerSystem : MonoBehaviour {
         }
         this.rooms = new RoomLevels(rooms.ToArray(),0);
     }
-
+    /// 
+    /// \brief Restores the power system
+    /// 
+    /// \return Returns the total amount of used power
+    /// 
+    /// \details sets the power level of each room back to the stored value
+    /// 
     int _restore() {
         rooms.restart();
         return rooms.total();
     }
-
+    /// 
+    /// \brief Crashes the power system
+    /// 
+    /// \return Returns 0
+    /// 
+    /// \details Sets the power level of all rooms to 0
+    /// 
     int _crash() {
         rooms.crash();
         foreach (TerminalButton button in buttons) {
@@ -306,29 +329,77 @@ public class PowerSystem : MonoBehaviour {
         }
         return 0;
     }
-
+    /// 
+    /// \brief Changes the power level of a room
+    /// 
+    /// \param [in] room The room name as a string
+    /// \param [in] up If the power should be increased or decreased
+    /// \return Returns the rooms new power level
+    /// 
+    /// \details Will return -1 if the room is not found
+    /// 
     int _changeRoom(string room, bool up) {
         int ret = rooms.changePower(room, up, aPower);
         updateText();
         return ret;
     }
+    /// 
+    /// \brief Sets the power level of a room
+    /// 
+    /// \param [in] room The name of the room as a string
+    /// \param [in] power The new power level
+    /// \return Returns the new power level of the room
+    /// 
+    /// \details Will return -1 if the room is not found
+    /// 
     int _setRoom(string room, int power) {
         int ret = rooms.setPower(room, power, aPower);
         updateText();
         return ret;
     }
+    /// 
+    /// \brief Gets the power level of a room
+    /// 
+    /// \param [in] room The name of the room as a string
+    /// \return Returns the power level of the room
+    /// 
+    /// \details Will return -1 if the room is not found
+    /// 
     int _getRoom(string room) {
         return rooms.getPower(room);
     }
+    /// 
+    /// \brief Updates the available and used power text
+    /// 
+    /// \return No return value
+    /// 
+    /// \details 
+    /// 
     void updateText() {
         uPower = rooms.total();
         powerText.text = uPower + "/" + aPower;
     }
+    /// 
+    /// \brief Sets the available power
+    /// 
+    /// \param [in] power The available power as an integer
+    /// \return No return value
+    /// 
+    /// \details 
+    /// 
     void _setPower(int power) {
         aPower = power;
         corridors.setPower(power);
         updateText();
     }
+    /// 
+    /// \brief Will return the minimum power level of a room
+    /// 
+    /// \param [in] room The name of the room as a string
+    /// \return Returns the minimum power level of the room
+    /// 
+    /// \details Will return -1 if the room is not found
+    /// 
     int _getMin(string room) {
         return rooms.getMin(room);
     }
