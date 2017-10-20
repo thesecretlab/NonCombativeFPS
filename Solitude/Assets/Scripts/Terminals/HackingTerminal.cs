@@ -3,22 +3,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public class HackingTerminal : Terminal, Breakable {
-    HackingUI hackUI;
+    
+	///HackingUI variable to access hackinUI class variables.
+	HackingUI hackUI;
 
-    public AudioSource IDSALERTsource;
+    ///Variable for storing an IDSalert audio source.
+	public AudioSource IDSALERTsource;
+	///Variavle for storing firewall audio source.
     public AudioSource Firewallsource;
 
-    public override void interact() {
+    ///on interaction show interface.
+	public override void interact() {
         show();
     }
+	///when timer runs out hide the interace and resest the hacking task.
     public void hackFail() {
         hide();
         hackUI.reset();
     }
+	
+	///onbreak show access denied message.
     public void onBreak() {
         Debug.Log("Locked out");
         Ship.ship.setAccess(false);
     }
+	///when fixed restore access and reset hacking minigame and hide UI.
     public void onFix() {
         Debug.Log("Fix");
         Ship.ship.setAccess(true);
@@ -27,12 +36,16 @@ public class HackingTerminal : Terminal, Breakable {
     }
     protected override void doUpdate() {
     }
+	
+	///Intialises breakevent and get the hackUI and initialize it.
     protected override void initialise() {
-        new BreakEvent(this, 10); //set back to 10 post testing
+        ///set back to 10 post testing
+		new BreakEvent(this, 10); 
         hackUI = ui.GetComponent<HackingUI>();
         hackUI.setTerminal(this);
     }
-
+	
+	///Onclose reset hacking minigame.
     protected override void onClose() {
         hackUI.reset();
     }

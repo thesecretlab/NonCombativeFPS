@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class FTL : MonoBehaviour, PowerConsumer {
-    public void updatePower(bool powered) {
-        GameConditions.setSpeed(powered);
+    
+	
+	public void updatePower(bool powered) {
+        ///set the speeded if powered.
+		GameConditions.setSpeed(powered);
     }
 
-    // Use this for initialization
+    /// Use this for initialization
     void Start () {
 		
 	}
 	
-	// Update is called once per frame
+	/// Update is called once per frame
 	void Update () {
 		
 	}

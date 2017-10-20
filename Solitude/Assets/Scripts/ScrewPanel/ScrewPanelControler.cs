@@ -3,5 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScrewPanelControler : MonoBehaviour{
-    public GameObject screw;	
+    
+	///creates object to store screws.
+	public GameObject screw;	
 }
