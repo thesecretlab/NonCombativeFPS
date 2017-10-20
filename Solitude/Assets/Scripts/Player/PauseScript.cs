@@ -2,6 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+///<summary>
+///Controls the pausing and unpausing of the game.
+///Controls stopping all tasks when the game is paused.
+///<summary>
+///<remarks>
+///Authors:
+///</remarks>
 public class PauseScript :MonoBehaviour, Window {
     ///track if game is paused
     ///public bool paused;

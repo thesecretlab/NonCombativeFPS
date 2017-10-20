@@ -10,7 +10,7 @@ using UnityEngine.UI;
 public class CryoTerminalScript : Terminal, PowerConsumer
 {
 	
-	/// array of gameobjects handling all crew objects
+	///Array of gameobjects handling all crew objects
     public GameObject[] crew;    
 	///Game object handling the crew power
     GameObject crew_power;  
@@ -39,7 +39,7 @@ public class CryoTerminalScript : Terminal, PowerConsumer
         ///loads the cryo terminal user interface
         show();
 
-        ///Searches through all gameobjects in the heiarchy of the cryoterminal scene that are named "POWER"
+        ///Searches through all gameobjects in the heirarchy of the cryoterminal scene that are named "POWER"
         ///and grabs the text component.
         foreach (GameObject c in crew) {
             crew_power = c.transform.Find("POWER").gameObject;

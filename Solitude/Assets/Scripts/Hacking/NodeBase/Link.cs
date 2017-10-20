@@ -4,7 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-
+///<summary>
+///Controls the node links of the hacking minigame.
+///</summary>
+///<remarks>
+/// Authors: Jeffrey Albion
+///</remarks>
 public class Link : MonoBehaviour {
     
 	///image variable to store link image.

@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+ ///<summary>
  /// Switches between two gameObjects (Diffrent Models) by boolean value.
-  
-  ///If the whole ship or room the light is in power is down then var power
-  ///should reflect this state and be changed in another script.
-  
-  ///Created By Alexander Tilley 12/08/2017
-  ///Edited By Jeffrey Albion: Added interaction through Light Interface
- 
+ ///If the whole ship or room the light is in power is down then var power
+ ///should reflect this state and be changed in another script.
+ ///</summary>
+ ///<remarks>
+ ///Created By Alexander Tilley 12/08/2017
+ ///Edited By Jeffrey Albion: Added interaction through Light Interface
+ ///</remarks> 
 
 public class FluroLight : MonoBehaviour, shipLight {
 

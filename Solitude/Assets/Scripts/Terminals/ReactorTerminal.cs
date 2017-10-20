@@ -3,6 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+///<summary>
+///Controls functionality of the reactor, powering up and overloading.
+///Controls reactor heating up and cooling down.
+///</summary>
+///<remarks>
+///Authors: Sam Cowley, Jeffrey Albion.
+///</remarks>
 public class ReactorTerminal : Terminal {
    
     

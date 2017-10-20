@@ -1,8 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+
+	///<summary>
+	///Controls the camera that is attached to the player
+	///Limits and mitigates the camera shake.
+	///</summary>
+	///
+	///<remarks>
+	/// Authors go here.
+	///</remarks>
 public class CameraControl : MonoBehaviour 
 {
+	
+	
+	
 	/// How quickly the camera should move from point A to B.
     public float MoveSpeed = 10f;
 	/// How far from the new position we should be before snapping to it.

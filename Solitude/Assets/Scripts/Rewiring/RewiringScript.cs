@@ -5,25 +5,49 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+///<summary>
+///Controls functionality of the rewiring minigame.
+///Controls the game completions.
+///</summary>
+///<remarks>
+///Authors: Sam Cowley.
+///</remarks>
+
 public class RewiringScript : MonoBehaviour {
 
-    //Variables to track the current state of the buttons 0 is active but unresolved, 1 means pending and 2 means resolved.
-    short blue1 = 0;
+    ///Variables to track the current state of the buttons 0 is active but unresolved, 1 means pending and 2 means resolved.
+    ///Tracks blue button.
+	short blue1 = 0;
+	///Tracks second blue button.
     short blue2 = 0;
+	///Tracks red button.
     short red1 = 0;
+	///tracks second red button.
     short red2 = 0;
+	///Tracks green button.
     short green1 = 0;
+	///Tracks second green button.
     short green2 = 0;
+	///Tracks the last colour pressed.
     string lastColourPressed;
+	///Tracks the current colour pressed.
     string colourPressed;
 	
 	///Declaration for all the button objects
-    GameObject blueBtn1;
+    ///Game object for first blue button.
+	GameObject blueBtn1;
+	///Game object for second blue button.
     GameObject blueBtn2;
+	///Game object for first red button.
     GameObject redBtn1;
+	///Game object for second red button.
     GameObject redBtn2;
+	///Game object for first green button.
     GameObject greenBtn1;
+	///Game Object for second green button.
     GameObject greenBtn2;
+	///Text object for game win alert.
     public Text Gamewinalert;
 
     /// Use this for initialization

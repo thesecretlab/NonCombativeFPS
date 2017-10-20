@@ -5,6 +5,16 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+
+///<summary>
+///Controls the Node behavior of the hacking minigame.
+///Controls the colouring of each node depending on its status.
+///</summary>
+///<remarks>
+/// Author: Jeffrey Albion
+///</remark>
+
+
 public class Node : MonoBehaviour, IPointerClickHandler {
     
 	///boolen to store if the firewall is true.
