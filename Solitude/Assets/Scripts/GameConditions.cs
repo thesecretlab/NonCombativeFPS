@@ -116,7 +116,7 @@ public class GameConditions : MonoBehaviour {
 		 ///If turretaccuracy is less than 50
         if (TurretAccuracy < 50) {                
 			///Display text on bridge screen		
-            ShipHealthtext.text = "Defence Accuracy Low\nRecalibration Necessary\n";    
+            ShipHealthtext.text = "Defence Accuracy Low\nRecalibration Necessary\n\n";    
         }
 		///Display text on bridge screen
         ShipHealthtext.text += "Hull Integrity " + shiphealth + " %";                   
