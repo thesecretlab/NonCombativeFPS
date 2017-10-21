@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 114188839800319954}
   - component: {fileID: 114039977706890556}
   m_Layer: 5
-  m_Name: Screw
+  m_Name: Screw_Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
