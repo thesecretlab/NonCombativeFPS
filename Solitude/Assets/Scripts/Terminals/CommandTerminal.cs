@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-///<summary>
-///Functional operation of the command terminal
-///Controls player input and the commands the player can currently use
-///Fix corrupt navigation problem.
-///</summary>
-///<remarks>
-///Authors: Sam Cowley, Jeffrey Albion, Alexander Tilley.
-///</remarks>
+/// <summary>
+/// Functional operation of the command terminal
+/// Controls player input and the commands the player can currently use
+/// Fix corrupt navigation problem.
+/// </summary>
+/// <remarks>
+/// Authors: Sam Cowley, Jeffrey Albion, Alexander Tilley.
+/// </remarks>
 
 
 

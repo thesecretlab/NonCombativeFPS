@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-///<summary>
-///controls the speed of the ftl
-///indirectly controls the speed of the goal timer.
-///</summary>
-///<remarks>
+/// <summary>
+/// controls the speed of the ftl
+/// indirectly controls the speed of the goal timer.
+/// </summary>
+/// <remarks>
 /// Authors:
-///</remarks>
+/// </remarks>
 public class FTL : MonoBehaviour, PowerConsumer {
     
 	

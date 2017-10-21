@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-///<summary>
-///Controls the hiding and showing of the hackinggame tutorial window
-///<summary>
+/// <summary>
+/// Controls the hiding and showing of the hackinggame tutorial window
+/// <summary>
 
 
 

@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+/// 
+/// \brief Interface between the Hacking UI and the Terminal
+/// 
 public class HackingUI : MonoBehaviour {
     
 	///variable for storing the firewall sprite.

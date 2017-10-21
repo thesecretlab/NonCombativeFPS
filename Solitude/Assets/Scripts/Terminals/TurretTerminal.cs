@@ -4,13 +4,13 @@ using UnityEngine;
 
 
 
-///<summary>
-///Controls functionality of the turret calibration, increasing accuracy.
-///Controls target increasing and decreasing in size and movement.
-///</summary>
-///<remarks>
+/// <summary>
+/// Controls functionality of the turret calibration, increasing accuracy.
+/// Controls target increasing and decreasing in size and movement.
+/// </summary>
+/// <remarks>
 /// Authors: Jeffrey Albions, Sam Cowley.
-///</remark>
+/// </remark>
 public class TurretTerminal : Terminal, Breakable {
 
 	///tracks if the system is broken or not.

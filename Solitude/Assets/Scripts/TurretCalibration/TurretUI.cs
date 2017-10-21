@@ -4,13 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-///<summary>
-///Controls the turret terminals User interface.
-///Controls the updating of accuracy into the main system.
-///</summary>
-///<remarks>
-///Authors: Jeffrey Albion.
-///</remarks>
+/// <summary>
+/// Controls the turret terminals User interface.
+/// Controls the updating of accuracy into the main system.
+/// </summary>
+/// <remarks>
+/// Authors: Jeffrey Albion.
+/// </remarks>
 
 public class TurretUI : MonoBehaviour {
     

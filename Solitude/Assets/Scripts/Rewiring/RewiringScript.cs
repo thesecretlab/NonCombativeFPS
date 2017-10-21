@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-///<summary>
-///Controls functionality of the rewiring minigame.
-///Controls the game completions.
-///</summary>
-///<remarks>
-///Authors: Sam Cowley.
-///</remarks>
+/// <summary>
+/// Controls functionality of the rewiring minigame.
+/// Controls the game completions.
+/// </summary>
+/// <remarks>
+/// Authors: Sam Cowley.
+/// </remarks>
 
 public class RewiringScript : MonoBehaviour {
 

@@ -2,6 +2,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// 
+/// \brief Default scrollbar script
+/// 
 [RequireComponent(typeof(Button))]
 public class ScrollbarIncrementer : MonoBehaviour
 {
