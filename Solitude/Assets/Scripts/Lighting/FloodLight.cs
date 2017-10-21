@@ -2,15 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
- ///<summary>
+/// <summary>
 /// Switches between two gameObjects (Diffrent Models) when setpower() is called.
- /// Used for when the whole ship or room's power is down to turn of the lights.
- ///should reflect this state and be changed in another script.
- ///</summary>
- ///<remarks> 
- /// Created By Alexander Tilley 12/08/2017
-  ///Edited By Jeffrey Albion: Added interaction through Light Interface
- ///</remarks>
+/// Used for when the whole ship or room's power is down to turn of the lights.
+/// should reflect this state and be changed in another script.
+/// </summary>
+/// <remarks> 
+/// Created By Alexander Tilley 12/08/2017
+/// Edited By Jeffrey Albion: Added interaction through Light Interface
+/// </remarks>
 public class FloodLight : MonoBehaviour, shipLight {
 
 	///Recomended to have both objects as children from the object this script is apart of
@@ -20,7 +20,7 @@ public class FloodLight : MonoBehaviour, shipLight {
 	public GameObject lightOff;		
 
 
-	/// Intitalally loaded object
+	///Sets the objects so only one is visible.
 	void Start () {
 		if (lightOn != null && lightOff != null) {	//If Both Objects are set
 				lightOn.SetActive (false);
