@@ -1,8 +1,10 @@
 ﻿[System.Serializable]
+/// 
+/// \brief Dataset containing a link and a node
+/// 
 public class nodeLink {
-    
-	///sets a node variable.
+	///The Node
 	public Node node;
-	///sets a link variable.
+	///The link
     public Link link;
 }

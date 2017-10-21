@@ -3,13 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-///<summary>
-///Controls the functionality of the hacking terminal
-///Fixes the terminal lock out problem.
-///</summary>
-///<remarks>
-///Authors: Jeffrey Albion, Jonothan Nield.
-///</remarks>
+/// <summary>
+/// Controls the functionality of the hacking terminal
+/// Fixes the terminal lock out problem.
+/// </summary>
+/// <remarks>
+/// Authors: Jeffrey Albion, Jonothan Nield.
+/// </remarks>
 
 public class HackingTerminal : Terminal, Breakable {
     

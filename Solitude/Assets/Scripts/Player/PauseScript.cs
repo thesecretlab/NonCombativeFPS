@@ -140,7 +140,9 @@ public class PauseScript :MonoBehaviour, Window {
         Time.timeScale = 1;
     }
 }
-
+/// 
+/// \brief Window class for the Sub menu's
+/// 
 public class PauseSub : Window {
 	///gameobject to store UI
     GameObject ui;

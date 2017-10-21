@@ -3,14 +3,14 @@ using System.Collections;
 
 
 
-	///<summary>
-	///Controls the camera that is attached to the player
-	///Limits and mitigates the camera shake.
-	///</summary>
+	/// <summary>
+	/// Controls the camera that is attached to the player
+	/// Limits and mitigates the camera shake
+	/// </summary>
 	///
-	///<remarks>
+	/// <remarks>
 	/// Authors go here.
-	///</remarks>
+	/// </remarks>
 public class CameraControl : MonoBehaviour 
 {
 	
