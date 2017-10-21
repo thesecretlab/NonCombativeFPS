@@ -126,8 +126,8 @@ public class Node : MonoBehaviour, IPointerClickHandler {
 	///sets the current sprites image to be the passed in variable.
     public void setImage(Sprite sprite) {
         image.sprite = sprite;
-        image.transform.localScale = new Vector3(1, 1, 1);
-        gameObject.transform.SetAsLastSibling();
+        //image.transform.localScale = new Vector3(1, 1, 1);
+        //gameObject.transform.SetAsLastSibling();
     }
 	
 	///returns the colour value if the node is active, firewall or opened.

@@ -58,18 +58,18 @@ public class CommandTerminal : Terminal, Breakable {
     }
 	///This function is called when the command terminal breaks.
     public void onBreak() {
-        Toast.addToast("Navigation Corrupted. Please reset", 3); ///when the navigation is corrupted add it to the top of the screen
-        isBroken = false; //idk it was like this when I found it
+        Toast.addToast("Navigation Corrupted. Please reset", 3); //when the navigation is corrupted add it to the top of the screen
+        isBroken = true;
         this.setActive(true);
-        GameConditions.setTraveling(false);///sets traveling to false in the game conditions script.
+        GameConditions.setTraveling(false);//sets traveling to false in the game conditions script.
     }
 	///Initializes all variables.
     protected override void initialise() {
-        broken = new BreakEvent(this, 20); ///creates a new break event
-        t = ui.GetComponentInChildren<Text>(); ///gets the text component and all children and stores it in t.
-        t.text = ""; /// sets the text field t to be blank.
+        broken = new BreakEvent(this, 20); //creates a new break event
+        t = ui.GetComponentInChildren<Text>(); //gets the text component and all children and stores it in t.
+        t.text = ""; // sets the text field t to be blank.
 		
-		///Adds the following strings as commands to the command list.
+		//Adds the following strings as commands to the command list.
         commands.Add("Go to Navigation");
         commands.Add("Stop Navigation");
         commands.Add("Load Navigation Backups");
@@ -77,11 +77,11 @@ public class CommandTerminal : Terminal, Breakable {
         commands.Add("Help");
         addline("Available Commands");
         
-		///Adds enough lines to terminal to display all commands
+		//Adds enough lines to terminal to display all commands
         for (int i = commands.Count; i < LINES; i++) {
             addline("");
         }
-		///Adds each command to the terminal for the user to view.
+		//Adds each command to the terminal for the user to view.
         foreach (string command in commands) {
             addline(command);
         }
@@ -99,27 +99,27 @@ public class CommandTerminal : Terminal, Breakable {
     ///called when the Return key is pressed
     private void onSubmit(string line) {
         
-		///Adds the line that the user typed to the screen
+		//Adds the line that the user typed to the screen
 		addline(line);
-		///Makes the string the user entered all lower case for comparison.
+		//Makes the string the user entered all lower case for comparison.
         String entry = line.ToLower();
 		///Trims whitespace of the string to get more accurate comparison results.
         entry = entry.Trim();
 		
-		///executes the following switch statement with the entry as the case and updates the command terminal if valid command is entered.
+		//executes the following switch statement with the entry as the case and updates the command terminal if valid command is entered.
         switch (entry) {
             case "go to navigation":
-				///Goes to the navigation directory by setting the value to true and telling the user what has happened.
+				//Goes to the navigation directory by setting the value to true and telling the user what has happened.
                 addline("moving to navigation directory");
                 navDir = true;
                 break;
             case "stop navigation":
-				/// addlines the line to tell the user what is happening and setting the service to false, stopping it.
+				// addlines the line to tell the user what is happening and setting the service to false, stopping it.
                 addline("service stopping");
                 service = false;
                 break;
             case "load navigation backups":
-				///Loads the navigation route from the current back ups, this can only be done if the user is in the nav directory and the service is stopped.
+				//Loads the navigation route from the current back ups, this can only be done if the user is in the nav directory and the service is stopped.
                 if (!navDir) {
                     addline("Unable to locate Navigation back-ups");
                     break;
@@ -132,7 +132,7 @@ public class CommandTerminal : Terminal, Breakable {
                 isBroken = false;
                 break;
             case "start navigation": 
-				///starts the service again, has to be done after back ups are loaded.
+				//starts the service again, has to be done after back ups are loaded.
                 addline("starting service");
                 if (!isBroken) {
                     service = true;
@@ -143,26 +143,26 @@ public class CommandTerminal : Terminal, Breakable {
                 }
                 break;
             case "help":
-				///Displays all commands the user can use.		
+				//Displays all commands the user can use.		
                 addline("Available Commands");
                 foreach (string command in commands) {
                     addline(command);
                 }
                 break;
             default:
-				///this will be shown when a invalid command is inputted.	
+				//this will be shown when a invalid command is inputted.	
                 addline("Invalid Command, Please try again.");
                 break;
         }
     }
     protected override void doUpdate() {
-        ///executes if the terminal is broken
+        //executes if the terminal is broken
 		if (doBreak) {
             doBreak = false;
             onBreak();
         }
 		
-		///allows the entry of dyanamic characters onto the command screen.
+		//allows the entry of dyanamic characters onto the command screen.
         dashCount++;
         if (dashCount > 2 * dashFrames) {
             dashCount -= 2 * dashFrames;
