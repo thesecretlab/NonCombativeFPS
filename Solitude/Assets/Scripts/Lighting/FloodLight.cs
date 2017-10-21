@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
  ///<summary>
- /// Switches between two gameObjects (Diffrent Models) by boolean value.
- /// If the whole ship or room the light is in power is down then var power
+/// Switches between two gameObjects (Diffrent Models) when setpower() is called.
+ /// Used for when the whole ship or room's power is down to turn of the lights.
  ///should reflect this state and be changed in another script.
  ///</summary>
  ///<remarks> 
@@ -28,11 +28,7 @@ public class FloodLight : MonoBehaviour, shipLight {
 				//Debug.Log("Flood Ligth Power Off");
 		}
 	}
-	
-	/// Update is called once per frame
-	void Update () {
-		
-	}
+
 
 	/// Switches the between the diffrent game objects
 	public void setPower(int powerState){
