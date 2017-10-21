@@ -48,8 +48,7 @@ public class HackingTerminal : Terminal, Breakable {
 	
 	///Intialises breakevent and get the hackUI and initialize it.
     protected override void initialise() {
-        new BreakEvent(this, 0, true); //set back to 10 post testing
-		new BreakEvent(this, 10); 
+        new BreakEvent(this, 10, true); //set back to 10 post testing
         hackUI = ui.GetComponent<HackingUI>();
         hackUI.setTerminal(this);
     }
