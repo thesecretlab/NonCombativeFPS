@@ -10,37 +10,58 @@ using UnityEngine.UI;
 /// </remarks>
 public class ScrewPanel : Terminal, Breakable {
 
-
-    public const int screws = 4;			//Maxium Number of Screws
-    public int breakPercent = 100;			//Percentage chance this has to break.
-	public Inventory playerInv;				//Player Inventory (Set In Unity)
+	///Maxium Number of Screws
+    public const int screws = 4;	
+	///Percentage chance this has to break.	
+    public int breakPercent = 100;	
+	///Player Inventory (Set In Unity)	
+	public Inventory playerInv;				
 	private int canvasWid = 1920; 			//TODO Replace me with Camera.pixelwidth -10% where camera = maincamera
 	private int canvasHig = 1080;			//TODO Replace me with Camera.pixelheight-10% were camera = maincamera
-	public const int iconPixelSize = 295;	//Size of the Screw Icon (pressumably symetrical)
+	///Size of the Screw Icon (pressumably symetrical)
+	public const int iconPixelSize = 295;	
 
-	private int[,] buttonCoords = new int[screws, 2];	//Position for screws
+	///Position for screws
+	private int[,] buttonCoords = new int[screws, 2];	
 
+	///varable to stored the screws that have been screwed.
     private int screwed = 0;
+	///boolean  to store if the panel isFixing or not.
     private bool isFixing = false;
 
+	
+	///when a screw is interacted with.
     public override void interact() {
-        if (isFixing == false) {
-            screwed = 0;							//Reset Screws
+        
+		
+		
+		if (isFixing == false) {
+            
+			///Reset Screws
+			screwed = 0;							
 
+			
 			for (int i = 0; i < screws; i++) {
-				buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));		//Inside the canvas postioned in icon sized grid
-				buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));		//Inside the canvas postioned in icon sized grid
-				int OneLessScrew = 1;																//Number of times to try and repostion if collsion
+				///Inside the canvas postioned in icon sized grid
+				buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));	
+				///Inside the canvas postioned in icon sized grid				
+				buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));		
+				///Number of times to try and repostion if collsion
+				int OneLessScrew = 1;
+				
 				for (int s = 0; s < i; s++) {
-					if (buttonCoords [i, 0] == buttonCoords [s, 0] && buttonCoords [i, 1] == buttonCoords [s, 1]) {//If Collsion
-						if (OneLessScrew == 0) {		//If have already tried OneLessScrew times.
+					///If Collsion
+					if (buttonCoords [i, 0] == buttonCoords [s, 0] && buttonCoords [i, 1] == buttonCoords [s, 1]) {
+						///If have already tried OneLessScrew times.
+						if (OneLessScrew == 0) {		
                             Debug.Log("screwed is equal to" + screwed);
 							buttonCoords [i,0] = -1;
 							buttonCoords [i,1]= -1;
 							screwed++;
                             Debug.Log("screwed is now equal to" + screwed);
                         } else {
-							buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));		//Try and replace.
+							///Try and replace.
+							buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));		
 							buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));
 							s = 0;
 							OneLessScrew--;				
@@ -49,12 +70,15 @@ public class ScrewPanel : Terminal, Breakable {
 
 				}
 			}
-
-            for (int i = 0; i < screws; i++) {		//Instanite and replace screws.
+			///Instanite and replace screws.
+            for (int i = 0; i < screws; i++) {		
                 Debug.Log("Screwing : "+i);
-				GameObject newscrew = Instantiate(this.ui.GetComponent<ScrewPanelControler>().screw, ui.transform);					//Instantiate a screw.
-				newscrew.transform.position = new Vector3(buttonCoords[i,0]*iconPixelSize, buttonCoords[i,1]*iconPixelSize, 0);		//Put in postion
-				newscrew.GetComponent<Button>().onClick.AddListener(delegate { clickButton(newscrew); });							//On Click call clickButton
+				///Instantiate a screw.
+				GameObject newscrew = Instantiate(this.ui.GetComponent<ScrewPanelControler>().screw, ui.transform);	
+				///Put in postion				
+				newscrew.transform.position = new Vector3(buttonCoords[i,0]*iconPixelSize, buttonCoords[i,1]*iconPixelSize, 0);		
+				///On Click call clickButton
+				newscrew.GetComponent<Button>().onClick.AddListener(delegate { clickButton(newscrew); });							
 
                 /*GameObject newscrew = Instantiate(this.ui.GetComponent<ScrewPanelControler>().screw, ui.transform);				//LEGACY CODE
                 newscrew.transform.position = new Vector3(Random.Range(60, canvasWid - 60), Random.Range(60, canvasHig - 60), 0);
@@ -64,17 +88,19 @@ public class ScrewPanel : Terminal, Breakable {
         }
         show();
     }
-
+	
+	///when the screw panel breaks set the screws screwed to 0 and sets active to be true.
     public void onBreak() {
         screwed = 0;
         this.setActive(true);
     }
-
+	///initialise break event.
     protected override void initialise() {
         new BreakEvent(this, breakPercent);
         this.onBreak();
     }
 
+	///activated when screw is clicked.
 	public void clickButton(GameObject button) {
 		button.gameObject.SetActive(false);
         if((screwed += 1) == screws) {
@@ -82,6 +108,7 @@ public class ScrewPanel : Terminal, Breakable {
         }
     }
 
+	///when all screws are screwed then the screw panel is fixed.
     public void onFix() {
 		if (screwed >= screws) {
 			if (playerInv.consume (Inventory.POWERCABLE_ID, 1, 0, 0)) {

@@ -5,10 +5,15 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public class ScrollbarIncrementer : MonoBehaviour
 {
+	///sets a scrollbar variable for type target.
     public Scrollbar Target;
+	///button variable.
     public Button TheOtherButton;
-    public float Step = 0.1f;
+    ///float variable to store the stpe.
+	public float Step = 0.1f;
 
+	
+	///increments target value.
     public void Increment()
     {
         if (Target == null || TheOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");
@@ -17,6 +22,7 @@ public class ScrollbarIncrementer : MonoBehaviour
         TheOtherButton.interactable = true;
     }
 
+	///decrements target value.
     public void Decrement()
     {
         if (Target == null || TheOtherButton == null) throw new Exception("Setup ScrollbarIncrementer first!");

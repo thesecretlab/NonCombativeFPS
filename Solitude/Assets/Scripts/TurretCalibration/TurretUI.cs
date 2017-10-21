@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+
+///<summary>
+///Controls the turret terminals User interface.
+///Controls the updating of accuracy into the main system.
+///</summary>
+///<remarks>
+///Authors: Jeffrey Albion.
+///</remarks>
+
 public class TurretUI : MonoBehaviour {
     
 	///Declaraion of the target that player will be aiming for.
