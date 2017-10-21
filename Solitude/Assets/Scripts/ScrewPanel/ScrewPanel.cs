@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 
 /// <summary>
-/// Screw Pannel Minigame, randomly places screws onto a canvas for the player to click them all to complete the acitvity.
+/// Screw Pannel Minigame, randomly places screws onto a canvas for the player to click them all and 
+/// use Inventory.POWERCABLE_ID to complete the activity.
 /// </summary>
 /// <remarks> 
 /// Created By Jeffery Albion
@@ -37,22 +38,22 @@ public class ScrewPanel : Terminal, Breakable {
 		
 		if (isFixing == false) {
             
-			///Reset Screws
+			//Reset Screws
 			screwed = 0;							
 
 			
 			for (int i = 0; i < screws; i++) {
-				///Inside the canvas postioned in icon sized grid
+				//Inside the canvas postioned in icon sized grid
 				buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));	
-				///Inside the canvas postioned in icon sized grid				
+				//Inside the canvas postioned in icon sized grid				
 				buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));		
-				///Number of times to try and repostion if collsion
+				//Number of times to try and repostion if collsion
 				int OneLessScrew = 1;
 				
 				for (int s = 0; s < i; s++) {
-					///If Collsion
+					//If Collsion
 					if (buttonCoords [i, 0] == buttonCoords [s, 0] && buttonCoords [i, 1] == buttonCoords [s, 1]) {
-						///If have already tried OneLessScrew times.
+						//If have already tried OneLessScrew times.
 						if (OneLessScrew == 0) {		
                             Debug.Log("screwed is equal to" + screwed);
 							buttonCoords [i,0] = -1;
@@ -60,7 +61,7 @@ public class ScrewPanel : Terminal, Breakable {
 							screwed++;
                             Debug.Log("screwed is now equal to" + screwed);
                         } else {
-							///Try and replace.
+							//Try and replace.
 							buttonCoords [i,0] = Random.Range (1, (canvasWid - 60*2)/(iconPixelSize+20));		
 							buttonCoords [i,1]= Random.Range (1, (canvasHig - 60*2)/(iconPixelSize+20));
 							s = 0;
@@ -70,14 +71,14 @@ public class ScrewPanel : Terminal, Breakable {
 
 				}
 			}
-			///Instanite and replace screws.
+			//Instanite and replace screws.
             for (int i = 0; i < screws; i++) {		
                 Debug.Log("Screwing : "+i);
-				///Instantiate a screw.
+				//Instantiate a screw.
 				GameObject newscrew = Instantiate(this.ui.GetComponent<ScrewPanelControler>().screw, ui.transform);	
-				///Put in postion				
+				//Put in postion				
 				newscrew.transform.position = new Vector3(buttonCoords[i,0]*iconPixelSize, buttonCoords[i,1]*iconPixelSize, 0);		
-				///On Click call clickButton
+				//On Click call clickButton
 				newscrew.GetComponent<Button>().onClick.AddListener(delegate { clickButton(newscrew); });							
 
                 /*GameObject newscrew = Instantiate(this.ui.GetComponent<ScrewPanelControler>().screw, ui.transform);				//LEGACY CODE
@@ -108,7 +109,7 @@ public class ScrewPanel : Terminal, Breakable {
         }
     }
 
-	///when all screws are screwed then the screw panel is fixed.
+	///when all screws are screwed and the player has spare Inventory.POWERCABLE_ID the crew pannel will be fixed.
     public void onFix() {
 		if (screwed >= screws) {
 			if (playerInv.consume (Inventory.POWERCABLE_ID, 1, 0, 0)) {

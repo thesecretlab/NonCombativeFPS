@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-///<summary>
+/// <summary>
 /// Switches between two gameObjects (Diffrent Models) when setpower() is called.
 /// Used for when the whole ship or room's power is down to turn of the lights.
-///should reflect this state and be changed in another script.
-///</summary>
-///<remarks>
-///Created By Alexander Tilley 12/08/2017
-///Edited By Jeffrey Albion: Added interaction through Light Interface
-///</remarks> 
+/// should reflect this state and be changed in another script.
+/// </summary>
+/// <remarks>
+/// Created By Alexander Tilley 12/08/2017
+/// Edited By Jeffrey Albion: Added interaction through Light Interface
+/// </remarks> 
 public class FluroLight : MonoBehaviour, shipLight {
 
 	///Power State Only used an initialization
@@ -24,12 +24,12 @@ public class FluroLight : MonoBehaviour, shipLight {
 	public GameObject lightOff;		
 
 
-	///Intitalally loaded object
+	///Sets the objects so only one is visible.
 	void Start () {
-		///If Both Objects are set
+		//If Both Objects are set
 		if (lightOn != null && lightOff != null) {	
 			if (power) {
-				///Change Model
+				//Change Model
 				lightOff.SetActive (false);				
 				lightOn.SetActive (true);
 				//Debug.Log("Flood Ligth Power On");
@@ -40,11 +40,7 @@ public class FluroLight : MonoBehaviour, shipLight {
 			}
 		}
 	}
-
-	/// Update is called once per frame
-	void Update () {
-
-	}
+		
 
 	///Switches the between the diffrent game objects
 	public void setPower(int powerState){
